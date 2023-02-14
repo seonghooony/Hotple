@@ -6,10 +6,15 @@
 //
 
 import UIKit
+
 import RxKakaoSDKCommon
 import RxKakaoSDKAuth
 import KakaoSDKAuth
+
 import NaverThirdPartyLogin
+
+import FirebaseCore
+import FirebaseFirestore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+
         // 카카오SDK 실행
         RxKakaoSDK.initSDK(appKey: AppKeys.KAKAO_NATIVE_APP_KEY)
         
@@ -39,6 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         instance?.consumerSecret = kConsumerSecret
         // 애플리케이션 이름
         instance?.appName = kServiceAppName
+        
+        
+        // 구글 firestore 실행
+        FirebaseApp.configure()
         
         
         

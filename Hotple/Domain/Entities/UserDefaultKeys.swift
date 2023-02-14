@@ -9,4 +9,6 @@ import Foundation
 
 struct UserDefaultKeys {
     static let USER_ID = "userId"
+    static let LOGIN_TYPE = "loginType"
+    
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB0168DF299B457A00E07875 /* FirebaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168DE299B457A00E07875 /* FirebaseRepository.swift */; };
 		DB20A41E298CC1D400AD31F7 /* KakaoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB20A41D298CC1D400AD31F7 /* KakaoUseCase.swift */; };
 		DB20A422298CC5AD00AD31F7 /* KakaoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB20A421298CC5AD00AD31F7 /* KakaoRepository.swift */; };
 		DB20A4242991EE8800AD31F7 /* NaverUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB20A4232991EE8800AD31F7 /* NaverUseCase.swift */; };
@@ -60,6 +61,7 @@
 		58B8FD5FA8785505A842F000 /* Pods_Hotple.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hotple.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01CF98BF3F90AFA29370EB4 /* Pods-Hotple.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hotple.debug.xcconfig"; path = "Target Support Files/Pods-Hotple/Pods-Hotple.debug.xcconfig"; sourceTree = "<group>"; };
 		AE6516A7087EB37F230D9BA9 /* Pods-Hotple.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hotple.release.xcconfig"; path = "Target Support Files/Pods-Hotple/Pods-Hotple.release.xcconfig"; sourceTree = "<group>"; };
+		DB0168DE299B457A00E07875 /* FirebaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRepository.swift; sourceTree = "<group>"; };
 		DB20A41D298CC1D400AD31F7 /* KakaoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoUseCase.swift; sourceTree = "<group>"; };
 		DB20A421298CC5AD00AD31F7 /* KakaoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoRepository.swift; sourceTree = "<group>"; };
 		DB20A4232991EE8800AD31F7 /* NaverUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverUseCase.swift; sourceTree = "<group>"; };
@@ -140,6 +142,31 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		DB0168DB299B453A00E07875 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				DB3E32E22999D19E00EAD0B6 /* LocalRepository.swift */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		DB0168DC299B454700E07875 /* SNSLogin */ = {
+			isa = PBXGroup;
+			children = (
+				DB20A421298CC5AD00AD31F7 /* KakaoRepository.swift */,
+				DB20A4252991EF0F00AD31F7 /* NaverRepository.swift */,
+			);
+			path = SNSLogin;
+			sourceTree = "<group>";
+		};
+		DB0168DD299B455400E07875 /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+				DB0168DE299B457A00E07875 /* FirebaseRepository.swift */,
+			);
+			path = Firestore;
+			sourceTree = "<group>";
+		};
 		DB20A413298CABCE00AD31F7 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,9 +237,9 @@
 		DB20A41A298CAD2400AD31F7 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				DB3E32E22999D19E00EAD0B6 /* LocalRepository.swift */,
-				DB20A421298CC5AD00AD31F7 /* KakaoRepository.swift */,
-				DB20A4252991EF0F00AD31F7 /* NaverRepository.swift */,
+				DB0168DB299B453A00E07875 /* Local */,
+				DB0168DC299B454700E07875 /* SNSLogin */,
+				DB0168DD299B455400E07875 /* Firestore */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -474,6 +501,7 @@
 				DB687AD6298A1DB5006A5E69 /* AppStep.swift in Sources */,
 				DB20A41E298CC1D400AD31F7 /* KakaoUseCase.swift in Sources */,
 				DB3E32E32999D19E00EAD0B6 /* LocalRepository.swift in Sources */,
+				DB0168DF299B457A00E07875 /* FirebaseRepository.swift in Sources */,
 				DB3E32BD2995E64400EAD0B6 /* FeedTabFlow.swift in Sources */,
 				DB20A422298CC5AD00AD31F7 /* KakaoRepository.swift in Sources */,
 				DB3E32B3299482F800EAD0B6 /* UserData.swift in Sources */,

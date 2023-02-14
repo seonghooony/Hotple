@@ -24,9 +24,9 @@ class LoginFlow: Flow {
     
     init() {
         let localRepository = LocalRepository()
-        self.kakaoUseCase = KakaoUseCase(localRepository: localRepository, kakaoRepository: KakaoRepository())
-        
-        self.naverUseCase = NaverUseCase(localRepository: localRepository, naverRepository: NaverRepository())
+        let firebaseRepository = FirebaseRepository()
+        self.kakaoUseCase = KakaoUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, kakaoRepository: KakaoRepository())
+        self.naverUseCase = NaverUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, naverRepository: NaverRepository())
     }
     
     deinit {

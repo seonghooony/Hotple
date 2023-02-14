@@ -21,6 +21,7 @@ final class LocalRepository: LocalRepositoryProtocol {
         print("LocalRepository createUser")
         guard let data = try? JSONEncoder().encode(user) else { return Observable.just(false) }
         UserDefaults.standard.setValue(user.id, forKey: UserDefaultKeys.USER_ID)
+        UserDefaults.standard.setValue(user.snsType, forKey: UserDefaultKeys.LOGIN_TYPE)
         let query: [CFString: Any] = [
             kSecClass : kSecClassGenericPassword,
             kSecAttrService : "com.github.seonghooony.Hotple",
@@ -58,6 +59,7 @@ final class LocalRepository: LocalRepositoryProtocol {
         guard let userId = UserDefaults.standard.string(forKey: UserDefaultKeys.USER_ID) else { return Observable.just(false) }
         
         UserDefaults.standard.setValue(user.id, forKey: UserDefaultKeys.USER_ID)
+        UserDefaults.standard.setValue(user.snsType, forKey: UserDefaultKeys.LOGIN_TYPE)
         
         let query: [CFString: Any] = [
             kSecClass : kSecClassGenericPassword,
@@ -83,6 +85,7 @@ final class LocalRepository: LocalRepositoryProtocol {
         ]
         
         UserDefaults.standard.removeObject(forKey: UserDefaultKeys.USER_ID)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKeys.LOGIN_TYPE)
         
         return Observable.just(SecItemDelete(query as CFDictionary) == errSecSuccess)
     }

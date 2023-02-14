@@ -17,4 +17,16 @@ struct UserData: Codable {
     var phone: String?
     var profileImgUrl: String?
     var snsType: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case email
+        case name
+        case nickname
+        case birth
+        case gender
+        case phone
+        case profileImgUrl
+        case snsType
+    }
 }

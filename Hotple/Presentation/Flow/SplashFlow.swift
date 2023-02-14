@@ -25,9 +25,11 @@ class SplashFlow: Flow {
     
     init() {
         let localRepository = LocalRepository()
-        self.kakaoUseCase = KakaoUseCase(localRepository: localRepository, kakaoRepository: KakaoRepository())
+        let firebaseRepository = FirebaseRepository()
         
-        self.naverUseCase = NaverUseCase(localRepository: localRepository, naverRepository: NaverRepository())
+        self.kakaoUseCase = KakaoUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, kakaoRepository: KakaoRepository())
+        
+        self.naverUseCase = NaverUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, naverRepository: NaverRepository())
     }
     
     deinit {
@@ -48,9 +50,6 @@ class SplashFlow: Flow {
         // 자기 자신이 실행 될 경우
         case .loginIsRequired:
             return self.navigateToLogin()
-            
-        case .kakaoLoginIsRequired:
-            return self.navigateToKakao()
             
         case .tabDashBoardIsRequired:
             return self.navigateToTabDashBoard()
@@ -92,11 +91,7 @@ class SplashFlow: Flow {
 //        return .one(flowContributor: .contribute(withNext: viewController))
     }
     
-    private func navigateToKakao() -> FlowContributors {
-        return .none
-    }
-    
-    
+
     private func navigateToTabDashBoard() -> FlowContributors {
         let tabDashBoardFlow = TabDashBoardFlow(rootViewController: self.rootViewController)
 

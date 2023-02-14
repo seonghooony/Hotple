@@ -23,7 +23,7 @@ protocol NaverRepositoryProtocol {
 }
 
 
-class NaverRepository: NSObject, NaverThirdPartyLoginConnectionDelegate, NaverRepositoryProtocol {
+final class NaverRepository: NSObject, NaverThirdPartyLoginConnectionDelegate, NaverRepositoryProtocol {
 
     let disposeBag = DisposeBag()
     

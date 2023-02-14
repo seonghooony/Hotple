@@ -19,8 +19,8 @@ class AppStepper: Stepper {
     }
     
     var initialStep: Step {
-//        return AppStep.splashIsRequired
-        return AppStep.loginIsRequired
+        return AppStep.splashIsRequired
+//        return AppStep.loginIsRequired
     }
     
 }

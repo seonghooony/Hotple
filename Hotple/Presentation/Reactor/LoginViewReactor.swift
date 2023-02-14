@@ -50,9 +50,7 @@ class LoginViewReactor: Reactor, Stepper {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .clickToKakao:
-            
-            
-            
+
             return kakaoUseCase.login()
                 .map { isLogin in
                     return Mutation.loginKakao(isLogin)
@@ -62,7 +60,6 @@ class LoginViewReactor: Reactor, Stepper {
 //            return Observable.never()
             
         case .clickToNaver:
-            print("로그인 여부")
             return naverUseCase.login()
                 .map { isLogin in
                     return Mutation.loginNaver(isLogin)
@@ -73,11 +70,50 @@ class LoginViewReactor: Reactor, Stepper {
 //            return Observable.never()
             
         case .clickToTest:
-//            print(naverUseCase.logout())
-            self.steps.accept(AppStep.tabDashBoardIsRequired)
+            if let loginType = UserDefaults.standard.string(forKey: UserDefaultKeys.LOGIN_TYPE) {
+                print(loginType)
+                switch loginType {
+                case "naver":
+                    print("naver 진행")
+                    naverUseCase.logout()
+                        .subscribe(
+                            onNext: { isLogout in
+                                print("isLogout naver: \(isLogout)")
+                            }, onError: { error in
+                                print("error:\(error)")
+                            }, onCompleted: {
+                                print("onCompleted")
+                            }, onDisposed: {
+                                print("onDisposed")
+                            })
+                        .disposed(by: disposeBag)
+                case "kakao":
+                    print("kakao 진행")
+                    kakaoUseCase.logout()
+                        .subscribe(
+                            onNext: { isLogout in
+                                print("isLogout Kakao: \(isLogout)")
+                            }, onError: { error in
+                                print("error:\(error)")
+                            }, onCompleted: {
+                                print("onCompleted")
+                            }, onDisposed: {
+                                print("onDisposed")
+                            })
+                        .disposed(by: disposeBag)
+                        
+                default:
+                    
+                    break
+                }
+            } else {
+                print("로그인 되어있지 않음")
+            }
+
             return .never()
             
             
+ //            self.steps.accept(AppStep.tabDashBoardIsRequired)
 //            return kakaoUseCase.getUserInfo()
 //                            .map { userData in
 //                                return Mutation.setUserInfo(userData)

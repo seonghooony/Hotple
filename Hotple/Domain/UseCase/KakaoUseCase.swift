@@ -25,35 +25,76 @@ protocol KakaoUseCaseProtocol {
 
 final class KakaoUseCase: KakaoUseCaseProtocol {
     private let localRepository: LocalRepository
+    private let firebaseRepository: FirebaseRepository
     private let kakaoRepository: KakaoRepository
     
     let disposeBag = DisposeBag()
     
 //    var userDataSubject = PublishSubject<KakaoUserData>()
     
+
     
-    var localLoginSubject = PublishSubject<UserData>()
-    var completedLoginSubject = PublishSubject<Bool>()
-    
-    init(localRepository: LocalRepository, kakaoRepository: KakaoRepository) {
+    init(localRepository: LocalRepository, firebaseRepository: FirebaseRepository, kakaoRepository: KakaoRepository) {
         self.localRepository = localRepository
+        self.firebaseRepository = firebaseRepository
         self.kakaoRepository = kakaoRepository
     }
     
-    
+    // 회원가입 + 로그인 (카카오)
     func login() -> Observable<Bool> {
+        
+        var checkUserSubject = PublishSubject<UserData>()
+        var pushUserSubject = PublishSubject<UserData>()
+        var localLoginSubject = PublishSubject<UserData>()
+        var completedLoginSubject = PublishSubject<Bool>()
+        
+        // 로컬 단에 유저데이터 넣기
         localLoginSubject
             .subscribe { userData in
                 self.localRepository.createUser(userData)
                     .subscribe { isCompleted in
                         print("완료 여부 : \(isCompleted)")
                         print("로컬 로그인 성공, 완료 이벤트 방출")
-                        self.completedLoginSubject.onNext(isCompleted)
+                        completedLoginSubject.onNext(isCompleted)
                     }
                     .disposed(by: self.disposeBag)
             }
             .disposed(by: disposeBag)
         
+        // 회원가입 진행
+        pushUserSubject
+            .subscribe { userData in
+                self.firebaseRepository.setUserData(userData: userData)
+                    .subscribe { result in
+                        if result {
+                            print("푸쉬 진행 성공")
+                            localLoginSubject.onNext(userData)
+                        }
+                    }
+                    .disposed(by: self.disposeBag)
+            }
+            .disposed(by: disposeBag)
+        
+        // 회원 여부 확인
+        checkUserSubject
+            .subscribe { userData in
+                self.firebaseRepository.getUserData(userData: userData)
+                    .subscribe { userDataF in
+                        if let userDataF = userDataF {
+                            print("유저 존재함")
+                            localLoginSubject.onNext(userDataF)
+                        } else {
+                            print("유저 존재하지 않음, 푸쉬 진행")
+                            pushUserSubject.onNext(userData)
+                        }
+                        
+                    }
+                    .disposed(by: self.disposeBag)
+
+            }
+            .disposed(by: disposeBag)
+        
+        // 카카오 로그인 진행 후 id 얻기
         if (UserApi.isKakaoTalkLoginAvailable()) {
 
             kakaoRepository.setLoginWithKakaoTalk()
@@ -62,7 +103,7 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
                         self.getUserInfo()
                             .subscribe { userData in
                                 print("카카오 서드파티 로그인 성공, 로컬 로그인 진행")
-                                self.localLoginSubject.onNext(userData)
+                                checkUserSubject.onNext(userData)
                             }
                             .disposed(by: self.disposeBag)
                     }
@@ -85,7 +126,7 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
                         self.getUserInfo()
                             .subscribe { userData in
                                 print("카카오 서드파티 로그인 성공, 로컬 로그인 진행")
-                                self.localLoginSubject.onNext(userData)
+                                checkUserSubject.onNext(userData)
                             }
                             .disposed(by: self.disposeBag)
                     }
@@ -102,7 +143,15 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
     }
     
     func logout() -> Observable<Bool> {
-        return kakaoRepository.setLogout()
+        return Observable.combineLatest(localRepository.deleteUser(), kakaoRepository.setLogout())
+            .map { (local, kakao) in
+                if local && kakao {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        
     }
     
     func getUserInfo() -> Observable<UserData> {

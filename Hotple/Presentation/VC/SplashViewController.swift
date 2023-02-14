@@ -11,6 +11,7 @@ import SnapKit
 import RxFlow
 import RxCocoa
 import ReactorKit
+import Lottie
 
 class SplashViewController: UIViewController, View {
     
@@ -18,7 +19,7 @@ class SplashViewController: UIViewController, View {
     
     typealias Reactor = SplashViewReactor
     
-
+    private let animationLogoView: LottieAnimationView = .init(name: "")
     
     override func loadView() {
         let view = UIView()
