@@ -79,22 +79,20 @@ class SplashFlow: Flow {
     
     private func navigateToLogin() -> FlowContributors {
         
-        let loginViewReactor = LoginViewReactor(kakaoUseCase: kakaoUseCase, naverUseCase: naverUseCase)
-        let loginViewController = LoginViewController(reactor: loginViewReactor)
-        self.rootViewController.pushViewController(loginViewController, animated: true)
+        let loginFlow = LoginFlow(rootViewController: self.rootViewController)
+
+        print("navigateToLogin")
         
-        print("navigateToMain")
-        print(self.rootViewController.viewControllers)
-        
-        return .one(flowContributor: .contribute(withNextPresentable: loginViewController, withNextStepper: loginViewReactor))
-        
-//        return .one(flowContributor: .contribute(withNext: viewController))
+        let nextStep = OneStepper(withSingleStep: AppStep.loginIsRequired)
+
+        return .one(flowContributor: .contribute(withNextPresentable: loginFlow, withNextStepper: nextStep))
     }
     
 
     private func navigateToTabDashBoard() -> FlowContributors {
         let tabDashBoardFlow = TabDashBoardFlow(rootViewController: self.rootViewController)
 
+        print("navigateToTabDashBoard")
         
         return .one(flowContributor: .contribute(withNextPresentable: tabDashBoardFlow, withNextStepper: OneStepper(withSingleStep: AppStep.tabDashBoardIsRequired)))
     }

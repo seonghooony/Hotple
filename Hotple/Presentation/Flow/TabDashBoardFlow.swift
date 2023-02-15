@@ -73,7 +73,9 @@ class TabDashBoardFlow: Flow {
             
 //            self.rootViewController.navigationBar.isHidden = true
             DispatchQueue.main.async {
-                self.rootViewController.pushViewController(tabDashBoardViewController, animated: false)
+//                self.rootViewController.pushViewController(tabDashBoardViewController, animated: false)
+                self.rootViewController.navigationBar.isHidden = true
+                self.rootViewController.setViewControllers([tabDashBoardViewController], animated: false)
             }
             
             

@@ -51,11 +51,14 @@ class SplashViewReactor: Reactor, Stepper {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .checkToLogin:
+            print("checkToLogin action 실행")
             if let userId = UserDefaults.standard.string(forKey: UserDefaultKeys.USER_ID),
                let loginType = UserDefaults.standard.string(forKey: UserDefaultKeys.LOGIN_TYPE) {
+                print("tabDashBoardIsRequired action 실행")
                 self.steps.accept(AppStep.tabDashBoardIsRequired)
                 
             } else {
+                print("loginIsRequired action 실행")
                 self.steps.accept(AppStep.loginIsRequired)
             }
             return .never()

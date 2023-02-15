@@ -10,19 +10,27 @@ import RxFlow
 
 class LoginFlow: Flow {
     
-    private lazy var rootViewController: UINavigationController = {
-        let viewController = UINavigationController()
-        return viewController
-    }()
+    var rootViewController: UINavigationController
+        
+    var root: Presentable
     
-    var root: Presentable {
-        return self.rootViewController
-    }
+//    private lazy var rootViewController: UINavigationController = {
+//        let viewController = UINavigationController()
+//        return viewController
+//    }()
+//
+//    var root: Presentable {
+//        return self.rootViewController
+//    }
     
     let kakaoUseCase: KakaoUseCase
     let naverUseCase: NaverUseCase
     
-    init() {
+    init(rootViewController: UINavigationController) {
+        
+        self.root = rootViewController
+        self.rootViewController = rootViewController
+        
         let localRepository = LocalRepository()
         let firebaseRepository = FirebaseRepository()
         self.kakaoUseCase = KakaoUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, kakaoRepository: KakaoRepository())
@@ -70,9 +78,11 @@ class LoginFlow: Flow {
         
         let loginViewReactor = LoginViewReactor(kakaoUseCase: kakaoUseCase, naverUseCase: naverUseCase)
         let loginViewController = LoginViewController(reactor: loginViewReactor)
-        self.rootViewController.pushViewController(loginViewController, animated: true)
+//        self.rootViewController.pushViewController(loginViewController, animated: true)
         
-        print("navigateToMain")
+        self.rootViewController.setViewControllers([loginViewController], animated: false)
+        
+        print("navigateToLogin")
         print(self.rootViewController.viewControllers)
         
         return .one(flowContributor: .contribute(withNextPresentable: loginViewController, withNextStepper: loginViewReactor))

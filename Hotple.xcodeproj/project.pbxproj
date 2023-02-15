@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		DB0168DF299B457A00E07875 /* FirebaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168DE299B457A00E07875 /* FirebaseRepository.swift */; };
+		DB0168E7299C9B0100E07875 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = DB0168E6299C9B0100E07875 /* splash.json */; };
+		DB0168EA299CAF3100E07875 /* TestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168E9299CAF3100E07875 /* TestCell.swift */; };
+		DB0168EC299CC70600E07875 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168EB299CC70600E07875 /* Const.swift */; };
 		DB20A41E298CC1D400AD31F7 /* KakaoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB20A41D298CC1D400AD31F7 /* KakaoUseCase.swift */; };
 		DB20A422298CC5AD00AD31F7 /* KakaoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB20A421298CC5AD00AD31F7 /* KakaoRepository.swift */; };
 		DB20A4242991EE8800AD31F7 /* NaverUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB20A4232991EE8800AD31F7 /* NaverUseCase.swift */; };
@@ -62,6 +65,9 @@
 		A01CF98BF3F90AFA29370EB4 /* Pods-Hotple.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hotple.debug.xcconfig"; path = "Target Support Files/Pods-Hotple/Pods-Hotple.debug.xcconfig"; sourceTree = "<group>"; };
 		AE6516A7087EB37F230D9BA9 /* Pods-Hotple.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hotple.release.xcconfig"; path = "Target Support Files/Pods-Hotple/Pods-Hotple.release.xcconfig"; sourceTree = "<group>"; };
 		DB0168DE299B457A00E07875 /* FirebaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRepository.swift; sourceTree = "<group>"; };
+		DB0168E6299C9B0100E07875 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
+		DB0168E9299CAF3100E07875 /* TestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCell.swift; sourceTree = "<group>"; };
+		DB0168EB299CC70600E07875 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		DB20A41D298CC1D400AD31F7 /* KakaoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoUseCase.swift; sourceTree = "<group>"; };
 		DB20A421298CC5AD00AD31F7 /* KakaoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoRepository.swift; sourceTree = "<group>"; };
 		DB20A4232991EE8800AD31F7 /* NaverUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverUseCase.swift; sourceTree = "<group>"; };
@@ -167,6 +173,22 @@
 			path = Firestore;
 			sourceTree = "<group>";
 		};
+		DB0168E3299C981600E07875 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				DB0168E6299C9B0100E07875 /* splash.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
+		DB0168E8299CAF1400E07875 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DB0168E9299CAF3100E07875 /* TestCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		DB20A413298CABCE00AD31F7 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +216,7 @@
 				DB687ACE298A1B16006A5E69 /* Flow */,
 				DB687AD2298A1BC0006A5E69 /* Reactor */,
 				DB687AD1298A1BB9006A5E69 /* VC */,
+				DB0168E8299CAF1400E07875 /* Cell */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -310,8 +333,10 @@
 		DB687AE1298A2A5A006A5E69 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				DB687AF2298C99EB006A5E69 /* AppKeys.swift */,
+				DB0168E3299C981600E07875 /* Lottie */,
 				DB687AE2298A2A7C006A5E69 /* Strings */,
+				DB687AF2298C99EB006A5E69 /* AppKeys.swift */,
+				DB0168EB299CC70600E07875 /* Const.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -428,6 +453,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB0168E7299C9B0100E07875 /* splash.json in Resources */,
 				DB830FE02989EECB00D76B2B /* LaunchScreen.storyboard in Resources */,
 				DB687AE5298A2BB3006A5E69 /* Localizable.strings in Resources */,
 				DB830FDD2989EECB00D76B2B /* Assets.xcassets in Resources */,
@@ -517,6 +543,7 @@
 				DB20A42A29936D1A00AD31F7 /* KakaoData.swift in Sources */,
 				DB3E32B72995E5E300EAD0B6 /* HomeTabFlow.swift in Sources */,
 				DB687AED298A4AE6006A5E69 /* Extension.swift in Sources */,
+				DB0168EA299CAF3100E07875 /* TestCell.swift in Sources */,
 				DB3E32DF2999BE4E00EAD0B6 /* SplashFlow.swift in Sources */,
 				DB687ADE298A1FC5006A5E69 /* LoginViewController.swift in Sources */,
 				DB3E32DD2999BE4000EAD0B6 /* SplashViewReactor.swift in Sources */,
@@ -527,6 +554,7 @@
 				DB687ADA298A1EF8006A5E69 /* AppStepper.swift in Sources */,
 				DB687ADC298A1FA5006A5E69 /* LoginViewReactor.swift in Sources */,
 				DB20A4242991EE8800AD31F7 /* NaverUseCase.swift in Sources */,
+				DB0168EC299CC70600E07875 /* Const.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

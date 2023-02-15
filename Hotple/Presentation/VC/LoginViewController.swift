@@ -44,7 +44,7 @@ class LoginViewController: UIViewController, View {
         self.view = view
         
         // #698a50 #93c572 #e1ffc9 #f0ffe4
-        self.view.backgroundColor = UIColor(red: 240/255, green: 255/255, blue: 228/255, alpha: 1.0)
+        self.view.backgroundColor = .white
         
         self.loginLbl.text = "로그인"
         self.loginLbl.textColor = UIColor(red: 52/255, green: 52/255, blue: 52/255, alpha: 1.0)

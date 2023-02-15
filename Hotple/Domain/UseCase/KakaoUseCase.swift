@@ -43,10 +43,10 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
     // 회원가입 + 로그인 (카카오)
     func login() -> Observable<Bool> {
         
-        var checkUserSubject = PublishSubject<UserData>()
-        var pushUserSubject = PublishSubject<UserData>()
-        var localLoginSubject = PublishSubject<UserData>()
-        var completedLoginSubject = PublishSubject<Bool>()
+        let checkUserSubject = PublishSubject<UserData>()
+        let pushUserSubject = PublishSubject<UserData>()
+        let localLoginSubject = PublishSubject<UserData>()
+        let completedLoginSubject = PublishSubject<Bool>()
         
         // 로컬 단에 유저데이터 넣기
         localLoginSubject
@@ -67,7 +67,7 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
                 self.firebaseRepository.setUserData(userData: userData)
                     .subscribe { result in
                         if result {
-                            print("푸쉬 진행 성공")
+                            print("유저 데이터 푸쉬 진행 성공")
                             localLoginSubject.onNext(userData)
                         }
                     }
@@ -81,10 +81,10 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
                 self.firebaseRepository.getUserData(userData: userData)
                     .subscribe { userDataF in
                         if let userDataF = userDataF {
-                            print("유저 존재함")
+                            print("유저 데이터 존재함")
                             localLoginSubject.onNext(userDataF)
                         } else {
-                            print("유저 존재하지 않음, 푸쉬 진행")
+                            print("유저 데이터 존재하지 않음, 푸쉬 진행")
                             pushUserSubject.onNext(userData)
                         }
                         
@@ -143,7 +143,7 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
     }
     
     func logout() -> Observable<Bool> {
-        return Observable.combineLatest(localRepository.deleteUser(), kakaoRepository.setLogout())
+        return Observable.zip(localRepository.deleteUser(), kakaoRepository.setLogout())
             .map { (local, kakao) in
                 if local && kakao {
                     return true

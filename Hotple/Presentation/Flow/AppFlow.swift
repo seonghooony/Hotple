@@ -33,8 +33,8 @@ class AppFlow: Flow {
         case .splashIsRequired:
             return self.navigateToSplash()
             
-        case .loginIsRequired:
-            return self.navigateToLogin()
+//        case .loginIsRequired:
+//            return self.navigateToLogin()
 //        case .homeIsRequired:
 //            return self.navigateToHome()
             
@@ -58,18 +58,17 @@ class AppFlow: Flow {
         return .one(flowContributor: .contribute(withNextPresentable: splashFlow, withNextStepper: nextStep))
     }
     
-    private func navigateToLogin() -> FlowContributors {
-        let loginFlow = LoginFlow()
-
-        // mainFlow 생성 시 root 를 window에 연결함.
-        Flows.use(loginFlow, when: .created) { (root) in
-            self.window.rootViewController = root
-        }
-
-        let nextStep = OneStepper(withSingleStep: AppStep.loginIsRequired)
-
-        return .one(flowContributor: .contribute(withNextPresentable: loginFlow, withNextStepper: nextStep))
-    }
+//    private func navigateToLogin() -> FlowContributors {
+//        let loginFlow = LoginFlow(rootViewController: self.rootViewController)
+//        // mainFlow 생성 시 root 를 window에 연결함.
+//        Flows.use(loginFlow, when: .created) { (root) in
+//            self.window.rootViewController = root
+//        }
+//
+//        let nextStep = OneStepper(withSingleStep: AppStep.loginIsRequired)
+//
+//        return .one(flowContributor: .contribute(withNextPresentable: loginFlow, withNextStepper: nextStep))
+//    }
 
     
 

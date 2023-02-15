@@ -46,6 +46,7 @@ class ProfileTabFlow: Flow {
         
         let profileTabViewReactor = ProfileTabViewReactor()
         let profileTabViewController = ProfileTabViewController(reactor: profileTabViewReactor)
+        self.rootViewController.navigationBar.isHidden = true
         self.rootViewController.pushViewController(profileTabViewController, animated: false)
         
 

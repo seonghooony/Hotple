@@ -21,6 +21,8 @@ target 'Hotple' do
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
   pod 'lottie-ios'
+  pod 'RxViewController'
+  pod 'Then'
 
 end
 
