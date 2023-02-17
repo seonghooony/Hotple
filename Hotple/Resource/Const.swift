@@ -8,7 +8,7 @@
 import Foundation
 
 struct Const {
-    static let naviBarHeight: CGFloat = 44.0
     static let headerMinHeight: CGFloat = 44.0
-    static let headerMaxHeight: CGFloat = 100.0
+    static let headerMaxHeight: CGFloat = 150.0
+    static let canMoveHeight: CGFloat = headerMaxHeight - headerMinHeight
 }

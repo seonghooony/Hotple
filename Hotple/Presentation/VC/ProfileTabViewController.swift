@@ -10,7 +10,7 @@ import SnapKit
 import RxFlow
 import RxCocoa
 import ReactorKit
-import Then
+
 
 class ProfileTabViewController: UIViewController, View {
     
@@ -18,16 +18,23 @@ class ProfileTabViewController: UIViewController, View {
     
     typealias Reactor = ProfileTabViewReactor
     
+    // 상단 프로필 헤더뷰
     var stickyHeaderView = UIView()
+    // 프로필 이미지 뷰
+    var profileImgView = UIImageView()
+    // 프로필 닉네임 뷰
+    var profileNicknameLbl = UILabel()
+    
+    // 상단 네비 뷰
     var headerView = UIView()
+    // 헤더 라벨 뷰
+    var headerLbl = UILabel()
+    
+    
+    // 메인 콘텐츠 스크롤 뷰
     var scrollView = UIScrollView()
     var scrollContentView = UIView()
-    var optionTableView = UITableView()
-        .then {
-            $0.separatorStyle = .none
-            $0.isScrollEnabled = false
-            $0.showsVerticalScrollIndicator = false
-        }
+
 
     
     override func loadView() {
@@ -37,11 +44,26 @@ class ProfileTabViewController: UIViewController, View {
         
         self.view.backgroundColor = .white
         
-        headerView.backgroundColor = .red
+        headerView.backgroundColor = .white
+        headerView.alpha = 0.0
         self.view.addSubview(headerView)
         
-        stickyHeaderView.backgroundColor = .blue
+        headerLbl.text = "마이"
+        self.headerView.addSubview(headerLbl)
+        
+        stickyHeaderView.backgroundColor = .white
         self.view.addSubview(stickyHeaderView)
+        
+        profileImgView.image = UIImage(named: "")
+        profileImgView.backgroundColor = .gray
+        profileImgView.layer.cornerRadius = 40
+        profileImgView.clipsToBounds = true
+        stickyHeaderView.addSubview(profileImgView)
+        
+        profileNicknameLbl.text = "닉네임"
+        stickyHeaderView.addSubview(profileNicknameLbl)
+        
+        
         
         scrollView.delegate = self
         scrollView.backgroundColor = .green
@@ -50,11 +72,7 @@ class ProfileTabViewController: UIViewController, View {
         scrollContentView.backgroundColor = .brown
         scrollView.addSubview(scrollContentView)
         
-//        optionTableView.delegate = self
-//        optionTableView.dataSource = self
-//        optionTableView.backgroundColor = .brown
-//        optionTableView.register(InteriorAdItemCell.self, forCellReuseIdentifier: "InteriorAdItemCell")
-//        scrollContentView.addSubview(optionTableView)
+
         
        
     }
@@ -70,19 +88,39 @@ class ProfileTabViewController: UIViewController, View {
     }
     
     func initConstraint() {
-        
+    
         headerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
 //            make.top.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalTo(Const.naviBarHeight)
+            make.height.equalTo(Const.headerMinHeight)
         }
+        
+        headerLbl.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(32)
+        }
+        
         stickyHeaderView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
 //            make.top.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalTo(Const.headerMaxHeight)
         }
+        
+        profileImgView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(44 + 16)
+            make.leading.equalToSuperview().offset(16)
+            make.width.height.equalTo(80)
+        }
+        
+        profileNicknameLbl.snp.makeConstraints { make in
+            make.centerY.equalTo(profileImgView)
+            make.leading.equalTo(profileImgView.snp.trailing).offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        
+
         
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(stickyHeaderView.snp.bottom)
@@ -96,9 +134,7 @@ class ProfileTabViewController: UIViewController, View {
             make.height.equalTo(2000)
         }
         
-//        optionTableView.snp.makeConstraints { make in
-//            make.edges.equalToSuperview()
-//        }
+
         
         
     }
@@ -152,25 +188,6 @@ class ProfileTabViewController: UIViewController, View {
     
 }
 
-//extension ProfileTabViewController: UITableViewDelegate, UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 100
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: InteriorAdItemCell.reuseIdentifier, for: indexPath) as! InteriorAdItemCell
-////        let cell = UITableViewCell()
-////        cell.backgroundColor = .black
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//
-//        return 144.0
-//    }
-//
-//}
 
 extension ProfileTabViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -180,9 +197,9 @@ extension ProfileTabViewController: UIScrollViewDelegate {
         print(headerConstant)
         
         headerConstant = headerConstant < 0 ? 0 : headerConstant
-        headerConstant = headerConstant > Const.headerMinHeight ? Const.headerMinHeight : headerConstant
+        headerConstant = headerConstant > Const.canMoveHeight ? Const.canMoveHeight : headerConstant
         
-        tableConstant = Const.headerMaxHeight - ( ((headerConstant - 0) / Const.headerMinHeight) * (Const.headerMaxHeight - Const.headerMinHeight) )
+        tableConstant = Const.headerMaxHeight - ( ((headerConstant - 0) / Const.canMoveHeight) * (Const.headerMaxHeight - Const.canMoveHeight) )
         
         stickyHeaderView.snp.updateConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(-headerConstant)
@@ -193,8 +210,8 @@ extension ProfileTabViewController: UIScrollViewDelegate {
 //            make.top.equalTo(stickyHeaderView.snp.bottom).offset(tableConstant)
 //        }
         
-        stickyHeaderView.alpha = 1 - headerConstant / Const.headerMinHeight
-        headerView.alpha = headerConstant / Const.headerMinHeight
+        stickyHeaderView.alpha = 1 - headerConstant / Const.canMoveHeight
+        headerView.alpha = headerConstant / Const.canMoveHeight
         
         
         
