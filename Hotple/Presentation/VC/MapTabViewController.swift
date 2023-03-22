@@ -17,7 +17,7 @@ class MapTabViewController: UIViewController, View {
     
     typealias Reactor = MapTabViewReactor
     
-   
+    weak var windowNavigationController: UINavigationController?
 
     
     override func loadView() {

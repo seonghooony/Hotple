@@ -18,7 +18,14 @@ class HomeTabViewController: UIViewController, View {
     
     typealias Reactor = HomeTabViewReactor
     
+    weak var windowNavigationController: UINavigationController?
+    
     let testBtn = UIButton()
+    
+    // 상단 네비 뷰
+    var headerView = UIView()
+    // 헤더 라벨 뷰
+    var headerLbl = UILabel()
 
     
     override func loadView() {
@@ -27,6 +34,14 @@ class HomeTabViewController: UIViewController, View {
         self.view = view
         
         self.view.backgroundColor = .white
+        
+        headerView.backgroundColor = .white
+        self.view.addSubview(headerView)
+        
+        headerLbl.text = "마이페이지"
+        headerLbl.textColor = .black
+        self.headerView.addSubview(headerLbl)
+
         
         testBtn.setTitle("TEST", for: .normal)
         testBtn.backgroundColor = .black
@@ -49,6 +64,18 @@ class HomeTabViewController: UIViewController, View {
         self.testBtn.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.width.height.equalTo(200)
+        }
+        
+        headerView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+//            make.top.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.height.equalTo(Const.headerMinHeight)
+        }
+        
+        headerLbl.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
         }
         
     }

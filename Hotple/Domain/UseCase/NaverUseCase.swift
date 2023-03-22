@@ -31,6 +31,9 @@ final class NaverUseCase: NaverUseCaseProtocol {
         self.naverRepository = naverRepository
     }
     
+    deinit {
+        print("NaverUseCase deinit")
+    }
     
     func login() -> Observable<Bool> {
         var checkUserSubject = PublishSubject<UserData>()

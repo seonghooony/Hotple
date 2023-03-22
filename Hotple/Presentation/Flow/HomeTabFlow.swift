@@ -16,14 +16,20 @@ class HomeTabFlow: Flow {
     
     private let rootViewController = UINavigationController()
     
+    private weak var windowNavigationController: UINavigationController?
+    
 //    var root: Presentable
     
 //    var rootViewController: UINavigationController
 //
-//    init(rootViewController: UINavigationController) {
-//        self.root = rootViewController
-//        self.rootViewController = rootViewController
-//    }
+    init(windowNavigationController: UINavigationController) {
+        
+        self.windowNavigationController = windowNavigationController
+        
+        print("HomeTabFlow init")
+        print("windowNavigationController : \(windowNavigationController.viewControllers)")
+        
+    }
     
     deinit {
         print("HomeTabFlow deinit")
@@ -49,6 +55,8 @@ class HomeTabFlow: Flow {
             // 바깥 네비게이션에서 푸쉬하지만 이대로 이 화면은 끝이남
 //            return .end(forwardToParentFlowWithStep: AppStep.testIsRequired)
             
+        case .logoutIsRequired:
+            return logout()
             
         default:
             return .none
@@ -59,11 +67,20 @@ class HomeTabFlow: Flow {
         
         let homeTabViewReactor = HomeTabViewReactor()
         let homeTabViewController = HomeTabViewController(reactor: homeTabViewReactor)
+        homeTabViewController.windowNavigationController = windowNavigationController
+        self.rootViewController.navigationBar.isHidden = true
         self.rootViewController.pushViewController(homeTabViewController, animated: false)
         
 
         
         return .one(flowContributor: .contribute(withNextPresentable: homeTabViewController, withNextStepper: homeTabViewReactor))
+    }
+    
+    private func logout() -> FlowContributors {
+        
+        self.rootViewController.popViewController(animated: true)
+        return .none
+        
     }
     
 }

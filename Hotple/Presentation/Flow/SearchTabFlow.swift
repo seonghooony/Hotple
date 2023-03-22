@@ -16,26 +16,36 @@ class SearchTabFlow: Flow {
     
     private let rootViewController = UINavigationController()
     
-//    var root: Presentable 
-//    
+    private weak var windowNavigationController: UINavigationController?
+    
+//    var root: Presentable
+    
 //    var rootViewController: UINavigationController
-//    
-//    init(rootViewController: UINavigationController) {
-//        self.root = rootViewController
-//        self.rootViewController = rootViewController
-//    }
+//
+    init(windowNavigationController: UINavigationController) {
+        
+        self.windowNavigationController = windowNavigationController
+     
+        print("SearchTabFlow init")
+        print("windowNavigationController : \(windowNavigationController.viewControllers)")
+        
+    }
     
     deinit {
         print("SearchTabFlow deinit")
     }
     
     func navigate(to step: Step) -> FlowContributors {
+        print("excuting SearchTabFlow navigate")
         guard let step = step as? AppStep else { return . none }
         
         switch step {
             
         case .searchTabIsRequired:
             return self.navigateToSearchTab()
+            
+        case .logoutIsRequired:
+            return logout()
             
         default:
             return .none
@@ -46,6 +56,8 @@ class SearchTabFlow: Flow {
         
         let searchTabViewReactor = SearchTabViewReactor()
         let searchTabViewController = SearchTabViewController(reactor: searchTabViewReactor)
+        searchTabViewController.windowNavigationController = windowNavigationController
+        self.rootViewController.navigationBar.isHidden = true
         self.rootViewController.pushViewController(searchTabViewController, animated: false)
         
 
@@ -53,4 +65,11 @@ class SearchTabFlow: Flow {
         return .one(flowContributor: .contribute(withNextPresentable: searchTabViewController, withNextStepper: searchTabViewReactor))
     }
     
+    
+    private func logout() -> FlowContributors {
+        
+        self.rootViewController.popViewController(animated: true)
+        return .none
+        
+    }
 }

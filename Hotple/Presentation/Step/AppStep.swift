@@ -31,6 +31,13 @@ enum AppStep: Step {
     case feedTabIsRequired
     case profileTabIsRequired
     
+    // Setting
+    case profileSettingIsRequired
+    case logoutIsRequired
+    case popFromProfileSetting
+    
+    case none
+    
     // test
     case testIsRequired
     

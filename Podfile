@@ -8,9 +8,12 @@ target 'Hotple' do
   # Pods for Hotple
   pod 'Alamofire'
   pod 'RxAlamofire'
+  pod 'Kingfisher'
+  pod 'RxKingfisher'
   pod 'ReactorKit'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'RxDataSources'
   pod 'RxFlow'
   pod 'SnapKit'
   pod 'RxKakaoSDK', '~> 2.13.1'

@@ -31,6 +31,7 @@ class LoginViewReactor: Reactor, Stepper {
         case clickToKakao
         case clickToNaver
         case clickToTest
+        case clickToSkip
     }
     
     enum Mutation {
@@ -68,6 +69,11 @@ class LoginViewReactor: Reactor, Stepper {
             
             
 //            return Observable.never()
+            
+        case .clickToSkip:
+            self.steps.accept(AppStep.tabDashBoardIsRequired)
+            
+            return .never()
             
         case .clickToTest:
             if let loginType = UserDefaults.standard.string(forKey: UserDefaultKeys.LOGIN_TYPE) {

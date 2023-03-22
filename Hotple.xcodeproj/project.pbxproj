@@ -11,6 +11,13 @@
 		DB0168E7299C9B0100E07875 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = DB0168E6299C9B0100E07875 /* splash.json */; };
 		DB0168EA299CAF3100E07875 /* TestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168E9299CAF3100E07875 /* TestCell.swift */; };
 		DB0168EC299CC70600E07875 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168EB299CC70600E07875 /* Const.swift */; };
+		DB0168EE29A306A800E07875 /* ProfileSettingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168ED29A306A800E07875 /* ProfileSettingFlow.swift */; };
+		DB0168F029A306C000E07875 /* ProfileSettingViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168EF29A306C000E07875 /* ProfileSettingViewReactor.swift */; };
+		DB0168F229A306CF00E07875 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168F129A306CF00E07875 /* ProfileSettingViewController.swift */; };
+		DB0168F829ADB66F00E07875 /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168F729ADB66F00E07875 /* UserUseCase.swift */; };
+		DB0168FA29B0550E00E07875 /* ProfileSettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168F929B0550E00E07875 /* ProfileSettingSection.swift */; };
+		DB0168FC29B05A8700E07875 /* ProfileSettingMenuData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168FB29B05A8700E07875 /* ProfileSettingMenuData.swift */; };
+		DB0168FF29B05E9000E07875 /* ProfileSettingMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168FE29B05E9000E07875 /* ProfileSettingMenuCell.swift */; };
 		DB20A41E298CC1D400AD31F7 /* KakaoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB20A41D298CC1D400AD31F7 /* KakaoUseCase.swift */; };
 		DB20A422298CC5AD00AD31F7 /* KakaoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB20A421298CC5AD00AD31F7 /* KakaoRepository.swift */; };
 		DB20A4242991EE8800AD31F7 /* NaverUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB20A4232991EE8800AD31F7 /* NaverUseCase.swift */; };
@@ -68,6 +75,13 @@
 		DB0168E6299C9B0100E07875 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		DB0168E9299CAF3100E07875 /* TestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCell.swift; sourceTree = "<group>"; };
 		DB0168EB299CC70600E07875 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		DB0168ED29A306A800E07875 /* ProfileSettingFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingFlow.swift; sourceTree = "<group>"; };
+		DB0168EF29A306C000E07875 /* ProfileSettingViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewReactor.swift; sourceTree = "<group>"; };
+		DB0168F129A306CF00E07875 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
+		DB0168F729ADB66F00E07875 /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
+		DB0168F929B0550E00E07875 /* ProfileSettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingSection.swift; sourceTree = "<group>"; };
+		DB0168FB29B05A8700E07875 /* ProfileSettingMenuData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingMenuData.swift; sourceTree = "<group>"; };
+		DB0168FE29B05E9000E07875 /* ProfileSettingMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingMenuCell.swift; sourceTree = "<group>"; };
 		DB20A41D298CC1D400AD31F7 /* KakaoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoUseCase.swift; sourceTree = "<group>"; };
 		DB20A421298CC5AD00AD31F7 /* KakaoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoRepository.swift; sourceTree = "<group>"; };
 		DB20A4232991EE8800AD31F7 /* NaverUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverUseCase.swift; sourceTree = "<group>"; };
@@ -184,9 +198,19 @@
 		DB0168E8299CAF1400E07875 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				DB0168FE29B05E9000E07875 /* ProfileSettingMenuCell.swift */,
 				DB0168E9299CAF3100E07875 /* TestCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		DB0168FD29B05E4000E07875 /* ProfileSetting */ = {
+			isa = PBXGroup;
+			children = (
+				DB0168F929B0550E00E07875 /* ProfileSettingSection.swift */,
+				DB0168FB29B05A8700E07875 /* ProfileSettingMenuData.swift */,
+			);
+			path = ProfileSetting;
 			sourceTree = "<group>";
 		};
 		DB20A413298CABCE00AD31F7 /* Application */ = {
@@ -232,6 +256,7 @@
 		DB20A417298CAD0300AD31F7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				DB0168FD29B05E4000E07875 /* ProfileSetting */,
 				DB3E32B2299482F800EAD0B6 /* UserData.swift */,
 				DB20A42929936D1A00AD31F7 /* KakaoData.swift */,
 				DB20A427299327A100AD31F7 /* NaverData.swift */,
@@ -243,6 +268,7 @@
 		DB20A418298CAD0E00AD31F7 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				DB0168F729ADB66F00E07875 /* UserUseCase.swift */,
 				DB20A41D298CC1D400AD31F7 /* KakaoUseCase.swift */,
 				DB20A4232991EE8800AD31F7 /* NaverUseCase.swift */,
 			);
@@ -279,6 +305,7 @@
 				DB3E32BA2995E60800EAD0B6 /* MapTabFlow.swift */,
 				DB3E32BC2995E64400EAD0B6 /* FeedTabFlow.swift */,
 				DB3E32BE2995E65600EAD0B6 /* ProfileTabFlow.swift */,
+				DB0168ED29A306A800E07875 /* ProfileSettingFlow.swift */,
 				DB3E32D4299614E200EAD0B6 /* TestFlow.swift */,
 			);
 			path = Flow;
@@ -310,6 +337,7 @@
 				DB3E32CE2995FC2900EAD0B6 /* MapTabViewController.swift */,
 				DB3E32D02995FC3800EAD0B6 /* FeedTabViewController.swift */,
 				DB3E32D22995FC5100EAD0B6 /* ProfileTabViewController.swift */,
+				DB0168F129A306CF00E07875 /* ProfileSettingViewController.swift */,
 				DB3E32D8299614FB00EAD0B6 /* TestViewController.swift */,
 			);
 			path = VC;
@@ -325,6 +353,7 @@
 				DB3E32C42995FBD400EAD0B6 /* MapTabViewReactor.swift */,
 				DB3E32C62995FBE800EAD0B6 /* FeedTabViewReactor.swift */,
 				DB3E32C82995FBF800EAD0B6 /* ProfileTabViewReactor.swift */,
+				DB0168EF29A306C000E07875 /* ProfileSettingViewReactor.swift */,
 				DB3E32D6299614ED00EAD0B6 /* TestViewReactor.swift */,
 			);
 			path = Reactor;
@@ -513,6 +542,7 @@
 				DB3E32BF2995E65600EAD0B6 /* ProfileTabFlow.swift in Sources */,
 				DB3E32D5299614E200EAD0B6 /* TestFlow.swift in Sources */,
 				DB687AD8298A1E43006A5E69 /* LoginFlow.swift in Sources */,
+				DB0168FA29B0550E00E07875 /* ProfileSettingSection.swift in Sources */,
 				DB3E32D12995FC3800EAD0B6 /* FeedTabViewController.swift in Sources */,
 				DB3E32CB2995FC0900EAD0B6 /* HomeTabViewController.swift in Sources */,
 				DB3E32C52995FBD400EAD0B6 /* MapTabViewReactor.swift in Sources */,
@@ -521,6 +551,7 @@
 				DB687AEB298A4545006A5E69 /* LoginButton.swift in Sources */,
 				DB3E32D7299614ED00EAD0B6 /* TestViewReactor.swift in Sources */,
 				DB687AF3298C99EB006A5E69 /* AppKeys.swift in Sources */,
+				DB0168F029A306C000E07875 /* ProfileSettingViewReactor.swift in Sources */,
 				DB3E32D32995FC5100EAD0B6 /* ProfileTabViewController.swift in Sources */,
 				DB3E32CF2995FC2900EAD0B6 /* MapTabViewController.swift in Sources */,
 				DB830FD42989EECB00D76B2B /* AppDelegate.swift in Sources */,
@@ -528,9 +559,13 @@
 				DB20A41E298CC1D400AD31F7 /* KakaoUseCase.swift in Sources */,
 				DB3E32E32999D19E00EAD0B6 /* LocalRepository.swift in Sources */,
 				DB0168DF299B457A00E07875 /* FirebaseRepository.swift in Sources */,
+				DB0168EE29A306A800E07875 /* ProfileSettingFlow.swift in Sources */,
 				DB3E32BD2995E64400EAD0B6 /* FeedTabFlow.swift in Sources */,
 				DB20A422298CC5AD00AD31F7 /* KakaoRepository.swift in Sources */,
+				DB0168FF29B05E9000E07875 /* ProfileSettingMenuCell.swift in Sources */,
 				DB3E32B3299482F800EAD0B6 /* UserData.swift in Sources */,
+				DB0168FC29B05A8700E07875 /* ProfileSettingMenuData.swift in Sources */,
+				DB0168F229A306CF00E07875 /* ProfileSettingViewController.swift in Sources */,
 				DB687AD4298A1C79006A5E69 /* AppFlow.swift in Sources */,
 				DB3E32D9299614FB00EAD0B6 /* TestViewController.swift in Sources */,
 				DB20A4262991EF0F00AD31F7 /* NaverRepository.swift in Sources */,
@@ -550,6 +585,7 @@
 				DB3E32C32995FBC700EAD0B6 /* SearchTabViewReactor.swift in Sources */,
 				DB20A428299327A100AD31F7 /* NaverData.swift in Sources */,
 				DB830FD62989EECB00D76B2B /* SceneDelegate.swift in Sources */,
+				DB0168F829ADB66F00E07875 /* UserUseCase.swift in Sources */,
 				DB3E32B52995DEE100EAD0B6 /* TabDashBoardFlow.swift in Sources */,
 				DB687ADA298A1EF8006A5E69 /* AppStepper.swift in Sources */,
 				DB687ADC298A1FA5006A5E69 /* LoginViewReactor.swift in Sources */,

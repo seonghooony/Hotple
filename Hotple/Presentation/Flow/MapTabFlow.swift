@@ -16,26 +16,35 @@ class MapTabFlow: Flow {
     
     private let rootViewController = UINavigationController()
     
+    private weak var windowNavigationController: UINavigationController?
+    
 //    var root: Presentable
-//    
+    
 //    var rootViewController: UINavigationController
-//    
-//    init(rootViewController: UINavigationController) {
-//        self.root = rootViewController
-//        self.rootViewController = rootViewController
-//    }
+//
+    init(windowNavigationController: UINavigationController) {
+        
+        self.windowNavigationController = windowNavigationController
+        
+        print("MapTabFlow init")
+        print("windowNavigationController : \(windowNavigationController.viewControllers)")
+    }
     
     deinit {
         print("MapTabFlow deinit")
     }
     
     func navigate(to step: Step) -> FlowContributors {
+        print("excuting MapTabFlow navigate")
         guard let step = step as? AppStep else { return . none }
         
         switch step {
             
         case .mapTabIsRequired:
             return self.navigateToMapTab()
+            
+        case .logoutIsRequired:
+            return logout()
             
         default:
             return .none
@@ -46,11 +55,20 @@ class MapTabFlow: Flow {
         
         let mapTabViewReactor = MapTabViewReactor()
         let mapTabViewController = MapTabViewController(reactor: mapTabViewReactor)
+        mapTabViewController.windowNavigationController = windowNavigationController
+        self.rootViewController.navigationBar.isHidden = true
         self.rootViewController.pushViewController(mapTabViewController, animated: false)
         
 
         
         return .one(flowContributor: .contribute(withNextPresentable: mapTabViewController, withNextStepper: mapTabViewReactor))
+    }
+    
+    private func logout() -> FlowContributors {
+        
+        self.rootViewController.popViewController(animated: true)
+        return .none
+        
     }
     
 }

@@ -40,6 +40,10 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
         self.kakaoRepository = kakaoRepository
     }
     
+    deinit {
+        print("KakaoUseCase deinit")
+    }
+    
     // 회원가입 + 로그인 (카카오)
     func login() -> Observable<Bool> {
         
@@ -151,6 +155,7 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
                     return false
                 }
             }
+
         
     }
     

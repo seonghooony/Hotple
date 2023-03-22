@@ -15,11 +15,33 @@ class TabDashBoardFlow: Flow {
         
     var root: Presentable
     
+    let tabDashBoardViewController: UITabBarController
+    
+    let homeTabFlow: HomeTabFlow
+    let searchTabFlow: SearchTabFlow
+    let mapTabFlow: MapTabFlow
+    let feedTabFlow: FeedTabFlow
+    let profileTabFlow: ProfileTabFlow
+    
     init(rootViewController: UINavigationController) {
+        
+        print("TabDashBoardFlow init")
+        print("windowNavigationController : \(rootViewController.viewControllers)")
+        
         self.root = rootViewController
         self.rootViewController = rootViewController
+        
+        tabDashBoardViewController = UITabBarController()
+        
+        homeTabFlow = HomeTabFlow(windowNavigationController: rootViewController)
+        searchTabFlow = SearchTabFlow(windowNavigationController: rootViewController)
+        mapTabFlow = MapTabFlow(windowNavigationController: rootViewController)
+        feedTabFlow = FeedTabFlow(windowNavigationController: rootViewController)
+        profileTabFlow = ProfileTabFlow(windowNavigationController: rootViewController)
     }
         
+    
+    
     
     deinit {
         print("TabDashBoardFlow deinit")
@@ -37,6 +59,9 @@ class TabDashBoardFlow: Flow {
         case .testIsRequired:
             return navigateToTest()
             
+        case .logoutIsRequired:
+            return logout()
+            
         default:
             return .none
         }
@@ -44,13 +69,7 @@ class TabDashBoardFlow: Flow {
     
     
     private func navigateToTabDashBoard() -> FlowContributors {
-        let tabDashBoardViewController = UITabBarController()
         
-        let homeTabFlow = HomeTabFlow()
-        let searchTabFlow = SearchTabFlow()
-        let mapTabFlow = MapTabFlow()
-        let feedTabFlow = FeedTabFlow()
-        let profileTabFlow = ProfileTabFlow()
         
         Flows.use(homeTabFlow, searchTabFlow, mapTabFlow, feedTabFlow, profileTabFlow,
                   when: .created) { [unowned self] flow1Root, flow2Root, flow3Root, flow4Root, flow5Root in
@@ -58,13 +77,14 @@ class TabDashBoardFlow: Flow {
             let tabBarItem2 = UITabBarItem(title: "검색", image: UIImage(), selectedImage: UIImage())
             let tabBarItem3 = UITabBarItem(title: "지도", image: UIImage(), selectedImage: UIImage())
             let tabBarItem4 = UITabBarItem(title: "피드", image: UIImage(), selectedImage: UIImage())
-            let tabBarItem5 = UITabBarItem(title: "마이", image: UIImage(), selectedImage: UIImage())
+            let tabBarItem5 = UITabBarItem(title: "마이페이지", image: UIImage(), selectedImage: UIImage())
             
             flow1Root.tabBarItem = tabBarItem1
             flow2Root.tabBarItem = tabBarItem2
             flow3Root.tabBarItem = tabBarItem3
             flow4Root.tabBarItem = tabBarItem4
             flow5Root.tabBarItem = tabBarItem5
+
             
             tabDashBoardViewController.tabBar.backgroundColor = .white
             
@@ -74,12 +94,11 @@ class TabDashBoardFlow: Flow {
 //            self.rootViewController.navigationBar.isHidden = true
             DispatchQueue.main.async {
 //                self.rootViewController.pushViewController(tabDashBoardViewController, animated: false)
-                self.rootViewController.navigationBar.isHidden = true
-                self.rootViewController.setViewControllers([tabDashBoardViewController], animated: false)
+                self.rootViewController.navigationBar.isHidden = false
+                self.rootViewController.navigationBar.backgroundColor = .clear
+                self.rootViewController.setViewControllers([self.tabDashBoardViewController], animated: false)
             }
-            
-            
-            
+
         }
         
         return .multiple(
@@ -92,12 +111,19 @@ class TabDashBoardFlow: Flow {
             ])
     }
     
+    
+    private func logout() -> FlowContributors {
+        print("navigateToLogout")
+        
+        return .end(forwardToParentFlowWithStep: AppStep.loginIsRequired)
+
+    }
+    
     private func navigateToTest() -> FlowContributors {
         let testViewReactor = TestViewReactor()
                 let viewController = TestViewController(reactor: testViewReactor)
                 self.rootViewController.pushViewController(viewController, animated: true)
 
-                
                 return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: testViewReactor))
     }
     

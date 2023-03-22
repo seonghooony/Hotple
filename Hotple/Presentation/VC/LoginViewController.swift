@@ -24,14 +24,7 @@ class LoginViewController: UIViewController, View {
     
     private let naverBtn = UIButton()
     
-    
-    
-    
-    private let googleBtn = UIButton()
-    
-    private let emailBtn = UIButton()
-    
-    private let signupBtn = UIButton()
+    private let skipBtn = UIButton()
     
     private let testBtn = UIButton()
     
@@ -57,6 +50,10 @@ class LoginViewController: UIViewController, View {
         
         naverBtn.setBackgroundImage(UIImage(named: "img_naver_login"), for: .normal)
         self.view.addSubview(self.naverBtn)
+        
+        skipBtn.setTitle("건너뛰기", for: .normal)
+        skipBtn.setTitleColor(.black, for: .normal)
+        self.view.addSubview(skipBtn)
 
         testBtn.setTitle("테스트", for: .normal)
         testBtn.backgroundColor = .blue
@@ -94,6 +91,13 @@ class LoginViewController: UIViewController, View {
             make.top.equalTo(self.kakaoBtn.snp.bottom).offset(8)
             make.width.equalTo(250)
             make.height.equalTo(48)
+        }
+        
+        self.skipBtn.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-32)
+            make.trailing.equalToSuperview().offset(-16)
+            make.width.equalTo(100)
+            make.height.equalTo(50)
         }
         
         self.testBtn.snp.makeConstraints { make in
@@ -158,6 +162,12 @@ class LoginViewController: UIViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
+        skipBtn.rx.tap
+            .map { _ in
+                return Reactor.Action.clickToSkip
+            }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
         
 //        moveToHomeBtn.rx.tap
 //            .map { _ in

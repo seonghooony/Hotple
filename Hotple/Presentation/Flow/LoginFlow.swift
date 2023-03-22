@@ -27,6 +27,8 @@ class LoginFlow: Flow {
     let naverUseCase: NaverUseCase
     
     init(rootViewController: UINavigationController) {
+        print("LoginFlow deinit")
+        print("windowNavigationController : \(rootViewController.viewControllers)")
         
         self.root = rootViewController
         self.rootViewController = rootViewController
@@ -80,10 +82,13 @@ class LoginFlow: Flow {
         let loginViewController = LoginViewController(reactor: loginViewReactor)
 //        self.rootViewController.pushViewController(loginViewController, animated: true)
         
-        self.rootViewController.setViewControllers([loginViewController], animated: false)
+        DispatchQueue.main.async {
+            print("!@# \(self.rootViewController.viewControllers)")
+            self.rootViewController.setViewControllers([loginViewController], animated: false)
+            print("!@#2 \(self.rootViewController.viewControllers)")
+        }
         
         print("navigateToLogin")
-        print(self.rootViewController.viewControllers)
         
         return .one(flowContributor: .contribute(withNextPresentable: loginViewController, withNextStepper: loginViewReactor))
         
