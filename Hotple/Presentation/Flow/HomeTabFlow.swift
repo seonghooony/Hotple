@@ -69,6 +69,7 @@ class HomeTabFlow: Flow {
         let homeTabViewController = HomeTabViewController(reactor: homeTabViewReactor)
         homeTabViewController.windowNavigationController = windowNavigationController
         self.rootViewController.navigationBar.isHidden = true
+        self.rootViewController.hidesBottomBarWhenPushed = true
         self.rootViewController.pushViewController(homeTabViewController, animated: false)
         
 

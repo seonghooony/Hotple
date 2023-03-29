@@ -36,10 +36,10 @@ final class NaverUseCase: NaverUseCaseProtocol {
     }
     
     func login() -> Observable<Bool> {
-        var checkUserSubject = PublishSubject<UserData>()
-        var pushUserSubject = PublishSubject<UserData>()
-        var localLoginSubject = PublishSubject<UserData>()
-        var completedLoginSubject = PublishSubject<Bool>()
+        let checkUserSubject = PublishSubject<UserData>()
+        let pushUserSubject = PublishSubject<UserData>()
+        let localLoginSubject = PublishSubject<UserData>()
+        let completedLoginSubject = PublishSubject<Bool>()
         
         // 로컬 단에 유저데이터 넣기
         localLoginSubject

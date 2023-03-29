@@ -18,15 +18,14 @@ class SplashViewReactor: Reactor, Stepper {
     var steps = PublishRelay<Step>()
     
     let initialState: State
-    let kakaoUseCase: KakaoUseCase
-    let naverUseCase: NaverUseCase
     
-    init(kakaoUseCase: KakaoUseCase, naverUseCase: NaverUseCase) {
+    let userUseCase: UserUseCase
+    
+    init(userUseCase: UserUseCase) {
         self.initialState = State()
-        self.kakaoUseCase = kakaoUseCase
-        self.naverUseCase = naverUseCase
-        
+        self.userUseCase = userUseCase
     }
+    
     
     deinit {
         print("SplashViewReactor deinit")
@@ -52,15 +51,27 @@ class SplashViewReactor: Reactor, Stepper {
         switch action {
         case .checkToLogin:
             print("checkToLogin action 실행")
-            if let userId = UserDefaults.standard.string(forKey: UserDefaultKeys.USER_ID),
-               let loginType = UserDefaults.standard.string(forKey: UserDefaultKeys.LOGIN_TYPE) {
-                print("tabDashBoardIsRequired action 실행")
-                self.steps.accept(AppStep.tabDashBoardIsRequired)
-                
-            } else {
-                print("loginIsRequired action 실행")
-                self.steps.accept(AppStep.loginIsRequired)
-            }
+            
+            userUseCase.getUserInfo()
+                .subscribe { userData in
+                    if userData != nil {
+                        print("tabDashBoardIsRequired action 실행")
+                        self.steps.accept(AppStep.tabDashBoardIsRequired)
+                    } else {
+                        print("loginIsRequired action 실행")
+                        self.steps.accept(AppStep.loginIsRequired)
+                    }
+                } onError: { error in
+                    print("SplashViewReactor checkLogin userUseCase Error")
+                    print(error.localizedDescription)
+                } onCompleted: {
+                    print("SplashViewReactor checkLogin userUseCase Completed")
+                } onDisposed: {
+                    print("SplashViewReactor checkLogin userUseCase Disposed")
+                }
+                .disposed(by: self.disposeBag)
+
+            
             return .never()
             
         

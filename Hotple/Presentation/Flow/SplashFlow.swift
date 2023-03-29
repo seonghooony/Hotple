@@ -20,16 +20,20 @@ class SplashFlow: Flow {
         return self.rootViewController
     }
     
-    let kakaoUseCase: KakaoUseCase
-    let naverUseCase: NaverUseCase
+    let userUseCase: UserUseCase
+//    let kakaoUseCase: KakaoUseCase
+//    let naverUseCase: NaverUseCase
     
     init() {
+        
         let localRepository = LocalRepository()
         let firebaseRepository = FirebaseRepository()
         
-        self.kakaoUseCase = KakaoUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, kakaoRepository: KakaoRepository())
+        self.userUseCase = UserUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository)
         
-        self.naverUseCase = NaverUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, naverRepository: NaverRepository())
+//        self.kakaoUseCase = KakaoUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, kakaoRepository: KakaoRepository())
+//
+//        self.naverUseCase = NaverUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, naverRepository: NaverRepository())
     }
     
     deinit {
@@ -65,8 +69,8 @@ class SplashFlow: Flow {
     }
     
     private func navigateToSplash() -> FlowContributors {
-        
-        let splashViewReactor = SplashViewReactor(kakaoUseCase: kakaoUseCase, naverUseCase: naverUseCase)
+        let splashViewReactor = SplashViewReactor(userUseCase: userUseCase)
+//        let splashViewReactor = SplashViewReactor(kakaoUseCase: kakaoUseCase, naverUseCase: naverUseCase)
         let splashViewController = SplashViewController(reactor: splashViewReactor)
         self.rootViewController.pushViewController(splashViewController, animated: true)
         

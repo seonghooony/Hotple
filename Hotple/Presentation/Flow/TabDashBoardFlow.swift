@@ -86,9 +86,8 @@ class TabDashBoardFlow: Flow {
             flow5Root.tabBarItem = tabBarItem5
 
             
-            tabDashBoardViewController.tabBar.backgroundColor = .white
-            
-            tabDashBoardViewController.setViewControllers([flow1Root, flow2Root, flow3Root, flow4Root, flow5Root], animated: false)
+            self.tabDashBoardViewController.tabBar.backgroundColor = .white
+            self.tabDashBoardViewController.setViewControllers([flow1Root, flow2Root, flow3Root, flow4Root, flow5Root], animated: false)
             
             
 //            self.rootViewController.navigationBar.isHidden = true

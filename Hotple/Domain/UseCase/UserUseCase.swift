@@ -33,38 +33,50 @@ final class UserUseCase: UserUseCaseProtocol {
     }
     
     func getUserInfo() -> Observable<UserData?> {
-        return Observable.create { observer in
-            
-            if let userId = UserDefaults.standard.string(forKey: UserDefaultKeys.USER_ID) {
-                let localUserData = UserData(
-                    id: userId
-                )
-                
-                self.firebaseRepository.getUserData(userData: localUserData)
-                    .subscribe { userData in
-                        
-                        observer.onNext(userData)
-                        observer.onCompleted()
-                        
-                    } onError: { error in
-                        debugPrint(error.localizedDescription)
-                        observer.onError(error)
-                    } onCompleted: {
-                        debugPrint("onCompleted")
-                    } onDisposed: {
-                        debugPrint("onDisposed")
-                    }
-                    .disposed(by: self.disposeBag)
-                
-                
+        let localRepoSubject = PublishSubject<UserData?>()
+        let fbRepoSubject = PublishSubject<UserData?>()
+        let resultSubject = PublishSubject<UserData?>()
+        
+        localRepoSubject.subscribe { userData in
+            if let userData = userData {
+                fbRepoSubject.onNext(userData)
             } else {
-                observer.onNext(nil)
-                observer.onCompleted()
+                resultSubject.onNext(nil)
             }
-            
-            return Disposables.create()
-            
+        } onError: { error in
+            resultSubject.onError(error)
+            print(error.localizedDescription)
+        } onCompleted: {
+            print("userUseCase getUserInfo localRepo completed")
+        } onDisposed: {
+            print("userUseCase getUserInfo localRepo onDisposed")
         }
+        .disposed(by: self.disposeBag)
+        
+        fbRepoSubject.subscribe { userData in
+            if let userData = userData {
+                self.firebaseRepository.getUserData(userData: userData)
+                    .bind(to: resultSubject)
+                    .disposed(by: self.disposeBag)
+            } else {
+                resultSubject.onNext(nil)
+            }
+        } onError: { error in
+            resultSubject.onError(error)
+            print(error.localizedDescription)
+        } onCompleted: {
+            print("userUseCase getUserInfo fbRepo completed")
+        } onDisposed: {
+            print("userUseCase getUserInfo fbRepo onDisposed")
+        }
+        .disposed(by: self.disposeBag)
+
+        
+        localRepository.readUser()
+            .bind(to: localRepoSubject)
+            .disposed(by: self.disposeBag)
+        
+        return resultSubject
         
     }
     
