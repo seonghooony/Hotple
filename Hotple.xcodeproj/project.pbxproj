@@ -18,6 +18,10 @@
 		DB0168FA29B0550E00E07875 /* ProfileSettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168F929B0550E00E07875 /* ProfileSettingSection.swift */; };
 		DB0168FC29B05A8700E07875 /* ProfileSettingMenuData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168FB29B05A8700E07875 /* ProfileSettingMenuData.swift */; };
 		DB0168FF29B05E9000E07875 /* ProfileSettingMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168FE29B05E9000E07875 /* ProfileSettingMenuCell.swift */; };
+		DB01690129D3F9AD00E07875 /* TabDashBoardViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB01690029D3F9AD00E07875 /* TabDashBoardViewReactor.swift */; };
+		DB01690329D3F9C300E07875 /* TabDashBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB01690229D3F9C300E07875 /* TabDashBoardViewController.swift */; };
+		DB01690629D55B9300E07875 /* OSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB01690429D55B7700E07875 /* OSLog.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		DB01690829D55BF200E07875 /* OSLogExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB01690729D55BF200E07875 /* OSLogExtension.swift */; };
 		DB20A41E298CC1D400AD31F7 /* KakaoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB20A41D298CC1D400AD31F7 /* KakaoUseCase.swift */; };
 		DB20A422298CC5AD00AD31F7 /* KakaoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB20A421298CC5AD00AD31F7 /* KakaoRepository.swift */; };
 		DB20A4242991EE8800AD31F7 /* NaverUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB20A4232991EE8800AD31F7 /* NaverUseCase.swift */; };
@@ -82,6 +86,10 @@
 		DB0168F929B0550E00E07875 /* ProfileSettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingSection.swift; sourceTree = "<group>"; };
 		DB0168FB29B05A8700E07875 /* ProfileSettingMenuData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingMenuData.swift; sourceTree = "<group>"; };
 		DB0168FE29B05E9000E07875 /* ProfileSettingMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingMenuCell.swift; sourceTree = "<group>"; };
+		DB01690029D3F9AD00E07875 /* TabDashBoardViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabDashBoardViewReactor.swift; sourceTree = "<group>"; };
+		DB01690229D3F9C300E07875 /* TabDashBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabDashBoardViewController.swift; sourceTree = "<group>"; };
+		DB01690429D55B7700E07875 /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
+		DB01690729D55BF200E07875 /* OSLogExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLogExtension.swift; sourceTree = "<group>"; };
 		DB20A41D298CC1D400AD31F7 /* KakaoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoUseCase.swift; sourceTree = "<group>"; };
 		DB20A421298CC5AD00AD31F7 /* KakaoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoRepository.swift; sourceTree = "<group>"; };
 		DB20A4232991EE8800AD31F7 /* NaverUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverUseCase.swift; sourceTree = "<group>"; };
@@ -138,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB01690629D55B9300E07875 /* OSLog.framework in Frameworks */,
 				F17A00A91DE1736E6F832C4D /* Pods_Hotple.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,6 +157,7 @@
 		2C584BCDFE318348939228F1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DB01690429D55B7700E07875 /* OSLog.framework */,
 				58B8FD5FA8785505A842F000 /* Pods_Hotple.framework */,
 			);
 			name = Frameworks;
@@ -332,6 +342,7 @@
 			children = (
 				DB3E32DA2999BE2B00EAD0B6 /* SplashViewController.swift */,
 				DB687ADD298A1FC5006A5E69 /* LoginViewController.swift */,
+				DB01690229D3F9C300E07875 /* TabDashBoardViewController.swift */,
 				DB3E32CA2995FC0900EAD0B6 /* HomeTabViewController.swift */,
 				DB3E32CC2995FC1A00EAD0B6 /* SearchTabViewController.swift */,
 				DB3E32CE2995FC2900EAD0B6 /* MapTabViewController.swift */,
@@ -348,6 +359,7 @@
 			children = (
 				DB3E32DC2999BE4000EAD0B6 /* SplashViewReactor.swift */,
 				DB687ADB298A1FA5006A5E69 /* LoginViewReactor.swift */,
+				DB01690029D3F9AD00E07875 /* TabDashBoardViewReactor.swift */,
 				DB3E32C02995FBAE00EAD0B6 /* HomeTabViewReactor.swift */,
 				DB3E32C22995FBC700EAD0B6 /* SearchTabViewReactor.swift */,
 				DB3E32C42995FBD400EAD0B6 /* MapTabViewReactor.swift */,
@@ -383,6 +395,7 @@
 			children = (
 				DB687AEC298A4AE6006A5E69 /* Extension.swift */,
 				DB687AEA298A4545006A5E69 /* LoginButton.swift */,
+				DB01690729D55BF200E07875 /* OSLogExtension.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -551,6 +564,7 @@
 				DB687AEB298A4545006A5E69 /* LoginButton.swift in Sources */,
 				DB3E32D7299614ED00EAD0B6 /* TestViewReactor.swift in Sources */,
 				DB687AF3298C99EB006A5E69 /* AppKeys.swift in Sources */,
+				DB01690329D3F9C300E07875 /* TabDashBoardViewController.swift in Sources */,
 				DB0168F029A306C000E07875 /* ProfileSettingViewReactor.swift in Sources */,
 				DB3E32D32995FC5100EAD0B6 /* ProfileTabViewController.swift in Sources */,
 				DB3E32CF2995FC2900EAD0B6 /* MapTabViewController.swift in Sources */,
@@ -569,9 +583,11 @@
 				DB687AD4298A1C79006A5E69 /* AppFlow.swift in Sources */,
 				DB3E32D9299614FB00EAD0B6 /* TestViewController.swift in Sources */,
 				DB20A4262991EF0F00AD31F7 /* NaverRepository.swift in Sources */,
+				DB01690829D55BF200E07875 /* OSLogExtension.swift in Sources */,
 				DB3E32BB2995E60800EAD0B6 /* MapTabFlow.swift in Sources */,
 				DB3E32C92995FBF800EAD0B6 /* ProfileTabViewReactor.swift in Sources */,
 				DB3E32C72995FBE800EAD0B6 /* FeedTabViewReactor.swift in Sources */,
+				DB01690129D3F9AD00E07875 /* TabDashBoardViewReactor.swift in Sources */,
 				DB3E32E52999D5B800EAD0B6 /* UserDefaultKeys.swift in Sources */,
 				DB3E32C12995FBAE00EAD0B6 /* HomeTabViewReactor.swift in Sources */,
 				DB3E32B92995E5FD00EAD0B6 /* SearchTabFlow.swift in Sources */,

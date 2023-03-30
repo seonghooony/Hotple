@@ -25,12 +25,17 @@ protocol NaverRepositoryProtocol {
 
 final class NaverRepository: NSObject, NaverThirdPartyLoginConnectionDelegate, NaverRepositoryProtocol {
 
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     
     let loginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     
     private let loginSubject = PublishSubject<Bool>()
     private let logoutSubject = PublishSubject<Bool>()
+    
+    deinit {
+        disposeBag = DisposeBag()
+        Log.debug("NaverRepository deinit")
+    }
     
     // 서드파티 로그인 및 회원가입 진행
     func setLogin() -> Observable<Bool> {
@@ -57,7 +62,7 @@ final class NaverRepository: NSObject, NaverThirdPartyLoginConnectionDelegate, N
         guard let isValidAccessToken = loginInstance?.isValidAccessTokenExpireTimeNow() else { return .never() }
         
         if !isValidAccessToken {
-            debugPrint("Naver Token 정보 만료됨.")
+            Log.error("Naver Token 정보 만료됨.")
             return .never()
         }
 
@@ -76,6 +81,7 @@ final class NaverRepository: NSObject, NaverThirdPartyLoginConnectionDelegate, N
     
                 switch response.result {
                 case .success(let loginData):
+                    Log.network("[NAVER LOGIN USERDATA GET SUCCESSFULLY]")
                     let naverUserData = loginData.response
                     
                     observer.onNext(.success(naverUserData))
@@ -83,7 +89,7 @@ final class NaverRepository: NSObject, NaverThirdPartyLoginConnectionDelegate, N
                     observer.onCompleted()
                     
                 case .failure(let error):
-                    print("[NAVER ERROR] : \(error.localizedDescription)")
+                    Log.error("[NAVER ERROR] : \(error.localizedDescription)")
                     
                     observer.onError(error)
                 }
@@ -104,32 +110,28 @@ final class NaverRepository: NSObject, NaverThirdPartyLoginConnectionDelegate, N
     
     /* --------------------------Delegate Protocol Func--------------------------- */
     func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
-        print("[SUCCESS] : Success Naver Login")
-//        getUserInfo().subscribe()
+        Log.network("[SUCCESS] : Success Naver Login")
+
         loginSubject.onNext(true)
-//        loginSubject.onCompleted()
     }
     
     func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
-        print("[SUCCESS] : Success Naver Token Refresh")
-//        getUserInfo().subscribe()
+        Log.network("[SUCCESS] : Success Naver Token Refresh")
+
         loginSubject.onNext(true)
-//        loginSubject.onCompleted()
     }
     
     func oauth20ConnectionDidFinishDeleteToken() {
-        print("[SUCCESS] : Success Naver Token Delete")
+        Log.network("[SUCCESS] : Success Naver Token Delete")
+
         loginInstance?.requestDeleteToken()
     }
     
     func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
-        print("[ERROR] : ", error.localizedDescription)
+        Log.error("[ERROR] : ", error.localizedDescription)
         
         loginSubject.onError(error)
-//        loginSubject.onCompleted()
     }
-    
-
     
 }
     

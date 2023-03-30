@@ -18,25 +18,24 @@ class AppFlow: Flow {
     }
     
     init(window: UIWindow) {
+        Log.debug("AppFlow init")
         self.window = window
     }
     
     deinit {
-        print("AppFlow deinit")
+        Log.debug("AppFlow deinit")
     }
     
     func navigate(to step: RxFlow.Step) -> RxFlow.FlowContributors {
+        
         guard let step = step as? AppStep else { return .none }
-        print("현재 appflow")
+        
+        Log.flow("excuting AppFlow navigate")
+        
         switch step {
-            
+        // 스플래시 화면 이동
         case .splashIsRequired:
-            return self.navigateToSplash()
-            
-//        case .loginIsRequired:
-//            return self.navigateToLogin()
-//        case .homeIsRequired:
-//            return self.navigateToHome()
+            return self.flowToSplash()
             
         default:
             return .none
@@ -45,7 +44,9 @@ class AppFlow: Flow {
         
     }
     
-    private func navigateToSplash() -> FlowContributors {
+    private func flowToSplash() -> FlowContributors {
+        Log.flow("AppFlow flowToSplash")
+        
         let splashFlow = SplashFlow()
 
         // mainFlow 생성 시 root 를 window에 연결함.
@@ -57,21 +58,5 @@ class AppFlow: Flow {
 
         return .one(flowContributor: .contribute(withNextPresentable: splashFlow, withNextStepper: nextStep))
     }
-    
-//    private func navigateToLogin() -> FlowContributors {
-//        let loginFlow = LoginFlow(rootViewController: self.rootViewController)
-//        // mainFlow 생성 시 root 를 window에 연결함.
-//        Flows.use(loginFlow, when: .created) { (root) in
-//            self.window.rootViewController = root
-//        }
-//
-//        let nextStep = OneStepper(withSingleStep: AppStep.loginIsRequired)
-//
-//        return .one(flowContributor: .contribute(withNextPresentable: loginFlow, withNextStepper: nextStep))
-//    }
-
-    
-
-    
-    
+        
 }

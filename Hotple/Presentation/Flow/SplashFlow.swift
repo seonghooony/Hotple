@@ -21,29 +21,26 @@ class SplashFlow: Flow {
     }
     
     let userUseCase: UserUseCase
-//    let kakaoUseCase: KakaoUseCase
-//    let naverUseCase: NaverUseCase
+
     
     init() {
-        
+        Log.debug("SplashFlow init")
         let localRepository = LocalRepository()
         let firebaseRepository = FirebaseRepository()
         
         self.userUseCase = UserUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository)
-        
-//        self.kakaoUseCase = KakaoUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, kakaoRepository: KakaoRepository())
-//
-//        self.naverUseCase = NaverUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, naverRepository: NaverRepository())
+
     }
     
     deinit {
-        print("SplashFlow deinit")
+        Log.debug("SplashFlow deinit")
     }
     
     func navigate(to step: RxFlow.Step) -> RxFlow.FlowContributors {
-        print("excuting SplashFlow navigate")
+        
         guard let step = step as? AppStep else { return .none }
         
+        Log.flow("excuting SplashFlow navigate")
         
         switch step {
             
@@ -53,13 +50,10 @@ class SplashFlow: Flow {
             
         // 자기 자신이 실행 될 경우
         case .loginIsRequired:
-            return self.navigateToLogin()
+            return self.flowToLogin()
             
         case .tabDashBoardIsRequired:
-            return self.navigateToTabDashBoard()
-            
-            
-        
+            return self.flowToTabDashBoard()
             
         default:
             return .none
@@ -69,35 +63,31 @@ class SplashFlow: Flow {
     }
     
     private func navigateToSplash() -> FlowContributors {
+        Log.flow("SplashFlow navigateToSplash")
+        
         let splashViewReactor = SplashViewReactor(userUseCase: userUseCase)
-//        let splashViewReactor = SplashViewReactor(kakaoUseCase: kakaoUseCase, naverUseCase: naverUseCase)
         let splashViewController = SplashViewController(reactor: splashViewReactor)
         self.rootViewController.pushViewController(splashViewController, animated: true)
-        
-        print("navigateToSplash")
-        print(self.rootViewController.viewControllers)
         
         return .one(flowContributor: .contribute(withNextPresentable: splashViewController, withNextStepper: splashViewReactor))
         
     }
     
-    private func navigateToLogin() -> FlowContributors {
+    private func flowToLogin() -> FlowContributors {
+        Log.flow("SplashFlow flowToLogin")
         
         let loginFlow = LoginFlow(rootViewController: self.rootViewController)
-
-        print("navigateToLogin")
-        
         let nextStep = OneStepper(withSingleStep: AppStep.loginIsRequired)
 
         return .one(flowContributor: .contribute(withNextPresentable: loginFlow, withNextStepper: nextStep))
     }
     
 
-    private func navigateToTabDashBoard() -> FlowContributors {
+    private func flowToTabDashBoard() -> FlowContributors {
+        Log.flow("SplashFlow flowToTabDashBoard")
+        
         let tabDashBoardFlow = TabDashBoardFlow(rootViewController: self.rootViewController)
 
-        print("navigateToTabDashBoard")
-        
         return .one(flowContributor: .contribute(withNextPresentable: tabDashBoardFlow, withNextStepper: OneStepper(withSingleStep: AppStep.tabDashBoardIsRequired)))
     }
     

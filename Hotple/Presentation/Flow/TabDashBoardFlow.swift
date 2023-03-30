@@ -15,52 +15,36 @@ class TabDashBoardFlow: Flow {
         
     var root: Presentable
     
-    let tabDashBoardViewController: UITabBarController
-    
-    let homeTabFlow: HomeTabFlow
-    let searchTabFlow: SearchTabFlow
-    let mapTabFlow: MapTabFlow
-    let feedTabFlow: FeedTabFlow
-    let profileTabFlow: ProfileTabFlow
-    
     init(rootViewController: UINavigationController) {
-        
-        print("TabDashBoardFlow init")
-        print("windowNavigationController : \(rootViewController.viewControllers)")
+        Log.debug("TabDashBoardFlow init")
         
         self.root = rootViewController
         self.rootViewController = rootViewController
         
-        tabDashBoardViewController = UITabBarController()
-        
-        homeTabFlow = HomeTabFlow(windowNavigationController: rootViewController)
-        searchTabFlow = SearchTabFlow(windowNavigationController: rootViewController)
-        mapTabFlow = MapTabFlow(windowNavigationController: rootViewController)
-        feedTabFlow = FeedTabFlow(windowNavigationController: rootViewController)
-        profileTabFlow = ProfileTabFlow(windowNavigationController: rootViewController)
+//        self.tabDashBoardViewController = UITabBarController()
+
     }
-        
-    
-    
-    
+
     deinit {
-        print("TabDashBoardFlow deinit")
-        
+        Log.debug("TabDashBoardFlow deinit")
     }
     
     func navigate(to step: Step) -> FlowContributors {
-        print("excuting TabDashBoardFlow navigate")
+        
         guard let step = step as? AppStep else { return .none }
         
+        Log.flow("excuting TabDashBoardFlow navigate")
+        
         switch step {
+            
         case .tabDashBoardIsRequired:
             return navigateToTabDashBoard()
             
         case .testIsRequired:
             return navigateToTest()
             
-        case .logoutIsRequired:
-            return logout()
+//        case .logoutIsRequired:
+//            return logout()
             
         default:
             return .none
@@ -69,10 +53,19 @@ class TabDashBoardFlow: Flow {
     
     
     private func navigateToTabDashBoard() -> FlowContributors {
+        Log.flow("TabDashBoardFlow navigateToTabDashBoard")
         
+        let tabDashBoardViewReactor = TabDashBoardViewReactor()
+        let tabDashBoardViewController = TabDashBoardViewController(reactor: tabDashBoardViewReactor)
+        
+        let homeTabFlow = HomeTabFlow(windowNavigationController: rootViewController)
+        let searchTabFlow = SearchTabFlow(windowNavigationController: rootViewController)
+        let mapTabFlow = MapTabFlow(windowNavigationController: rootViewController)
+        let feedTabFlow = FeedTabFlow(windowNavigationController: rootViewController)
+        let profileTabFlow = ProfileTabFlow(windowNavigationController: rootViewController)
         
         Flows.use(homeTabFlow, searchTabFlow, mapTabFlow, feedTabFlow, profileTabFlow,
-                  when: .created) { [unowned self] flow1Root, flow2Root, flow3Root, flow4Root, flow5Root in
+                  when: .created) { [unowned self] (flow1Root, flow2Root, flow3Root, flow4Root, flow5Root) in
             let tabBarItem1 = UITabBarItem(title: "홈", image: UIImage(), selectedImage: UIImage())
             let tabBarItem2 = UITabBarItem(title: "검색", image: UIImage(), selectedImage: UIImage())
             let tabBarItem3 = UITabBarItem(title: "지도", image: UIImage(), selectedImage: UIImage())
@@ -85,17 +78,15 @@ class TabDashBoardFlow: Flow {
             flow4Root.tabBarItem = tabBarItem4
             flow5Root.tabBarItem = tabBarItem5
 
-            
-            self.tabDashBoardViewController.tabBar.backgroundColor = .white
-            self.tabDashBoardViewController.setViewControllers([flow1Root, flow2Root, flow3Root, flow4Root, flow5Root], animated: false)
-            
-            
-//            self.rootViewController.navigationBar.isHidden = true
+            tabDashBoardViewController.tabBar.backgroundColor = .white
+            tabDashBoardViewController.setViewControllers([flow1Root, flow2Root, flow3Root, flow4Root, flow5Root], animated: false)
+
+
             DispatchQueue.main.async {
-//                self.rootViewController.pushViewController(tabDashBoardViewController, animated: false)
-                self.rootViewController.navigationBar.isHidden = false
+//                self.rootViewController.navigationBar.isHidden = true
                 self.rootViewController.navigationBar.backgroundColor = .clear
-                self.rootViewController.setViewControllers([self.tabDashBoardViewController], animated: false)
+                self.rootViewController.pushViewController(tabDashBoardViewController, animated: false)
+//                self.rootViewController.setViewControllers([self.tabDashBoardViewController], animated: false)
             }
 
         }
@@ -111,12 +102,12 @@ class TabDashBoardFlow: Flow {
     }
     
     
-    private func logout() -> FlowContributors {
-        print("navigateToLogout")
-        
-        return .end(forwardToParentFlowWithStep: AppStep.loginIsRequired)
-
-    }
+//    private func logout() -> FlowContributors {
+//        print("navigateToLogout")
+//
+//        return .end(forwardToParentFlowWithStep: AppStep.loginIsRequired)
+//
+//    }
     
     private func navigateToTest() -> FlowContributors {
         let testViewReactor = TestViewReactor()

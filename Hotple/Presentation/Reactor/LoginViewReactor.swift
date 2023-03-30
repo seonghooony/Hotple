@@ -12,7 +12,7 @@ import RxCocoa
 // ExampleViewController의 VM 과 같음
 class LoginViewReactor: Reactor, Stepper {
     
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     
     var steps = PublishRelay<Step>()
     
@@ -25,6 +25,11 @@ class LoginViewReactor: Reactor, Stepper {
         self.kakaoUseCase = kakaoUseCase
         self.naverUseCase = naverUseCase
         
+    }
+    
+    deinit {
+        disposeBag = DisposeBag()
+        print("LoginViewReactor deinit")
     }
     
     enum Action {
@@ -49,16 +54,16 @@ class LoginViewReactor: Reactor, Stepper {
 
     
     func mutate(action: Action) -> Observable<Mutation> {
+
         switch action {
         case .clickToKakao:
-
+            
             return kakaoUseCase.login()
                 .map { isLogin in
                     return Mutation.loginKakao(isLogin)
                 }
                 .catchAndReturn(Mutation.loginKakao(false))
-            
-//            return Observable.never()
+
             
         case .clickToNaver:
             return naverUseCase.login()
@@ -66,9 +71,7 @@ class LoginViewReactor: Reactor, Stepper {
                     return Mutation.loginNaver(isLogin)
                 }
                 .catchAndReturn( Mutation.loginNaver(false))
-            
-            
-//            return Observable.never()
+
             
         case .clickToSkip:
             self.steps.accept(AppStep.tabDashBoardIsRequired)
@@ -160,7 +163,6 @@ class LoginViewReactor: Reactor, Stepper {
     }
     
     
-    deinit {
-        print("LoginViewReactor deinit")
-    }
+
+    
 }

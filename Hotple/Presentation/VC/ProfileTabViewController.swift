@@ -128,12 +128,14 @@ class ProfileTabViewController: UIViewController, View {
         
         initNavigationBar()
         
+        viewDidLoadSubject.onNext(true)
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad")
-        viewDidLoadSubject.onNext(true)
+        
         
         initConstraint()
         

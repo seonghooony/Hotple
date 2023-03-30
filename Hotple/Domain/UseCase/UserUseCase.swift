@@ -19,64 +19,33 @@ final class UserUseCase: UserUseCaseProtocol {
     private let localRepository: LocalRepository
     private let firebaseRepository: FirebaseRepository
     
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     
 
     
     init(localRepository: LocalRepository, firebaseRepository: FirebaseRepository) {
+        print("UserUseCase init")
         self.localRepository = localRepository
         self.firebaseRepository = firebaseRepository
     }
     
     deinit {
+        disposeBag = DisposeBag()
         print("UserUseCase deinit")
     }
     
     func getUserInfo() -> Observable<UserData?> {
-        let localRepoSubject = PublishSubject<UserData?>()
-        let fbRepoSubject = PublishSubject<UserData?>()
-        let resultSubject = PublishSubject<UserData?>()
         
-        localRepoSubject.subscribe { userData in
-            if let userData = userData {
-                fbRepoSubject.onNext(userData)
-            } else {
-                resultSubject.onNext(nil)
+        // 로컬 내 userdata 읽어오기
+        return self.localRepository.readUser()
+            .flatMapLatest { userData -> Observable<UserData?> in
+                // 로컬 데이터가 있으면 firebase 에 유저정보 있는지 확인
+                if let userData = userData {
+                    return self.firebaseRepository.getUserData(userData: userData)
+                } else {
+                    return Observable.just(nil)
+                }
             }
-        } onError: { error in
-            resultSubject.onError(error)
-            print(error.localizedDescription)
-        } onCompleted: {
-            print("userUseCase getUserInfo localRepo completed")
-        } onDisposed: {
-            print("userUseCase getUserInfo localRepo onDisposed")
-        }
-        .disposed(by: self.disposeBag)
-        
-        fbRepoSubject.subscribe { userData in
-            if let userData = userData {
-                self.firebaseRepository.getUserData(userData: userData)
-                    .bind(to: resultSubject)
-                    .disposed(by: self.disposeBag)
-            } else {
-                resultSubject.onNext(nil)
-            }
-        } onError: { error in
-            resultSubject.onError(error)
-            print(error.localizedDescription)
-        } onCompleted: {
-            print("userUseCase getUserInfo fbRepo completed")
-        } onDisposed: {
-            print("userUseCase getUserInfo fbRepo onDisposed")
-        }
-        .disposed(by: self.disposeBag)
-
-        
-        localRepository.readUser()
-            .bind(to: localRepoSubject)
-            .disposed(by: self.disposeBag)
-        
-        return resultSubject
         
     }
     

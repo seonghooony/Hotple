@@ -64,7 +64,6 @@ class ProfileSettingViewController: UIViewController, View {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         initNavigationBar()
 
     }
@@ -170,7 +169,8 @@ class ProfileSettingViewController: UIViewController, View {
     func bindState(_ reactor: ProfileSettingViewReactor) {
         //state
         
-        let dataSource = RxTableViewSectionedReloadDataSource<ProfileSettingSection.Model> { dataSource, tableView, indexPath, item in
+        let dataSource = RxTableViewSectionedReloadDataSource<ProfileSettingSection.Model> { [weak self] (dataSource, tableView, indexPath, item) in
+            guard let self = self else { return UITableViewCell() }
             return self.configureTableViewCell(tableView: tableView, indexPath: indexPath, item: item)
             
         }

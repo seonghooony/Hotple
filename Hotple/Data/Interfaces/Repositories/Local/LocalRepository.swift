@@ -20,8 +20,13 @@ protocol LocalRepositoryProtocol {
 
 final class LocalRepository: LocalRepositoryProtocol {
 
+    deinit {
+        Log.debug("LocalRepository deinit")
+    }
+    
     func createUser(_ user: UserData) -> Observable<Bool> {
-        print("LocalRepository createUser")
+        Log.info("LocalRepository createUser")
+        
         guard let data = try? JSONEncoder().encode(user) else { return Observable.just(false) }
         UserDefaults.standard.setValue(user.id, forKey: UserDefaultKeys.USER_ID)
         UserDefaults.standard.setValue(user.snsType, forKey: UserDefaultKeys.LOGIN_TYPE)
@@ -34,13 +39,15 @@ final class LocalRepository: LocalRepositoryProtocol {
         
         let status = SecItemAdd(query as CFDictionary, nil)
         if status == errSecSuccess {
-            print("LocalRepository createUser : 해당 사용자 정보 없음, 새로 생성")
+            Log.debug("LocalRepository createUser : 해당 사용자 정보 없음, 새로 생성")
             return Observable.just(true)
+            
         } else if status == errSecDuplicateItem {
-            print("LocalRepository createUser : 해당 사용자 정보 있음, 덮어쓰기")
+            Log.debug("LocalRepository createUser : 해당 사용자 정보 있음, 덮어쓰기")
             return updateUser(user)
+            
         } else {
-            print("LocalRepository createUser : 생성 할 수 없음")
+            Log.debug("LocalRepository createUser : 생성 할 수 없음")
             return Observable.just(false)
         }
         
@@ -49,6 +56,7 @@ final class LocalRepository: LocalRepositoryProtocol {
     }
     
     func readUser() -> Observable<UserData?> {
+        Log.info("LocalRepository readUser")
         guard let id = UserDefaults.standard.string(forKey: UserDefaultKeys.USER_ID) else { return Observable.just(nil) }
         let query: [CFString: Any] = [
             kSecClass : kSecClassGenericPassword,
@@ -71,6 +79,7 @@ final class LocalRepository: LocalRepositoryProtocol {
     }
     
     func updateUser(_ user: UserData) -> Observable<Bool> {
+        Log.info("LocalRepository updateUser")
         guard let data = try? JSONEncoder().encode(user) else { return Observable.just(false) }
         guard let userId = UserDefaults.standard.string(forKey: UserDefaultKeys.USER_ID) else { return Observable.just(false) }
         
@@ -92,6 +101,7 @@ final class LocalRepository: LocalRepositoryProtocol {
     }
     
     func deleteUser() -> Observable<Bool> {
+        Log.info("LocalRepository deleteUser")
         guard let userId = UserDefaults.standard.string(forKey: UserDefaultKeys.USER_ID) else { return Observable.just(false) }
         
         let query: [CFString: Any] = [

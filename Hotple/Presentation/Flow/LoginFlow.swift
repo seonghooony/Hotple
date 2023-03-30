@@ -14,61 +14,43 @@ class LoginFlow: Flow {
         
     var root: Presentable
     
-//    private lazy var rootViewController: UINavigationController = {
-//        let viewController = UINavigationController()
-//        return viewController
-//    }()
-//
-//    var root: Presentable {
-//        return self.rootViewController
-//    }
-    
     let kakaoUseCase: KakaoUseCase
     let naverUseCase: NaverUseCase
     
     init(rootViewController: UINavigationController) {
-        print("LoginFlow deinit")
-        print("windowNavigationController : \(rootViewController.viewControllers)")
+        Log.debug("LoginFlow init")
         
         self.root = rootViewController
         self.rootViewController = rootViewController
         
         let localRepository = LocalRepository()
         let firebaseRepository = FirebaseRepository()
-        self.kakaoUseCase = KakaoUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, kakaoRepository: KakaoRepository())
-        self.naverUseCase = NaverUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, naverRepository: NaverRepository())
+        let kakaoRepository = KakaoRepository()
+        let naverRepository = NaverRepository()
+        
+        self.kakaoUseCase = KakaoUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, kakaoRepository: kakaoRepository)
+        self.naverUseCase = NaverUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, naverRepository: naverRepository)
     }
     
     deinit {
-        print("LoginFlow deinit")
+        Log.debug("LoginFlow deinit")
     }
     
     func navigate(to step: RxFlow.Step) -> RxFlow.FlowContributors {
-        print("excuting LoginFlow navigate")
+        
         guard let step = step as? AppStep else { return .none }
         
+        Log.flow("excuting LoginFlow navigate")
         
         switch step {
+            
         // 자기 자신이 실행 될 경우
         case .loginIsRequired:
-            return self.navigateToLogin()
-            
-        case .kakaoLoginIsRequired:
-            return self.navigateToKakao()
+            return self.presentToLogin()
             
         case .tabDashBoardIsRequired:
-            return self.navigateToTabDashBoard()
-            
-//        case .mainDetailIsRequired:
-//            return self.navigateToMainDetail()
-//
-//        // 홈 버튼 누를 경우
-//        case .homeIsRequired:
-//            // 자기자신의 flow를 끝낸 후 부모 flow로 돌아가 해당 step을 전달해줌
-//            return .end(forwardToParentFlowWithStep: DemoStep.homeIsRequired)
-            
-        
-            
+            return self.backAndnavigateToTabDashBoard()
+
         default:
             return .none
         }
@@ -76,35 +58,32 @@ class LoginFlow: Flow {
         
     }
     
-    private func navigateToLogin() -> FlowContributors {
+    private func presentToLogin() -> FlowContributors {
+        
+        Log.flow("LoginFlow presentToLogin")
         
         let loginViewReactor = LoginViewReactor(kakaoUseCase: kakaoUseCase, naverUseCase: naverUseCase)
         let loginViewController = LoginViewController(reactor: loginViewReactor)
-//        self.rootViewController.pushViewController(loginViewController, animated: true)
+
+        loginViewController.modalPresentationStyle = .overFullScreen
         
         DispatchQueue.main.async {
-            print("!@# \(self.rootViewController.viewControllers)")
-            self.rootViewController.setViewControllers([loginViewController], animated: false)
-            print("!@#2 \(self.rootViewController.viewControllers)")
+            self.rootViewController.present(loginViewController, animated: true)
         }
         
-        print("navigateToLogin")
-        
         return .one(flowContributor: .contribute(withNextPresentable: loginViewController, withNextStepper: loginViewReactor))
-        
-//        return .one(flowContributor: .contribute(withNext: viewController))
     }
     
-    private func navigateToKakao() -> FlowContributors {
-        return .none
-    }
-    
-    
-    private func navigateToTabDashBoard() -> FlowContributors {
-        let tabDashBoardFlow = TabDashBoardFlow(rootViewController: self.rootViewController)
 
+    
+    private func backAndnavigateToTabDashBoard() -> FlowContributors {
         
-        return .one(flowContributor: .contribute(withNextPresentable: tabDashBoardFlow, withNextStepper: OneStepper(withSingleStep: AppStep.tabDashBoardIsRequired)))
+        Log.flow("LoginFlow backAndnavigateToTabDashBoard")
+        
+        self.rootViewController.presentedViewController?.dismiss(animated: true)
+        
+        return .end(forwardToParentFlowWithStep: AppStep.tabDashBoardIsRequired)
+
     }
     
 }

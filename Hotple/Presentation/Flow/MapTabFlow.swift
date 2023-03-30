@@ -18,33 +18,31 @@ class MapTabFlow: Flow {
     
     private weak var windowNavigationController: UINavigationController?
     
-//    var root: Presentable
-    
-//    var rootViewController: UINavigationController
-//
+
     init(windowNavigationController: UINavigationController) {
+        Log.debug("MapTabFlow init")
         
         self.windowNavigationController = windowNavigationController
         
-        print("MapTabFlow init")
-        print("windowNavigationController : \(windowNavigationController.viewControllers)")
     }
     
     deinit {
-        print("MapTabFlow deinit")
+        Log.debug("MapTabFlow deinit")
     }
     
     func navigate(to step: Step) -> FlowContributors {
-        print("excuting MapTabFlow navigate")
+
         guard let step = step as? AppStep else { return . none }
+        
+        Log.flow("excuting MapTabFlow navigate")
         
         switch step {
             
         case .mapTabIsRequired:
             return self.navigateToMapTab()
             
-        case .logoutIsRequired:
-            return logout()
+//        case .logoutIsRequired:
+//            return logout()
             
         default:
             return .none
@@ -52,6 +50,8 @@ class MapTabFlow: Flow {
     }
     
     private func navigateToMapTab() -> FlowContributors {
+        
+        Log.flow("MapTabFlow navigateToMapTab")
         
         let mapTabViewReactor = MapTabViewReactor()
         let mapTabViewController = MapTabViewController(reactor: mapTabViewReactor)
@@ -64,11 +64,11 @@ class MapTabFlow: Flow {
         return .one(flowContributor: .contribute(withNextPresentable: mapTabViewController, withNextStepper: mapTabViewReactor))
     }
     
-    private func logout() -> FlowContributors {
-        
-        self.rootViewController.popViewController(animated: true)
-        return .none
-        
-    }
+//    private func logout() -> FlowContributors {
+//        
+//        self.rootViewController.popViewController(animated: true)
+//        return .none
+//        
+//    }
     
 }

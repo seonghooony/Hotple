@@ -18,34 +18,31 @@ class FeedTabFlow: Flow {
     
     private weak var windowNavigationController: UINavigationController?
     
-//    var root: Presentable
-    
-//    var rootViewController: UINavigationController
-//
+
     init(windowNavigationController: UINavigationController) {
+        Log.debug("FeedTabFlow init")
         
         self.windowNavigationController = windowNavigationController
-        
-        print("FeedTabFlow init")
-        print("windowNavigationController : \(windowNavigationController.viewControllers)")
         
     }
     
     deinit {
-        print("FeedTabFlow deinit")
+        Log.debug("FeedTabFlow deinit")
     }
     
     func navigate(to step: Step) -> FlowContributors {
-        print("excuting FeedTabFlow navigate")
+        
         guard let step = step as? AppStep else { return . none }
+        
+        Log.flow("excuting FeedTabFlow navigate")
         
         switch step {
             
         case .feedTabIsRequired:
             return self.navigateToFeedTab()
             
-        case .logoutIsRequired:
-            return logout()
+//        case .logoutIsRequired:
+//            return logout()
             
         default:
             return .none
@@ -53,6 +50,8 @@ class FeedTabFlow: Flow {
     }
     
     private func navigateToFeedTab() -> FlowContributors {
+        
+        Log.flow("FeedTabFlow navigateToFeedTab")
         
         let feedTabViewReactor = FeedTabViewReactor()
         let feedTabViewController = FeedTabViewController(reactor: feedTabViewReactor)
@@ -65,11 +64,11 @@ class FeedTabFlow: Flow {
         return .one(flowContributor: .contribute(withNextPresentable: feedTabViewController, withNextStepper: feedTabViewReactor))
     }
     
-    private func logout() -> FlowContributors {
-        
-        self.rootViewController.popViewController(animated: true)
-        return .none
-        
-    }
+//    private func logout() -> FlowContributors {
+//
+//        self.rootViewController.popViewController(animated: true)
+//        return .none
+//
+//    }
     
 }

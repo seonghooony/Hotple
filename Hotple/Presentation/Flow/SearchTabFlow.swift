@@ -18,34 +18,32 @@ class SearchTabFlow: Flow {
     
     private weak var windowNavigationController: UINavigationController?
     
-//    var root: Presentable
     
-//    var rootViewController: UINavigationController
-//
     init(windowNavigationController: UINavigationController) {
+        Log.debug("SearchTabFlow init")
         
         self.windowNavigationController = windowNavigationController
-     
-        print("SearchTabFlow init")
-        print("windowNavigationController : \(windowNavigationController.viewControllers)")
         
     }
     
     deinit {
-        print("SearchTabFlow deinit")
+        Log.debug("SearchTabFlow deinit")
+
     }
     
     func navigate(to step: Step) -> FlowContributors {
-        print("excuting SearchTabFlow navigate")
+        
         guard let step = step as? AppStep else { return . none }
+        
+        Log.flow("excuting SearchTabFlow navigate")
         
         switch step {
             
         case .searchTabIsRequired:
             return self.navigateToSearchTab()
             
-        case .logoutIsRequired:
-            return logout()
+//        case .logoutIsRequired:
+//            return logout()
             
         default:
             return .none
@@ -53,23 +51,22 @@ class SearchTabFlow: Flow {
     }
     
     private func navigateToSearchTab() -> FlowContributors {
+        Log.flow("SearchTabFlow navigateToSearchTab")
         
         let searchTabViewReactor = SearchTabViewReactor()
         let searchTabViewController = SearchTabViewController(reactor: searchTabViewReactor)
         searchTabViewController.windowNavigationController = windowNavigationController
         self.rootViewController.navigationBar.isHidden = true
         self.rootViewController.pushViewController(searchTabViewController, animated: false)
-        
 
-        
         return .one(flowContributor: .contribute(withNextPresentable: searchTabViewController, withNextStepper: searchTabViewReactor))
     }
     
     
-    private func logout() -> FlowContributors {
-        
-        self.rootViewController.popViewController(animated: true)
-        return .none
-        
-    }
+//    private func logout() -> FlowContributors {
+//        
+//        self.rootViewController.popViewController(animated: true)
+//        return .none
+//        
+//    }
 }

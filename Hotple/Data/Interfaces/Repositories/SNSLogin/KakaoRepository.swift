@@ -30,73 +30,63 @@ protocol KakaoRepositoryProtocol {
 }
 
 final class KakaoRepository: KakaoRepositoryProtocol {
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
+    
+    deinit {
+        disposeBag = DisposeBag()
+        Log.debug("KakaoRepository deinit")
+    }
     
     func setLoginWithKakaoTalk() -> Observable<Bool> {
-        return Observable.create { observer in
-            if (UserApi.isKakaoTalkLoginAvailable()) {
-                UserApi.shared.rx.loginWithKakaoTalk()
-                    .subscribe(
-                        onNext: { (oauthToken) in
-                            print("loginWithKakaoTalk() Success.")
-                            
-                            print("oauthToken : \(oauthToken)")
-                            
-                            observer.onNext(true)
-                            observer.onCompleted()
-    
-                        },
-                        onError: { error in
-                            print(error)
-                            observer.onError(error)
-                        }
-                    )
-                    .disposed(by: self.disposeBag)
-            }
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            return UserApi.shared.rx.loginWithKakaoTalk()
+                .map { (oauthToken) in
+                    Log.network("kakaoRepo loginWithKakaoTalk() Success.")
+                    Log.network("oauthToken : \(oauthToken)")
+                    
+                    return true
+                }
             
-            return Disposables.create()
+        } else {
+            return Observable.just(false)
         }
+
         
     }
     
     func setLoginWithKakaoAccount() -> Observable<Bool> {
-        return Observable.create { observer in
-            UserApi.shared.rx.loginWithKakaoAccount()
-                .subscribe(
-                    onNext: { (oauthToken) in
-                        print("loginWithKakaoAccount() Success.")
-                        
-                        print("oauthToken : \(oauthToken)")
-                        
-                        observer.onNext(true)
-                        observer.onCompleted()
-                        
-                        
-                    },
-                    onError: { error in
-                        print(error)
-                        observer.onError(error)
-                    }
-                )
-                .disposed(by: self.disposeBag)
-            
-            return Disposables.create()
-        }
+        
+        return UserApi.shared.rx.loginWithKakaoAccount()
+            .map { (oauthToken) in
+                Log.network("kakaoRepo loginWithKakaoTalk() Success.")
+                Log.network("oauthToken : \(oauthToken)")
+                
+                return true
+            }
+                
     }
     
     // 로그아웃
     func setLogout() -> Observable<Bool> {
-        return Observable.create { observer in
+        
+        return Observable.create { [weak self] observer in
+            
+            guard let self = self else {
+                observer.onCompleted()
+                return Disposables.create()
+            }
+            
             UserApi.shared.rx.logout()
                 .subscribe(onCompleted:{
-                    print("logout() success.")
+                    Log.network("kakaoRepo logout() success.")
                     
                     observer.onNext(true)
                     observer.onCompleted()
                     
                 }, onError: {error in
-                    print("logout() error.")
-                    print(error)
+                    Log.error("kakaoRepo logout() error.")
+                    Log.error(error)
+                    
                     observer.onError(error)
                 })
                 .disposed(by: self.disposeBag)
@@ -108,7 +98,13 @@ final class KakaoRepository: KakaoRepositoryProtocol {
     // 회원정보 불러오기
     func getUserInfo() -> Observable<Result<KakaoUserData, Error>> {
 
-        return Observable<Result<KakaoUserData, Error>>.create { observer in
+        return Observable<Result<KakaoUserData, Error>>.create { [weak self] observer in
+            
+            guard let self = self else {
+                observer.onCompleted()
+                return Disposables.create()
+            }
+            
             UserApi.shared.rx.me()
                 .subscribe(onSuccess:{ ( user ) in
                     print("me() success.")

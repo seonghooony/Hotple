@@ -22,6 +22,10 @@ final class FirebaseRepository: FirebaseRepositoryProtocol {
     
     let db = Firestore.firestore()
     
+    deinit {
+        Log.debug("FirebaseRepository deinit")
+    }
+    
     func setUserData(userData: UserData) -> Observable<Bool> {
 
         return Observable<Bool>.create { observer in

@@ -13,7 +13,7 @@ import RxCocoa
 // ExampleViewController의 VM 과 같음
 class SplashViewReactor: Reactor, Stepper {
     
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     
     var steps = PublishRelay<Step>()
     
@@ -28,6 +28,7 @@ class SplashViewReactor: Reactor, Stepper {
     
     
     deinit {
+        disposeBag = DisposeBag()
         print("SplashViewReactor deinit")
     }
     
@@ -54,6 +55,7 @@ class SplashViewReactor: Reactor, Stepper {
             
             userUseCase.getUserInfo()
                 .subscribe { userData in
+                    
                     if userData != nil {
                         print("tabDashBoardIsRequired action 실행")
                         self.steps.accept(AppStep.tabDashBoardIsRequired)

@@ -115,7 +115,7 @@ class ProfileSettingViewReactor: Reactor, Stepper {
             if isLogin {
                 normalMenu.append(ProfileSettingMenuData(title: "로그아웃"))
             } else {
-                normalMenu.append(ProfileSettingMenuData(title: "로그인"))
+//                normalMenu.append(ProfileSettingMenuData(title: "로그인"))
             }
             
             let items = normalMenu.map { menuData in
@@ -139,10 +139,10 @@ class ProfileSettingViewReactor: Reactor, Stepper {
                 print("naver 진행")
                 naverUseCase.logout()
                     .subscribe(
-                        onNext: { isLogout in
+                        onNext: { [weak self] isLogout in
                             print("isLogout naver: \(isLogout)")
                             if isLogout {
-                                self.steps.accept(AppStep.logoutIsRequired)
+                                self?.steps.accept(AppStep.logoutIsRequired)
                             }
                         }, onError: { error in
                             print("error:\(error)")
@@ -156,10 +156,10 @@ class ProfileSettingViewReactor: Reactor, Stepper {
                 print("kakao 진행")
                 kakaoUseCase.logout()
                     .subscribe(
-                        onNext: { isLogout in
+                        onNext: { [weak self] isLogout in
                             print("isLogout Kakao: \(isLogout)")
                             if isLogout {
-                                self.steps.accept(AppStep.logoutIsRequired)
+                                self?.steps.accept(AppStep.logoutIsRequired)
                             }
                         }, onError: { error in
                             print("error:\(error)")

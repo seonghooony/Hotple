@@ -19,7 +19,6 @@ class ProfileSettingFlow: Flow {
     
     var root: Presentable
 
-    var rootViewController: UINavigationController
     
     private weak var windowNavigationController: UINavigationController?
     
@@ -28,27 +27,33 @@ class ProfileSettingFlow: Flow {
     let naverUseCase: NaverUseCase
     
 
-    init(windowNavigationController: UINavigationController?, rootViewController: UINavigationController) {
+    init(windowNavigationController: UINavigationController?) {
+        Log.debug("ProfileSettingFlow init")
         
         self.windowNavigationController = windowNavigationController
         
-        self.root = rootViewController
-        self.rootViewController = rootViewController
-        
+        self.root = windowNavigationController!
+
         let localRepository = LocalRepository()
         let firebaseRepository = FirebaseRepository()
+        let kakaoRepository = KakaoRepository()
+        let naverRepository = NaverRepository()
+        
         self.userUseCase = UserUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository)
-        self.kakaoUseCase = KakaoUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, kakaoRepository: KakaoRepository())
-        self.naverUseCase = NaverUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, naverRepository: NaverRepository())
+        self.kakaoUseCase = KakaoUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, kakaoRepository: kakaoRepository)
+        self.naverUseCase = NaverUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository, naverRepository: naverRepository)
+
     }
     
     deinit {
-        print("ProfileSettingFlow deinit")
+        Log.debug("ProfileSettingFlow deinit")
     }
     
     func navigate(to step: Step) -> FlowContributors {
-        print("excuting ProfileSettingFlow navigate")
+        
         guard let step = step as? AppStep else { return . none }
+        
+        Log.flow("excuting ProfileSettingFlow navigate")
         
         switch step {
             
@@ -67,6 +72,8 @@ class ProfileSettingFlow: Flow {
     }
     
     private func navigateToProfileSetting() -> FlowContributors {
+        
+        Log.flow("ProfileSettingFlow navigateToProfileSetting")
        
         let profileSettingViewReactor = ProfileSettingViewReactor(userUseCase: userUseCase, kakaoUseCase: kakaoUseCase, naverUseCase: naverUseCase)
         let profileSettingViewController = ProfileSettingViewController(reactor: profileSettingViewReactor)
@@ -83,6 +90,8 @@ class ProfileSettingFlow: Flow {
     
     private func popFromProfileSetting() -> FlowContributors {
         
+        Log.flow("ProfileSettingFlow popFromProfileSetting")
+        
         self.windowNavigationController?.popViewController(animated: true)
         
         return .end(forwardToParentFlowWithStep: AppStep.popFromProfileSetting)
@@ -90,9 +99,13 @@ class ProfileSettingFlow: Flow {
     
     private func logout() -> FlowContributors {
         
+        Log.flow("ProfileSettingFlow logout")
+        
         self.windowNavigationController?.popViewController(animated: true)
         
-        return .end(forwardToParentFlowWithStep: AppStep.logoutIsRequired)
+        return .end(forwardToParentFlowWithStep: AppStep.none)
+        
+//        return .end(forwardToParentFlowWithStep: AppStep.logoutIsRequired)
         
 //        let loginFlow = LoginFlow(rootViewController: self.windowNavigationController)
 //
