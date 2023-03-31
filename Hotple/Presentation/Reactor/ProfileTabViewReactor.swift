@@ -21,12 +21,13 @@ class ProfileTabViewReactor: Reactor, Stepper {
     let userUseCase: UserUseCase
 
     init(userUseCase: UserUseCase) {
+        Log.debug("ProfileTabViewReactor init")
         self.initialState = State(userData: UserData(id: ""))
         self.userUseCase = userUseCase
     }
     
     deinit {
-        print("HomeTabViewReactor deinit")
+        Log.debug("ProfileTabViewReactor deinit")
     }
     
     enum Action {
@@ -50,6 +51,8 @@ class ProfileTabViewReactor: Reactor, Stepper {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .loadView:
+            Log.action("ProfileTabViewReactor loadView action excuting")
+            
             return Observable.concat([
                 Observable.just(Mutation.setLoading(true)),
                 userUseCase.getUserInfo()
@@ -61,6 +64,7 @@ class ProfileTabViewReactor: Reactor, Stepper {
             ])
 
         case .clickToProfileSetting:
+            Log.action("ProfileTabViewReactor clickToProfileSetting action excuting")
             self.steps.accept(AppStep.profileSettingIsRequired)
             return Observable.never()
         
@@ -73,7 +77,8 @@ class ProfileTabViewReactor: Reactor, Stepper {
         
         switch mutation {
         case .setUserData(let userData):
-            print("@@@@@@ \(userData?.profileImgUrl)")
+            Log.action("ProfileTabViewReactor setUserData state excuting")
+            
             if userData == nil {
                 newState.showNeedLogin = true
             } else {

@@ -49,7 +49,7 @@ class SearchTabViewController: UIViewController, View {
     }
     
     deinit {
-        print("SearchTabViewController deinit")
+        Log.debug("SearchTabViewController deinit")
     }
     
     func initConstraint() {

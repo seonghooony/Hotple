@@ -39,7 +39,7 @@ class FeedTabViewController: UIViewController, View {
     }
     
     deinit {
-        print("FeedTabViewController deinit")
+        Log.debug("FeedTabViewController deinit")
     }
     private func initView() {
         
@@ -62,9 +62,7 @@ class FeedTabViewController: UIViewController, View {
         상단 네비게이션 바 초기화
      */
     private func initNavigationBar() {
-        print("네비 초기화")
-      
-
+        
         windowNavigationController?.navigationBar.backgroundColor = .white
         windowNavigationController?.navigationBar.topItem?.titleView = nil
         windowNavigationController?.navigationBar.topItem?.leftBarButtonItems = []

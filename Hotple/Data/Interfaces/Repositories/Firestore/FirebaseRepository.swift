@@ -22,12 +22,17 @@ final class FirebaseRepository: FirebaseRepositoryProtocol {
     
     let db = Firestore.firestore()
     
+    init() {
+        Log.debug("FirebaseRepository init")
+    }
+    
     deinit {
         Log.debug("FirebaseRepository deinit")
     }
     
     func setUserData(userData: UserData) -> Observable<Bool> {
-
+        Log.info("FirebaseRepository setUserData")
+        
         return Observable<Bool>.create { observer in
             do {
                 try self.db.collection("Users").document(userData.id).setData(from: userData) { error in
@@ -47,6 +52,8 @@ final class FirebaseRepository: FirebaseRepositoryProtocol {
     }
     
     func getUserData(userData: UserData) -> Observable<UserData?> {
+        Log.info("FirebaseRepository getUserData")
+        
         return Observable.create { observer in
             self.db.collection("Users").document(userData.id).getDocument { document, error in
                 

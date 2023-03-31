@@ -27,7 +27,7 @@ class TabDashBoardViewController: UITabBarController, View {
     }
     
     deinit {
-        print("TabDashBoardViewController deinit")
+        Log.debug("TabDashBoardViewController deinit")
     }
     
     

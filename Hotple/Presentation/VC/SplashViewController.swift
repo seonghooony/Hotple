@@ -50,7 +50,7 @@ class SplashViewController: UIViewController, View {
     }
     
     deinit {
-        print("SplashViewController deinit")
+        Log.debug("SplashViewController deinit")
     }
     
     func initConstraint() {

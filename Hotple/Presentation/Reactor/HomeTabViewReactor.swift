@@ -20,11 +20,12 @@ class HomeTabViewReactor: Reactor, Stepper {
     let initialState: State
 
     init() {
+        Log.debug("HomeTabViewReactor init")
         self.initialState = State()
     }
     
     deinit {
-        print("HomeTabViewReactor deinit")
+        Log.debug("HomeTabViewReactor deinit")
     }
     
     enum Action {

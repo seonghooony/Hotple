@@ -22,6 +22,7 @@ class SplashViewReactor: Reactor, Stepper {
     let userUseCase: UserUseCase
     
     init(userUseCase: UserUseCase) {
+        Log.debug("SplashViewReactor init")
         self.initialState = State()
         self.userUseCase = userUseCase
     }
@@ -29,7 +30,8 @@ class SplashViewReactor: Reactor, Stepper {
     
     deinit {
         disposeBag = DisposeBag()
-        print("SplashViewReactor deinit")
+        Log.debug("SplashViewReactor deinit")
+        
     }
     
     enum Action {
@@ -51,25 +53,31 @@ class SplashViewReactor: Reactor, Stepper {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .checkToLogin:
-            print("checkToLogin action 실행")
+            Log.action("SplashViewReactor checkToLogin action excuting")
             
             userUseCase.getUserInfo()
-                .subscribe { userData in
+                .subscribe { [weak self] (userData) in
+                    Log.network("SplashViewReactor userUseCase.getUserInfo() Success")
+                    
+                    guard let self = self else { return }
                     
                     if userData != nil {
-                        print("tabDashBoardIsRequired action 실행")
                         self.steps.accept(AppStep.tabDashBoardIsRequired)
                     } else {
                         print("loginIsRequired action 실행")
                         self.steps.accept(AppStep.loginIsRequired)
                     }
+                    
                 } onError: { error in
-                    print("SplashViewReactor checkLogin userUseCase Error")
-                    print(error.localizedDescription)
+                    Log.error("SplashViewReactor userUseCase.getUserInfo() Error")
+                    Log.error(error.localizedDescription)
+                    
                 } onCompleted: {
-                    print("SplashViewReactor checkLogin userUseCase Completed")
+                    Log.debug("SplashViewReactor userUseCase.getUserInfo() Completed")
+                    
                 } onDisposed: {
-                    print("SplashViewReactor checkLogin userUseCase Disposed")
+                    Log.debug("SplashViewReactor userUseCase.getUserInfo() Disposed")
+                    
                 }
                 .disposed(by: self.disposeBag)
 

@@ -20,11 +20,12 @@ class SearchTabViewReactor: Reactor, Stepper {
     let initialState: State
 
     init() {
+        Log.debug("SearchTabViewReactor init")
         self.initialState = State()
     }
     
     deinit {
-        print("HomeTabViewReactor deinit")
+        Log.debug("SearchTabViewReactor deinit")
     }
     
     enum Action {

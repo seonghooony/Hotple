@@ -27,7 +27,7 @@ class ProfileTabViewController: UIViewController, View {
     var settingBtn = UIButton()
     
     // 상단 프로필 헤더뷰
-    var stickyHeaderView = UIView()
+    var stickspyHeaderView = UIView()
     // 프로필 이미지 뷰
     var profileImgView = UIImageView()
     // 프로필 닉네임 라벨
@@ -57,8 +57,7 @@ class ProfileTabViewController: UIViewController, View {
         상단 네비게이션 바 초기화
      */
     private func initNavigationBar() {
-        print("네비 초기화")
-        
+
         let settingBarBtn = UIBarButtonItem(customView: settingBtn)
         
         let titleBarBtn = UIBarButtonItem(customView: titleHeaderLbl)
@@ -70,8 +69,6 @@ class ProfileTabViewController: UIViewController, View {
                 viewcontroller.navigationItem.leftBarButtonItems = [titleBarBtn]
             }
         })
-        
-
 
     }
     
@@ -134,16 +131,13 @@ class ProfileTabViewController: UIViewController, View {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad")
-        
         
         initConstraint()
-        
-        
+
     }
     
     deinit {
-        print("ProfileTabViewController deinit")
+        Log.debug("ProfileTabViewController deinit")
     }
     
     func initConstraint() {

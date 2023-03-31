@@ -37,7 +37,7 @@ class ProfileSettingViewController: UIViewController, View {
     private let viewDidLoadSubject = PublishSubject<Bool>()
     
     deinit {
-        print("ProfileSettingViewController deinit")
+        Log.debug("ProfileSettingViewController deinit")
     }
     
     override func loadView() {
@@ -72,7 +72,7 @@ class ProfileSettingViewController: UIViewController, View {
         상단 네비게이션 바 초기화
      */
     private func initNavigationBar() {
-        print("네비 초기화")
+        
 //        titleLbl.text = "마이페이지"
 //        titleLbl.alpha = 0.0
 

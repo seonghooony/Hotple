@@ -36,7 +36,7 @@ class MapTabViewController: UIViewController, View {
     }
     
     deinit {
-        print("MapTabViewController deinit")
+        Log.debug("MapTabViewController deinit")
     }
     
     func initConstraint() {

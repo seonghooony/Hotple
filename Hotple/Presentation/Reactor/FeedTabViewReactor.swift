@@ -20,11 +20,12 @@ class FeedTabViewReactor: Reactor, Stepper {
     let initialState: State
 
     init() {
+        Log.debug("FeedTabViewReactor init")
         self.initialState = State()
     }
     
     deinit {
-        print("HomeTabViewReactor deinit")
+        Log.debug("FeedTabViewReactor deinit")
     }
     
     enum Action {

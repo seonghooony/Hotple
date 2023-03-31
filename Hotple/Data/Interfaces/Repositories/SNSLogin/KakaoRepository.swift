@@ -32,12 +32,18 @@ protocol KakaoRepositoryProtocol {
 final class KakaoRepository: KakaoRepositoryProtocol {
     var disposeBag = DisposeBag()
     
+    init() {
+        Log.debug("KakaoRepository init")
+    }
+    
     deinit {
         disposeBag = DisposeBag()
         Log.debug("KakaoRepository deinit")
     }
     
     func setLoginWithKakaoTalk() -> Observable<Bool> {
+        Log.info("KakaoRepository setLoginWithKakaoTalk")
+        
         if (UserApi.isKakaoTalkLoginAvailable()) {
             return UserApi.shared.rx.loginWithKakaoTalk()
                 .map { (oauthToken) in
@@ -55,6 +61,7 @@ final class KakaoRepository: KakaoRepositoryProtocol {
     }
     
     func setLoginWithKakaoAccount() -> Observable<Bool> {
+        Log.info("KakaoRepository setLoginWithKakaoAccount")
         
         return UserApi.shared.rx.loginWithKakaoAccount()
             .map { (oauthToken) in
@@ -68,6 +75,7 @@ final class KakaoRepository: KakaoRepositoryProtocol {
     
     // 로그아웃
     func setLogout() -> Observable<Bool> {
+        Log.info("KakaoRepository setLogout")
         
         return Observable.create { [weak self] observer in
             
@@ -97,6 +105,7 @@ final class KakaoRepository: KakaoRepositoryProtocol {
     
     // 회원정보 불러오기
     func getUserInfo() -> Observable<Result<KakaoUserData, Error>> {
+        Log.info("KakaoRepository getUserInfo")
 
         return Observable<Result<KakaoUserData, Error>>.create { [weak self] observer in
             

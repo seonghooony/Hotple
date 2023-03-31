@@ -19,11 +19,12 @@ class TabDashBoardViewReactor: Reactor, Stepper {
     let initialState: State
 
     init() {
+        Log.debug("TabDashBoardViewReactor init")
         self.initialState = State()
     }
     
     deinit {
-        print("TabDashBoardViewReactor deinit")
+        Log.debug("TabDashBoardViewReactor deinit")
     }
     
     enum Action {

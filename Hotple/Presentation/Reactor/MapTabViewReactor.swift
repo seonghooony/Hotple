@@ -20,11 +20,12 @@ class MapTabViewReactor: Reactor, Stepper {
     let initialState: State
 
     init() {
+        Log.debug("MapTabViewReactor init")
         self.initialState = State()
     }
     
     deinit {
-        print("HomeTabViewReactor deinit")
+        Log.debug("MapTabViewReactor deinit")
     }
     
     enum Action {

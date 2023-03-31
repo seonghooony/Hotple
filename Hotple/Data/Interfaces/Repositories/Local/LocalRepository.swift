@@ -19,6 +19,10 @@ protocol LocalRepositoryProtocol {
 }
 
 final class LocalRepository: LocalRepositoryProtocol {
+    
+    init() {
+        Log.debug("LocalRepository init")
+    }
 
     deinit {
         Log.debug("LocalRepository deinit")

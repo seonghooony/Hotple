@@ -21,6 +21,7 @@ class LoginViewReactor: Reactor, Stepper {
     let naverUseCase: NaverUseCase
     
     init(kakaoUseCase: KakaoUseCase, naverUseCase: NaverUseCase) {
+        Log.debug("LoginViewReactor init")
         self.initialState = State(userData: UserData(id: ""))
         self.kakaoUseCase = kakaoUseCase
         self.naverUseCase = naverUseCase
@@ -29,7 +30,7 @@ class LoginViewReactor: Reactor, Stepper {
     
     deinit {
         disposeBag = DisposeBag()
-        print("LoginViewReactor deinit")
+        Log.debug("LoginViewReactor deinit")
     }
     
     enum Action {
@@ -57,6 +58,7 @@ class LoginViewReactor: Reactor, Stepper {
 
         switch action {
         case .clickToKakao:
+            Log.action("LoginViewReactor clickToKakao action excuting")
             
             return kakaoUseCase.login()
                 .map { isLogin in
@@ -66,6 +68,8 @@ class LoginViewReactor: Reactor, Stepper {
 
             
         case .clickToNaver:
+            Log.action("LoginViewReactor clickToNaver action excuting")
+            
             return naverUseCase.login()
                 .map { isLogin in
                     return Mutation.loginNaver(isLogin)
@@ -74,6 +78,8 @@ class LoginViewReactor: Reactor, Stepper {
 
             
         case .clickToSkip:
+            Log.action("LoginViewReactor clickToSkip action excuting")
+            
             self.steps.accept(AppStep.tabDashBoardIsRequired)
             
             return .never()
@@ -112,8 +118,8 @@ class LoginViewReactor: Reactor, Stepper {
                         .disposed(by: disposeBag)
                         
                 default:
-                    
                     break
+                    
                 }
             } else {
                 print("로그인 되어있지 않음")
@@ -143,19 +149,20 @@ class LoginViewReactor: Reactor, Stepper {
             if isLogin {
                 self.steps.accept(AppStep.tabDashBoardIsRequired)
             } else {
-                print("로그인 실패 알람?")
+                Log.action("LoginViewReactor loginKakao state fail")
+                
             }
             
         case .loginNaver(let isLogin):
             if isLogin {
                 self.steps.accept(AppStep.tabDashBoardIsRequired)
             } else {
-                print("로그인 실패 알람?")
+                Log.action("LoginViewReactor loginNaver state fail")
+                
             }
             
         case .setUserInfo(let userData):
             newState.userData = userData
-                
 
         }
         

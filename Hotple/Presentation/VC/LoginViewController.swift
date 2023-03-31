@@ -70,7 +70,7 @@ class LoginViewController: UIViewController, View {
     }
     
     deinit {
-        print("LoginViewController deinit")
+        Log.debug("LoginViewController deinit")
     }
     
     func initConstraint() {
@@ -109,16 +109,7 @@ class LoginViewController: UIViewController, View {
             make.trailing.bottom.equalToSuperview()
             
         }
-        
-//        self.moveToHomeBtn.snp.makeConstraints { make in
-//            make.center.equalToSuperview()
-//            make.width.height.equalTo(200)
-//        }
-//
-//        self.moveToDetailBtn.snp.makeConstraints { make in
-//            make.top.equalTo(self.moveToHomeBtn.snp.bottom).offset(50)
-//            make.width.height.equalTo(200)
-//        }
+
         
     }
     
@@ -168,22 +159,7 @@ class LoginViewController: UIViewController, View {
             }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
-        
-//        moveToHomeBtn.rx.tap
-//            .map { _ in
-//                return Reactor.Action.ClickMoveToHome
-//            }
-//            .bind(to: reactor.action)
-//            .disposed(by: disposeBag)
-//
-//        moveToDetailBtn.rx.tap
-//            .map { _ in
-//                return Reactor.Action.clickMoveToDetail
-//            }
-//            .bind(to: reactor.action)
-//            .disposed(by: disposeBag)
-
-        
+                
     }
     
     
@@ -199,36 +175,6 @@ class LoginViewController: UIViewController, View {
             .distinctUntilChanged()
             .bind(to: testLbl.rx.text)
             .disposed(by: disposeBag)
-        
-//        reactor.state.map { state in
-//            return state.homeIsRequired
-//        }
-//        .distinctUntilChanged()
-//        .subscribe { isShow in
-//            if isShow {
-//                self.steps.accept(DemoStep.homeIsRequired)
-//            }
-//
-//        }
-//        .disposed(by: disposeBag)
-//
-//        reactor.state.map { state in
-//            return state.detailIsRequired
-//        }
-//        .distinctUntilChanged()
-//        .subscribe { isShow in
-//            if isShow {
-//                self.steps.accept(DemoStep.mainDetailIsRequired)
-//            }
-//
-//        }
-//        .disposed(by: disposeBag)
-        
-//        .map { value in
-//            return value
-//        }
-//        .bind(to: valueLbl.rx.text)
-//        .disposed(by: disposeBag)
 
     }
     

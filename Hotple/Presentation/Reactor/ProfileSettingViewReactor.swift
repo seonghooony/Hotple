@@ -29,6 +29,8 @@ class ProfileSettingViewReactor: Reactor, Stepper {
     let naverUseCase: NaverUseCase
     
     init(userUseCase: UserUseCase, kakaoUseCase: KakaoUseCase, naverUseCase: NaverUseCase) {
+        Log.debug("ProfileSettingViewReactor init")
+        
         self.initialState = State()
         self.userUseCase = userUseCase
         self.kakaoUseCase = kakaoUseCase
@@ -36,7 +38,7 @@ class ProfileSettingViewReactor: Reactor, Stepper {
     }
     
     deinit {
-        print("ProfileSettingViewReactor deinit")
+        Log.debug("ProfileSettingViewReactor deinit")
     }
     
     enum Action {
@@ -63,6 +65,7 @@ class ProfileSettingViewReactor: Reactor, Stepper {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .loadView:
+            Log.action("ProfileSettingViewReactor loadView action excuting")
             return Observable.concat([
                 
                 userUseCase.getUserInfo()
@@ -80,8 +83,7 @@ class ProfileSettingViewReactor: Reactor, Stepper {
             
             
         case .clickCell(let indexPath):
-            print("indexpath: \(indexPath.row)")
-            print("title: \(normalMenu[indexPath.row].title)")
+            Log.action("ProfileSettingViewReactor clickCell action excuting / indexpath: \(indexPath.row) / title: \(normalMenu[indexPath.row].title)")
             
             let settingName = normalMenu[indexPath.row].title
             
@@ -99,6 +101,7 @@ class ProfileSettingViewReactor: Reactor, Stepper {
             return .never()
             
         case .clickToBack:
+            Log.action("ProfileSettingViewReactor clickToBack action excuting")
             self.steps.accept(AppStep.popFromProfileSetting)
             return Observable.never()
         
@@ -111,7 +114,8 @@ class ProfileSettingViewReactor: Reactor, Stepper {
         
         switch mutation {
         case .setNormalCell(let isLogin):
-
+            Log.action("ProfileTabViewReactor setNormalCell state excuting")
+            
             if isLogin {
                 normalMenu.append(ProfileSettingMenuData(title: "로그아웃"))
             } else {
@@ -132,41 +136,45 @@ class ProfileSettingViewReactor: Reactor, Stepper {
     
     
     func logout() {
+        
         if let loginType = UserDefaults.standard.string(forKey: UserDefaultKeys.LOGIN_TYPE) {
-            print(loginType)
+            Log.info("ProfileSettingViewReactor logout func / loginType : \(loginType)")
+            
             switch loginType {
             case "naver":
-                print("naver 진행")
                 naverUseCase.logout()
                     .subscribe(
                         onNext: { [weak self] isLogout in
-                            print("isLogout naver: \(isLogout)")
                             if isLogout {
+                                Log.network("Naver 3rd party logout success")
                                 self?.steps.accept(AppStep.logoutIsRequired)
                             }
                         }, onError: { error in
-                            print("error:\(error)")
+                            Log.error("Naver 3rd party logout error")
+                            Log.error("error:\(error)")
+                            
                         }, onCompleted: {
-                            print("onCompleted")
+                            Log.debug("Naver 3rd party logout onCompleted")
                         }, onDisposed: {
-                            print("onDisposed")
+                            Log.debug("Naver 3rd party logout onDisposed")
                         })
-                    .disposed(by: disposeBag)
+                    .disposed(by: self.disposeBag)
+                
             case "kakao":
-                print("kakao 진행")
                 kakaoUseCase.logout()
                     .subscribe(
                         onNext: { [weak self] isLogout in
-                            print("isLogout Kakao: \(isLogout)")
                             if isLogout {
+                                Log.network("Kakao 3rd party logout success")
                                 self?.steps.accept(AppStep.logoutIsRequired)
                             }
                         }, onError: { error in
-                            print("error:\(error)")
+                            Log.error("Kakao 3rd party logout error")
+                            Log.error("error:\(error)")
                         }, onCompleted: {
-                            print("onCompleted")
+                            Log.debug("Kakao 3rd party logout onCompleted")
                         }, onDisposed: {
-                            print("onDisposed")
+                            Log.debug("Kakao 3rd party logout onDisposed")
                         })
                     .disposed(by: disposeBag)
                     
@@ -174,7 +182,7 @@ class ProfileSettingViewReactor: Reactor, Stepper {
                 break
             }
         } else {
-            print("로그인 되어있지 않음")
+            Log.debug("isn't login now")
         }
     }
     

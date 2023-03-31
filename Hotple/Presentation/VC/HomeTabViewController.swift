@@ -56,7 +56,7 @@ class HomeTabViewController: UIViewController, View {
     }
     
     deinit {
-        print("HomeTabViewController deinit")
+        Log.debug("HomeTabViewController deinit")
     }
     
     func initConstraint() {
