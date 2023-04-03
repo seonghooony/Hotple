@@ -11,6 +11,7 @@ import RxFlow
 import RxCocoa
 import ReactorKit
 import RxKingfisher
+import SkeletonView
 
 class ProfileTabViewController: UIViewController, View {
     
@@ -20,20 +21,20 @@ class ProfileTabViewController: UIViewController, View {
     
     weak var windowNavigationController: UINavigationController?
     
+    /// 네비게이션 바 세팅
     // 상단 네비게이션 타이틀 라벨
     var titleHeaderLbl = UILabel()
-
     // 세팅 버튼
     var settingBtn = UIButton()
     
     // 상단 프로필 헤더뷰
-    var stickspyHeaderView = UIView()
+    var stickyHeaderView = UIView()
     // 프로필 이미지 뷰
     var profileImgView = UIImageView()
     // 프로필 닉네임 라벨
     var profileNicknameLbl = UILabel()
-    // 로그인 필요 닉네임 라벨
-    var profileNeedLoginLbl = UILabel()
+    // 프로필 닉네임 스켈레톤 뷰
+    var profileNicknameSKView = UIView()
     
     // 메인 콘텐츠 스크롤 뷰
     var scrollView = UIScrollView()
@@ -84,6 +85,7 @@ class ProfileTabViewController: UIViewController, View {
         titleHeaderLbl.alpha = 0.0
         titleHeaderLbl.text = "마이페이지"
         settingBtn.setImage(UIImage(systemName: "gearshape.fill"), for: .normal)
+        // 네비게이션 초기화 끝
         
         scrollView.delegate = self
         scrollView.backgroundColor = .green
@@ -95,22 +97,31 @@ class ProfileTabViewController: UIViewController, View {
         stickyHeaderView.backgroundColor = .white
         scrollContentView.addSubview(stickyHeaderView)
         
-        profileImgView.image = UIImage(named: "")
-        profileImgView.backgroundColor = .lightGray
+        profileImgView.image = UIImage(named: "img_profile_placeholder")
+        profileImgView.isSkeletonable = true
+        profileImgView.backgroundColor = .white
         profileImgView.layer.cornerRadius = 40
         profileImgView.clipsToBounds = true
-        profileImgView.isHidden = true
+        profileImgView.isHidden = false
         stickyHeaderView.addSubview(profileImgView)
         
-        profileNicknameLbl.text = "닉네임"
+//        profileNicknameLbl.text = "로그인을 해주세요."
+//        profileNicknameLbl.isHidden = false
         profileNicknameLbl.textColor = .black
-        profileNicknameLbl.isHidden = true
+        profileNicknameLbl.layer.cornerRadius = 4
+        profileNicknameLbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         stickyHeaderView.addSubview(profileNicknameLbl)
         
-        profileNeedLoginLbl.text = "로그인을 해주세요."
-        profileNeedLoginLbl.textColor = .black
-        profileNeedLoginLbl.isHidden = true
-        stickyHeaderView.addSubview(profileNeedLoginLbl)
+        profileNicknameSKView.isHidden = true
+        profileNicknameSKView.isSkeletonable = true
+        profileNicknameSKView.layer.cornerRadius = 4
+        profileNicknameSKView.clipsToBounds = true
+        stickyHeaderView.addSubview(profileNicknameSKView)
+        
+//        profileNeedLoginLbl.text = "로그인을 해주세요."
+//        profileNeedLoginLbl.textColor = .black
+//        profileNeedLoginLbl.isHidden = true
+//        stickyHeaderView.addSubview(profileNeedLoginLbl)
         
         bottomTempView.backgroundColor = .lightGray
         scrollContentView.addSubview(bottomTempView)
@@ -173,10 +184,17 @@ class ProfileTabViewController: UIViewController, View {
             make.trailing.equalToSuperview().offset(-16)
         }
         
-        profileNeedLoginLbl.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(32)
-            make.centerY.equalToSuperview()
+        profileNicknameSKView.snp.makeConstraints { make in
+            make.centerY.equalTo(profileNicknameLbl)
+            make.leading.equalTo(profileNicknameLbl)
+            make.trailing.equalTo(profileNicknameLbl).offset(-32)
+            make.height.equalTo(24)
         }
+        
+//        profileNeedLoginLbl.snp.makeConstraints { make in
+//            make.leading.equalToSuperview().offset(32)
+//            make.centerY.equalToSuperview()
+//        }
         
         bottomTempView.snp.makeConstraints { make in
             make.top.equalTo(stickyHeaderView.snp.bottom)
@@ -192,6 +210,18 @@ class ProfileTabViewController: UIViewController, View {
         
     }
     
+    func startShowSkeleton() {
+        profileNicknameSKView.isHidden = false
+        profileNicknameSKView.showAnimatedGradientSkeleton()
+        profileImgView.showAnimatedGradientSkeleton()
+        
+    }
+    
+    func stopShowSkeleton() {
+        profileNicknameSKView.isHidden = true
+        profileNicknameSKView.hideSkeleton()
+        profileImgView.hideSkeleton()
+    }
     
     
     init(reactor: Reactor) {
@@ -250,36 +280,43 @@ class ProfileTabViewController: UIViewController, View {
             .map { state in
                 return URL(string: state.userData.profileImgUrl ?? "")
             }
-            .bind(to: profileImgView.kf.rx.image())
+            .bind(to: profileImgView.kf.rx.image(placeholder: UIImage(named: "img_profile_placeholder")))
             .disposed(by: disposeBag)
         
         reactor.state
             .map { state in
                 return state.isLoading
             }
-            .bind(to: loadingIndicator.rx.isAnimating)
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { state in
-                return !state.showNeedLogin
-            }
-            .bind(to: profileNeedLoginLbl.rx.isHidden)
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { state in
-                return state.showNeedLogin
-            }
-            .bind(to: profileImgView.rx.isHidden)
+            .bind(onNext: { [weak self] isLoading in
+                guard let self = self else { return }
+                if isLoading {
+                    self.startShowSkeleton()
+                } else {
+                    self.stopShowSkeleton()
+                }
+            })
             .disposed(by: disposeBag)
         
         reactor.state
             .map { state in
                 return state.showNeedLogin
             }
-            .bind(to: profileNicknameLbl.rx.isHidden)
+            .bind(onNext: { [weak self] needLogin in
+                guard let self = self else { return }
+                
+                if needLogin {
+                    self.profileImgView.image = UIImage(named: "img_profile_placeholder")
+                    self.profileNicknameLbl.text = "로그인이 필요합니다."
+                } 
+            })
             .disposed(by: disposeBag)
+        
+//        reactor.state
+//            .map { state in
+//                return state.showNeedLogin
+//            }
+//            .bind(to: profileNicknameLbl.rx.isHidden)
+//            .disposed(by: disposeBag)
         
 //        reactor.state
 //            .map { state in

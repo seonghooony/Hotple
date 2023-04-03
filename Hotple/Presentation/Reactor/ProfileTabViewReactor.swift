@@ -56,6 +56,7 @@ class ProfileTabViewReactor: Reactor, Stepper {
             return Observable.concat([
                 Observable.just(Mutation.setLoading(true)),
                 userUseCase.getUserInfo()
+                    .delay(.seconds(1), scheduler: MainScheduler.instance)
                     .map { userData in
                         return Mutation.setUserData(userData)
                     }

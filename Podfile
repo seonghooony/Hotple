@@ -26,6 +26,7 @@ target 'Hotple' do
   pod 'lottie-ios'
   pod 'RxViewController'
   pod 'Then'
+  pod 'SkeletonView'
 
 end
 
