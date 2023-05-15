@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1914F276D36D3655A435B8EF /* Pods_Hotple.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B17499751BC035E36464D9E /* Pods_Hotple.framework */; };
 		DB0168DF299B457A00E07875 /* FirebaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168DE299B457A00E07875 /* FirebaseRepository.swift */; };
 		DB0168E7299C9B0100E07875 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = DB0168E6299C9B0100E07875 /* splash.json */; };
 		DB0168EA299CAF3100E07875 /* TestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0168E9299CAF3100E07875 /* TestCell.swift */; };
@@ -68,13 +69,11 @@
 		DB830FD62989EECB00D76B2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB830FD52989EECB00D76B2B /* SceneDelegate.swift */; };
 		DB830FDD2989EECB00D76B2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB830FDC2989EECB00D76B2B /* Assets.xcassets */; };
 		DB830FE02989EECB00D76B2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB830FDE2989EECB00D76B2B /* LaunchScreen.storyboard */; };
-		F17A00A91DE1736E6F832C4D /* Pods_Hotple.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B8FD5FA8785505A842F000 /* Pods_Hotple.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		58B8FD5FA8785505A842F000 /* Pods_Hotple.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hotple.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A01CF98BF3F90AFA29370EB4 /* Pods-Hotple.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hotple.debug.xcconfig"; path = "Target Support Files/Pods-Hotple/Pods-Hotple.debug.xcconfig"; sourceTree = "<group>"; };
-		AE6516A7087EB37F230D9BA9 /* Pods-Hotple.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hotple.release.xcconfig"; path = "Target Support Files/Pods-Hotple/Pods-Hotple.release.xcconfig"; sourceTree = "<group>"; };
+		0B17499751BC035E36464D9E /* Pods_Hotple.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hotple.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD77685B3DA3552ACF9DAF24 /* Pods-Hotple.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hotple.release.xcconfig"; path = "Target Support Files/Pods-Hotple/Pods-Hotple.release.xcconfig"; sourceTree = "<group>"; };
 		DB0168DE299B457A00E07875 /* FirebaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRepository.swift; sourceTree = "<group>"; };
 		DB0168E6299C9B0100E07875 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		DB0168E9299CAF3100E07875 /* TestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCell.swift; sourceTree = "<group>"; };
@@ -139,6 +138,7 @@
 		DB830FDC2989EECB00D76B2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB830FDF2989EECB00D76B2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB830FE12989EECB00D76B2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E0A947FA276A7FD213BEA009 /* Pods-Hotple.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hotple.debug.xcconfig"; path = "Target Support Files/Pods-Hotple/Pods-Hotple.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB01690629D55B9300E07875 /* OSLog.framework in Frameworks */,
-				F17A00A91DE1736E6F832C4D /* Pods_Hotple.framework in Frameworks */,
+				1914F276D36D3655A435B8EF /* Pods_Hotple.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,7 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				DB01690429D55B7700E07875 /* OSLog.framework */,
-				58B8FD5FA8785505A842F000 /* Pods_Hotple.framework */,
+				0B17499751BC035E36464D9E /* Pods_Hotple.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -166,8 +166,8 @@
 		3150BF9F434A83CEB27E6872 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A01CF98BF3F90AFA29370EB4 /* Pods-Hotple.debug.xcconfig */,
-				AE6516A7087EB37F230D9BA9 /* Pods-Hotple.release.xcconfig */,
+				E0A947FA276A7FD213BEA009 /* Pods-Hotple.debug.xcconfig */,
+				AD77685B3DA3552ACF9DAF24 /* Pods-Hotple.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -441,11 +441,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DB830FE42989EECB00D76B2B /* Build configuration list for PBXNativeTarget "Hotple" */;
 			buildPhases = (
-				AFFD9F8B6DB33B097F791EDD /* [CP] Check Pods Manifest.lock */,
+				AEE6940A98941EF4C3C1404F /* [CP] Check Pods Manifest.lock */,
 				DB830FCC2989EECB00D76B2B /* Sources */,
 				DB830FCD2989EECB00D76B2B /* Frameworks */,
 				DB830FCE2989EECB00D76B2B /* Resources */,
-				36D1BF1B440F9B229E51F8C6 /* [CP] Embed Pods Frameworks */,
+				AAE1EA9DECD5ABA5827537EE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -506,7 +506,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		36D1BF1B440F9B229E51F8C6 /* [CP] Embed Pods Frameworks */ = {
+		AAE1EA9DECD5ABA5827537EE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -523,7 +523,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hotple/Pods-Hotple-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AFFD9F8B6DB33B097F791EDD /* [CP] Check Pods Manifest.lock */ = {
+		AEE6940A98941EF4C3C1404F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -751,7 +751,7 @@
 		};
 		DB830FE52989EECB00D76B2B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A01CF98BF3F90AFA29370EB4 /* Pods-Hotple.debug.xcconfig */;
+			baseConfigurationReference = E0A947FA276A7FD213BEA009 /* Pods-Hotple.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -780,7 +780,7 @@
 		};
 		DB830FE62989EECB00D76B2B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE6516A7087EB37F230D9BA9 /* Pods-Hotple.release.xcconfig */;
+			baseConfigurationReference = AD77685B3DA3552ACF9DAF24 /* Pods-Hotple.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -65,7 +65,7 @@ class LoginFlow: Flow {
         let loginViewReactor = LoginViewReactor(kakaoUseCase: kakaoUseCase, naverUseCase: naverUseCase)
         let loginViewController = LoginViewController(reactor: loginViewReactor)
 
-        loginViewController.modalPresentationStyle = .overFullScreen
+        loginViewController.modalPresentationStyle = .fullScreen // .overFullScreen
         
         DispatchQueue.main.async {
             self.rootViewController.present(loginViewController, animated: true)
@@ -77,10 +77,11 @@ class LoginFlow: Flow {
 
     
     private func backAndnavigateToTabDashBoard() -> FlowContributors {
-        
         Log.flow("LoginFlow backAndnavigateToTabDashBoard")
         
-        self.rootViewController.presentedViewController?.dismiss(animated: true)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            self.rootViewController.presentedViewController?.dismiss(animated: true)
+        }
         
         return .end(forwardToParentFlowWithStep: AppStep.tabDashBoardIsRequired)
 

@@ -33,6 +33,7 @@ class ProfileTabViewReactor: Reactor, Stepper {
     enum Action {
         case loadView
         case clickToProfileSetting
+        case clickToLogin
 
     }
     
@@ -56,7 +57,7 @@ class ProfileTabViewReactor: Reactor, Stepper {
             return Observable.concat([
                 Observable.just(Mutation.setLoading(true)),
                 userUseCase.getUserInfo()
-                    .delay(.seconds(1), scheduler: MainScheduler.instance)
+                    .delay(.milliseconds(300), scheduler: MainScheduler.instance)
                     .map { userData in
                         return Mutation.setUserData(userData)
                     }
@@ -67,6 +68,34 @@ class ProfileTabViewReactor: Reactor, Stepper {
         case .clickToProfileSetting:
             Log.action("ProfileTabViewReactor clickToProfileSetting action excuting")
             self.steps.accept(AppStep.profileSettingIsRequired)
+            return Observable.never()
+            
+        case .clickToLogin:
+            Log.action("ProfileTabViewReactor clickToLogin action excuting")
+            userUseCase.getUserInfo()
+                .subscribe { [weak self] (userData) in
+                    Log.network("ProfileTabViewReactor userUseCase.getUserInfo() Success")
+                    
+                    guard let self = self else { return }
+                    
+                    if userData == nil {
+                        Log.action("ProfileTabViewReactor action excuting")
+                        self.steps.accept(AppStep.loginIsRequired)
+                    }
+                    
+                } onError: { error in
+                    Log.error("ProfileTabViewReactor userUseCase.getUserInfo() Error")
+                    Log.error(error.localizedDescription)
+                    
+                } onCompleted: {
+                    Log.debug("ProfileTabViewReactor userUseCase.getUserInfo() Completed")
+                    
+                } onDisposed: {
+                    Log.debug("ProfileTabViewReactor userUseCase.getUserInfo() Disposed")
+                    
+                }
+                .disposed(by: self.disposeBag)
+
             return Observable.never()
         
         }
@@ -80,14 +109,14 @@ class ProfileTabViewReactor: Reactor, Stepper {
         case .setUserData(let userData):
             Log.action("ProfileTabViewReactor setUserData state excuting")
             
-            if userData == nil {
-                newState.showNeedLogin = true
-            } else {
-                newState.userData = userData ?? UserData(id: "")
+            if let userData = userData {
+                newState.userData = userData
                 newState.showNeedLogin = false
+            } else {
+                newState.userData = UserData(id: "")
+                newState.showNeedLogin = true
             }
             
-        
         case .setLoading(let isLoading):
             newState.isLoading = isLoading
         }

@@ -48,7 +48,7 @@ class SplashFlow: Flow {
         case .splashIsRequired:
             return self.navigateToSplash()
             
-        // 자기 자신이 실행 될 경우
+        // 로그인 창 띄우기
         case .loginIsRequired:
             return self.flowToLogin()
             

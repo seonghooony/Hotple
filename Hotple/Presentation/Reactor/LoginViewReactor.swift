@@ -155,6 +155,7 @@ class LoginViewReactor: Reactor, Stepper {
             
         case .loginNaver(let isLogin):
             if isLogin {
+                Log.debug("확인삼아")
                 self.steps.accept(AppStep.tabDashBoardIsRequired)
             } else {
                 Log.action("LoginViewReactor loginNaver state fail")

@@ -26,8 +26,6 @@ class FeedTabViewController: UIViewController, View {
 
     
     override func loadView() {
-        
-        initNavigationBar()
         initView()
 
     }
@@ -37,10 +35,46 @@ class FeedTabViewController: UIViewController, View {
         
         initConstraint()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        initNavigationBar()
+        
+    }
+    
+    init(reactor: Reactor) {
+        super.init(nibName: nil, bundle: nil)
+        self.reactor = reactor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     deinit {
         Log.debug("FeedTabViewController deinit")
     }
+    
+    /*
+        상단 네비게이션 바 초기화
+     */
+    private func initNavigationBar() {
+        
+        let tempBtn1 = UIBarButtonItem(customView: UIView())
+        let tempBtn2 = UIBarButtonItem(customView: UIView())
+        
+        _ = windowNavigationController?.viewControllers.map({ viewcontroller in
+            if viewcontroller is UITabBarController {
+                viewcontroller.navigationItem.rightBarButtonItems = [tempBtn1]
+                viewcontroller.navigationItem.titleView = nil
+                viewcontroller.navigationItem.leftBarButtonItems = [tempBtn2]
+            }
+        })
+
+    }
+    
     private func initView() {
         
         let view = UIView()
@@ -58,19 +92,6 @@ class FeedTabViewController: UIViewController, View {
         
     }
     
-    /*
-        상단 네비게이션 바 초기화
-     */
-    private func initNavigationBar() {
-        
-        windowNavigationController?.navigationBar.backgroundColor = .white
-        windowNavigationController?.navigationBar.topItem?.titleView = nil
-        windowNavigationController?.navigationBar.topItem?.leftBarButtonItems = []
-        windowNavigationController?.navigationBar.topItem?.rightBarButtonItems = []
-
-
-    }
-    
     func initConstraint() {
         headerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
@@ -86,15 +107,7 @@ class FeedTabViewController: UIViewController, View {
         
     }
     
-    
-    init(reactor: Reactor) {
-        super.init(nibName: nil, bundle: nil)
-        self.reactor = reactor
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+
     
     func bind(reactor: FeedTabViewReactor) {
         bindAction(reactor)

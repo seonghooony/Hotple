@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 import RxFlow
 import RxCocoa
+import RxSwift
+import RxGesture
 import ReactorKit
 import RxKingfisher
 import SkeletonView
@@ -52,6 +54,35 @@ class ProfileTabViewController: UIViewController, View {
         
         initView()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        initNavigationBar()
+        
+        viewDidLoadSubject.onNext(true)
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        initConstraint()
+
+    }
+    
+    init(reactor: Reactor) {
+        super.init(nibName: nil, bundle: nil)
+        self.reactor = reactor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        Log.debug("ProfileTabViewController deinit")
     }
     
     /*
@@ -131,26 +162,6 @@ class ProfileTabViewController: UIViewController, View {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        initNavigationBar()
-        
-        viewDidLoadSubject.onNext(true)
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        initConstraint()
-
-    }
-    
-    deinit {
-        Log.debug("ProfileTabViewController deinit")
-    }
-    
     func initConstraint() {
         
         scrollView.snp.makeConstraints { make in
@@ -223,16 +234,6 @@ class ProfileTabViewController: UIViewController, View {
         profileImgView.hideSkeleton()
     }
     
-    
-    init(reactor: Reactor) {
-        super.init(nibName: nil, bundle: nil)
-        self.reactor = reactor
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     func bind(reactor: ProfileTabViewReactor) {
         bindAction(reactor)
         bindState(reactor)
@@ -257,7 +258,12 @@ class ProfileTabViewController: UIViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        
+        stickyHeaderView.rx.tapGesture()
+            .map { _ in
+                return Reactor.Action.clickToLogin
+            }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
 
         
     }

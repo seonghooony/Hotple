@@ -100,7 +100,7 @@ final class LocalRepository: LocalRepositoryProtocol {
             kSecAttrAccount : user.id,
             kSecAttrGeneric : data
         ]
-        
+        Log.debug(SecItemUpdate(query as CFDictionary, attribute as CFDictionary) == errSecSuccess)
         return Observable.just(SecItemUpdate(query as CFDictionary, attribute as CFDictionary) == errSecSuccess)
     }
     

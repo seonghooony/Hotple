@@ -51,10 +51,18 @@ class ProfileTabFlow: Flow {
             // 안쪽 네비게이션에서 푸쉬
             return flowToProfileSetting()
             
+        // 로그인 창 띄우기
+        case .loginIsRequired:
+            return self.flowToLogin()
+            
 //        case .logoutIsRequired:
 //            return logout()
             // 바깥 네비게이션에서 푸쉬
 //            return .one(flowContributor: .forwardToParentFlow(withStep: AppStep.profileSettingIsRequired))
+            
+        case .tabDashBoardIsRequired:
+            Log.flow("ProfileTabFlow tabDashBoardIsRequired (do nothing)")
+            return .none
             
         default:
             return .none
@@ -82,6 +90,15 @@ class ProfileTabFlow: Flow {
         let nextStep = OneStepper(withSingleStep: AppStep.profileSettingIsRequired)
 
         return .one(flowContributor: .contribute(withNextPresentable: profileSettingFlow, withNextStepper: nextStep))
+    }
+    
+    private func flowToLogin() -> FlowContributors {
+        Log.flow("SplashFlow flowToLogin")
+        
+        let loginFlow = LoginFlow(rootViewController: self.rootViewController)
+        let nextStep = OneStepper(withSingleStep: AppStep.loginIsRequired)
+
+        return .one(flowContributor: .contribute(withNextPresentable: loginFlow, withNextStepper: nextStep))
     }
     
 //    private func logout() -> FlowContributors {
