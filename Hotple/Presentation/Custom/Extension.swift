@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 extension UIImage {
     func withAlpha(_ a: CGFloat) -> UIImage {
@@ -17,3 +18,14 @@ extension UIImage {
 }
 
 
+extension MKMapView {
+    func centerToLocation(_ location: CLLocation, regionRadius: CLLocationDistance = 1000) {
+        let coordinateRegion = MKCoordinateRegion(
+            center: location.coordinate,
+            latitudinalMeters: regionRadius,
+            longitudinalMeters: regionRadius
+        )
+        
+        setRegion(coordinateRegion, animated: true)
+    }
+}

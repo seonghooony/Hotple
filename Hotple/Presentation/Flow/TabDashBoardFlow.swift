@@ -84,7 +84,7 @@ class TabDashBoardFlow: Flow {
 
             DispatchQueue.main.async {
 //                self.rootViewController.navigationBar.isHidden = true
-                self.rootViewController.navigationBar.backgroundColor = .clear
+                self.rootViewController.navigationBar.backgroundColor = .clear // .white
                 self.rootViewController.pushViewController(tabDashBoardViewController, animated: false)
 //                self.rootViewController.setViewControllers([self.tabDashBoardViewController], animated: false)
             }

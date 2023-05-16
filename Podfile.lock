@@ -799,6 +799,7 @@ PODS:
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
   - naveridlogin-sdk-ios (4.1.6)
+  - NMapsMap (3.15.0)
   - PromisesObjC (2.2.0)
   - ReactorKit (3.2.0):
     - RxSwift (~> 6.0)
@@ -886,6 +887,7 @@ DEPENDENCIES:
   - Kingfisher
   - lottie-ios
   - naveridlogin-sdk-ios
+  - NMapsMap (= 3.15.0)
   - ReactorKit
   - RxAlamofire
   - RxCocoa
@@ -937,6 +939,7 @@ SPEC REPOS:
     - lottie-ios
     - nanopb
     - naveridlogin-sdk-ios
+    - NMapsMap
     - PromisesObjC
     - ReactorKit
     - RxAlamofire
@@ -997,6 +1000,7 @@ SPEC CHECKSUMS:
   lottie-ios: 809ecf2d460ed650a6aed7aa88b2ec45fab4779c
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   naveridlogin-sdk-ios: cdd34e3585a3d5aaf37c1d84c1f41faba4a25d1a
+  NMapsMap: f151761c088d6516064c59da03ab6503769486e6
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   ReactorKit: e8b11d6b9c415405f381669b095c154a05b59eca
   RxAlamofire: beb75a1c452d0de225651db4903f5d29d034a620
@@ -1021,6 +1025,6 @@ SPEC CHECKSUMS:
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: 20ed5b4833f31f076bcc1bca3b882336fbf3bc12
+PODFILE CHECKSUM: f7919a06348a536ff8e48c10fa8eda154ccf0024
 
 COCOAPODS: 1.11.3

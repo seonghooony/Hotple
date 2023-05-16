@@ -19,6 +19,7 @@ target 'Hotple' do
   pod 'SnapKit'
   pod 'RxKakaoSDK'
   pod 'naveridlogin-sdk-ios'
+  pod 'NMapsMap','3.15.0'
   pod 'FirebaseAnalytics'
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
@@ -28,6 +29,7 @@ target 'Hotple' do
   pod 'RxViewController'
   pod 'Then'
   pod 'SkeletonView'
+
 
 end
 
