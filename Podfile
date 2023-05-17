@@ -30,7 +30,6 @@ target 'Hotple' do
   pod 'Then'
   pod 'SkeletonView'
 
-
 end
 
 post_install do |installer|

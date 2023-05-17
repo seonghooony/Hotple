@@ -69,6 +69,57 @@
 		DB830FD62989EECB00D76B2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB830FD52989EECB00D76B2B /* SceneDelegate.swift */; };
 		DB830FDD2989EECB00D76B2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB830FDC2989EECB00D76B2B /* Assets.xcassets */; };
 		DB830FE02989EECB00D76B2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB830FDE2989EECB00D76B2B /* LaunchScreen.storyboard */; };
+		DBD21FC32A14B8860046EE3C /* restaurant.json in Resources */ = {isa = PBXBuildFile; fileRef = DBD21F7A2A14B8860046EE3C /* restaurant.json */; };
+		DBD21FC42A14B8860046EE3C /* gangnam_8000.json in Resources */ = {isa = PBXBuildFile; fileRef = DBD21F7B2A14B8860046EE3C /* gangnam_8000.json */; };
+		DBD21FC52A14B8860046EE3C /* poi.csv in Resources */ = {isa = PBXBuildFile; fileRef = DBD21F7D2A14B8860046EE3C /* poi.csv */; };
+		DBD21FC62A14B8860046EE3C /* BMEuljiro10yearslaterOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBD21F7F2A14B8860046EE3C /* BMEuljiro10yearslaterOTF.otf */; };
+		DBD21FC72A14B8860046EE3C /* NanumSquareRoundOTFR.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBD21F802A14B8860046EE3C /* NanumSquareRoundOTFR.otf */; };
+		DBD21FC82A14B8860046EE3C /* NanumSquareRoundOTFEB.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBD21F812A14B8860046EE3C /* NanumSquareRoundOTFEB.otf */; };
+		DBD21FC92A14B8860046EE3C /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21F842A14B8860046EE3C /* LoadViewController.swift */; };
+		DBD21FCA2A14B8860046EE3C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21F862A14B8860046EE3C /* DetailViewController.swift */; };
+		DBD21FCB2A14B8860046EE3C /* DetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21F882A14B8860046EE3C /* DetailCollectionViewCell.swift */; };
+		DBD21FCC2A14B8860046EE3C /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21F8A2A14B8860046EE3C /* DrawerController.swift */; };
+		DBD21FCD2A14B8860046EE3C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21F8C2A14B8860046EE3C /* MainViewController.swift */; };
+		DBD21FCE2A14B8860046EE3C /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21F8D2A14B8860046EE3C /* MainInteractor.swift */; };
+		DBD21FCF2A14B8860046EE3C /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21F8E2A14B8860046EE3C /* MainPresenter.swift */; };
+		DBD21FD02A14B8860046EE3C /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21F8F2A14B8860046EE3C /* AlertType.swift */; };
+		DBD21FD12A14B8860046EE3C /* MainAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21F912A14B8860046EE3C /* MainAnimationController.swift */; };
+		DBD21FD32A14B8860046EE3C /* MarkerLayerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21F942A14B8860046EE3C /* MarkerLayerFactory.swift */; };
+		DBD21FD72A14B8860046EE3C /* ConvexHull.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21F9B2A14B8860046EE3C /* ConvexHull.swift */; };
+		DBD21FD82A14B8860046EE3C /* KMeans.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21F9C2A14B8860046EE3C /* KMeans.swift */; };
+		DBD21FD92A14B8860046EE3C /* Clustering.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21F9D2A14B8860046EE3C /* Clustering.swift */; };
+		DBD21FDA2A14B8860046EE3C /* ClusteringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21F9E2A14B8860046EE3C /* ClusteringProtocol.swift */; };
+		DBD21FDB2A14B8860046EE3C /* Cluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21F9F2A14B8860046EE3C /* Cluster.swift */; };
+		DBD21FDC2A14B8860046EE3C /* POI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FA22A14B8860046EE3C /* POI.swift */; };
+		DBD21FDD2A14B8860046EE3C /* ManagedPOI+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FA32A14B8860046EE3C /* ManagedPOI+CoreDataClass.swift */; };
+		DBD21FDE2A14B8860046EE3C /* ManagedPOI+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FA42A14B8860046EE3C /* ManagedPOI+CoreDataProperties.swift */; };
+		DBD21FDF2A14B8860046EE3C /* CoreDataLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FA52A14B8860046EE3C /* CoreDataLayer.swift */; };
+		DBD21FE02A14B8860046EE3C /* CoreDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FA62A14B8860046EE3C /* CoreDataContainer.swift */; };
+		DBD21FE12A14B8860046EE3C /* NMFMarker+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FA82A14B8860046EE3C /* NMFMarker+.swift */; };
+		DBD21FE22A14B8860046EE3C /* String+Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FA92A14B8860046EE3C /* String+Localize.swift */; };
+		DBD21FE32A14B8860046EE3C /* CGPoint+Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FAA2A14B8860046EE3C /* CGPoint+Distance.swift */; };
+		DBD21FE42A14B8860046EE3C /* NMFMarker+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FAB2A14B8860046EE3C /* NMFMarker+Animation.swift */; };
+		DBD21FE52A14B8860046EE3C /* NMFCameraUpdate+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FAC2A14B8860046EE3C /* NMFCameraUpdate+.swift */; };
+		DBD21FE62A14B8860046EE3C /* CGPoint+isValid.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FAD2A14B8860046EE3C /* CGPoint+isValid.swift */; };
+		DBD21FE72A14B8860046EE3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FAE2A14B8860046EE3C /* UIColor+.swift */; };
+		DBD21FE82A14B8860046EE3C /* String+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FAF2A14B8860046EE3C /* String+Bundle.swift */; };
+		DBD21FE92A14B8860046EE3C /* NMFPolygonOverlay+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FB02A14B8860046EE3C /* NMFPolygonOverlay+.swift */; };
+		DBD21FEA2A14B8860046EE3C /* CSVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FB22A14B8860046EE3C /* CSVParser.swift */; };
+		DBD21FEB2A14B8860046EE3C /* DataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FB32A14B8860046EE3C /* DataParser.swift */; };
+		DBD21FEC2A14B8860046EE3C /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FB42A14B8860046EE3C /* ImageDownloader.swift */; };
+		DBD21FED2A14B8860046EE3C /* IsCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FB62A14B8860046EE3C /* IsCheck.swift */; };
+		DBD21FEE2A14B8860046EE3C /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FB72A14B8860046EE3C /* Value.swift */; };
+		DBD21FEF2A14B8860046EE3C /* AddressAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FB82A14B8860046EE3C /* AddressAPI.swift */; };
+		DBD21FF02A14B8860046EE3C /* JsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FB92A14B8860046EE3C /* JsonParser.swift */; };
+		DBD21FF12A14B8860046EE3C /* MapSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FBC2A14B8860046EE3C /* MapSettings.swift */; };
+		DBD21FF22A14B8860046EE3C /* MapTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FBD2A14B8860046EE3C /* MapTypes.swift */; };
+		DBD21FF32A14B8860046EE3C /* LayerGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FBE2A14B8860046EE3C /* LayerGroup.swift */; };
+		DBD21FF42A14B8860046EE3C /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FBF2A14B8860046EE3C /* Geocoding.swift */; };
+		DBD21FF52A14B8860046EE3C /* LatLng.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FC02A14B8860046EE3C /* LatLng.swift */; };
+		DBD21FF62A14B8860046EE3C /* POIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FC12A14B8860046EE3C /* POIModel.swift */; };
+		DBD21FF72A14B8860046EE3C /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD21FC22A14B8860046EE3C /* LinkedList.swift */; };
+		DBD21FFA2A14BC260046EE3C /* Loading.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBD21FF82A14BC260046EE3C /* Loading.storyboard */; };
+		DBD21FFB2A14BC260046EE3C /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBD21FF92A14BC260046EE3C /* Detail.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,6 +189,57 @@
 		DB830FDC2989EECB00D76B2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB830FDF2989EECB00D76B2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB830FE12989EECB00D76B2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBD21F7A2A14B8860046EE3C /* restaurant.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = restaurant.json; sourceTree = "<group>"; };
+		DBD21F7B2A14B8860046EE3C /* gangnam_8000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gangnam_8000.json; sourceTree = "<group>"; };
+		DBD21F7D2A14B8860046EE3C /* poi.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = poi.csv; sourceTree = "<group>"; };
+		DBD21F7F2A14B8860046EE3C /* BMEuljiro10yearslaterOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMEuljiro10yearslaterOTF.otf; sourceTree = "<group>"; };
+		DBD21F802A14B8860046EE3C /* NanumSquareRoundOTFR.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundOTFR.otf; sourceTree = "<group>"; };
+		DBD21F812A14B8860046EE3C /* NanumSquareRoundOTFEB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundOTFEB.otf; sourceTree = "<group>"; };
+		DBD21F842A14B8860046EE3C /* LoadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadViewController.swift; sourceTree = "<group>"; };
+		DBD21F862A14B8860046EE3C /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		DBD21F882A14B8860046EE3C /* DetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		DBD21F8A2A14B8860046EE3C /* DrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerController.swift; sourceTree = "<group>"; };
+		DBD21F8C2A14B8860046EE3C /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		DBD21F8D2A14B8860046EE3C /* MainInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
+		DBD21F8E2A14B8860046EE3C /* MainPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		DBD21F8F2A14B8860046EE3C /* AlertType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
+		DBD21F912A14B8860046EE3C /* MainAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAnimationController.swift; sourceTree = "<group>"; };
+		DBD21F942A14B8860046EE3C /* MarkerLayerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerLayerFactory.swift; sourceTree = "<group>"; };
+		DBD21F9B2A14B8860046EE3C /* ConvexHull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvexHull.swift; sourceTree = "<group>"; };
+		DBD21F9C2A14B8860046EE3C /* KMeans.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMeans.swift; sourceTree = "<group>"; };
+		DBD21F9D2A14B8860046EE3C /* Clustering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clustering.swift; sourceTree = "<group>"; };
+		DBD21F9E2A14B8860046EE3C /* ClusteringProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClusteringProtocol.swift; sourceTree = "<group>"; };
+		DBD21F9F2A14B8860046EE3C /* Cluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cluster.swift; sourceTree = "<group>"; };
+		DBD21FA22A14B8860046EE3C /* POI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POI.swift; sourceTree = "<group>"; };
+		DBD21FA32A14B8860046EE3C /* ManagedPOI+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ManagedPOI+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DBD21FA42A14B8860046EE3C /* ManagedPOI+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ManagedPOI+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DBD21FA52A14B8860046EE3C /* CoreDataLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataLayer.swift; sourceTree = "<group>"; };
+		DBD21FA62A14B8860046EE3C /* CoreDataContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataContainer.swift; sourceTree = "<group>"; };
+		DBD21FA82A14B8860046EE3C /* NMFMarker+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NMFMarker+.swift"; sourceTree = "<group>"; };
+		DBD21FA92A14B8860046EE3C /* String+Localize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Localize.swift"; sourceTree = "<group>"; };
+		DBD21FAA2A14B8860046EE3C /* CGPoint+Distance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Distance.swift"; sourceTree = "<group>"; };
+		DBD21FAB2A14B8860046EE3C /* NMFMarker+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NMFMarker+Animation.swift"; sourceTree = "<group>"; };
+		DBD21FAC2A14B8860046EE3C /* NMFCameraUpdate+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NMFCameraUpdate+.swift"; sourceTree = "<group>"; };
+		DBD21FAD2A14B8860046EE3C /* CGPoint+isValid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+isValid.swift"; sourceTree = "<group>"; };
+		DBD21FAE2A14B8860046EE3C /* UIColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		DBD21FAF2A14B8860046EE3C /* String+Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Bundle.swift"; sourceTree = "<group>"; };
+		DBD21FB02A14B8860046EE3C /* NMFPolygonOverlay+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NMFPolygonOverlay+.swift"; sourceTree = "<group>"; };
+		DBD21FB22A14B8860046EE3C /* CSVParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSVParser.swift; sourceTree = "<group>"; };
+		DBD21FB32A14B8860046EE3C /* DataParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataParser.swift; sourceTree = "<group>"; };
+		DBD21FB42A14B8860046EE3C /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
+		DBD21FB62A14B8860046EE3C /* IsCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsCheck.swift; sourceTree = "<group>"; };
+		DBD21FB72A14B8860046EE3C /* Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
+		DBD21FB82A14B8860046EE3C /* AddressAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressAPI.swift; sourceTree = "<group>"; };
+		DBD21FB92A14B8860046EE3C /* JsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonParser.swift; sourceTree = "<group>"; };
+		DBD21FBC2A14B8860046EE3C /* MapSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSettings.swift; sourceTree = "<group>"; };
+		DBD21FBD2A14B8860046EE3C /* MapTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTypes.swift; sourceTree = "<group>"; };
+		DBD21FBE2A14B8860046EE3C /* LayerGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerGroup.swift; sourceTree = "<group>"; };
+		DBD21FBF2A14B8860046EE3C /* Geocoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
+		DBD21FC02A14B8860046EE3C /* LatLng.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatLng.swift; sourceTree = "<group>"; };
+		DBD21FC12A14B8860046EE3C /* POIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POIModel.swift; sourceTree = "<group>"; };
+		DBD21FC22A14B8860046EE3C /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		DBD21FF82A14BC260046EE3C /* Loading.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Loading.storyboard; sourceTree = "<group>"; };
+		DBD21FF92A14BC260046EE3C /* Detail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		E0A947FA276A7FD213BEA009 /* Pods-Hotple.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hotple.debug.xcconfig"; path = "Target Support Files/Pods-Hotple/Pods-Hotple.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -421,6 +523,7 @@
 		DB830FD22989EECB00D76B2B /* Hotple */ = {
 			isa = PBXGroup;
 			children = (
+				DBD21F762A14B8740046EE3C /* ClusterUtil */,
 				DB20A413298CABCE00AD31F7 /* Application */,
 				DB20A415298CACCB00AD31F7 /* Presentation */,
 				DB20A414298CACB700AD31F7 /* Domain */,
@@ -432,6 +535,232 @@
 				DB830FDE2989EECB00D76B2B /* LaunchScreen.storyboard */,
 			);
 			path = Hotple;
+			sourceTree = "<group>";
+		};
+		DBD21F762A14B8740046EE3C /* ClusterUtil */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21F9A2A14B8860046EE3C /* Clustering */,
+				DBD21FA02A14B8860046EE3C /* CoreData */,
+				DBD21FA72A14B8860046EE3C /* Extension */,
+				DBD21FBA2A14B8860046EE3C /* Models */,
+				DBD21F772A14B8860046EE3C /* Resources */,
+				DBD21F822A14B8860046EE3C /* Scenes */,
+				DBD21FB12A14B8860046EE3C /* Util */,
+			);
+			path = ClusterUtil;
+			sourceTree = "<group>";
+		};
+		DBD21F772A14B8860046EE3C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21F782A14B8860046EE3C /* POIRawData */,
+				DBD21F7E2A14B8860046EE3C /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DBD21F782A14B8860046EE3C /* POIRawData */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21F792A14B8860046EE3C /* json */,
+				DBD21F7C2A14B8860046EE3C /* csv */,
+			);
+			path = POIRawData;
+			sourceTree = "<group>";
+		};
+		DBD21F792A14B8860046EE3C /* json */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21F7A2A14B8860046EE3C /* restaurant.json */,
+				DBD21F7B2A14B8860046EE3C /* gangnam_8000.json */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+		DBD21F7C2A14B8860046EE3C /* csv */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21F7D2A14B8860046EE3C /* poi.csv */,
+			);
+			path = csv;
+			sourceTree = "<group>";
+		};
+		DBD21F7E2A14B8860046EE3C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21F7F2A14B8860046EE3C /* BMEuljiro10yearslaterOTF.otf */,
+				DBD21F802A14B8860046EE3C /* NanumSquareRoundOTFR.otf */,
+				DBD21F812A14B8860046EE3C /* NanumSquareRoundOTFEB.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		DBD21F822A14B8860046EE3C /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21F832A14B8860046EE3C /* Loading */,
+				DBD21F852A14B8860046EE3C /* Detail */,
+				DBD21F892A14B8860046EE3C /* DrawerMenu */,
+				DBD21F8B2A14B8860046EE3C /* MainView */,
+				DBD21F922A14B8860046EE3C /* Views */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		DBD21F832A14B8860046EE3C /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21F842A14B8860046EE3C /* LoadViewController.swift */,
+			);
+			path = Loading;
+			sourceTree = "<group>";
+		};
+		DBD21F852A14B8860046EE3C /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21F862A14B8860046EE3C /* DetailViewController.swift */,
+				DBD21F872A14B8860046EE3C /* View */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		DBD21F872A14B8860046EE3C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21F882A14B8860046EE3C /* DetailCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DBD21F892A14B8860046EE3C /* DrawerMenu */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21F8A2A14B8860046EE3C /* DrawerController.swift */,
+			);
+			path = DrawerMenu;
+			sourceTree = "<group>";
+		};
+		DBD21F8B2A14B8860046EE3C /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21F8C2A14B8860046EE3C /* MainViewController.swift */,
+				DBD21F8D2A14B8860046EE3C /* MainInteractor.swift */,
+				DBD21F8E2A14B8860046EE3C /* MainPresenter.swift */,
+				DBD21F8F2A14B8860046EE3C /* AlertType.swift */,
+				DBD21F902A14B8860046EE3C /* Animations */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		DBD21F902A14B8860046EE3C /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21F912A14B8860046EE3C /* MainAnimationController.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		DBD21F922A14B8860046EE3C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21FF92A14BC260046EE3C /* Detail.storyboard */,
+				DBD21FF82A14BC260046EE3C /* Loading.storyboard */,
+				DBD21F942A14B8860046EE3C /* MarkerLayerFactory.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DBD21F9A2A14B8860046EE3C /* Clustering */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21F9B2A14B8860046EE3C /* ConvexHull.swift */,
+				DBD21F9C2A14B8860046EE3C /* KMeans.swift */,
+				DBD21F9D2A14B8860046EE3C /* Clustering.swift */,
+				DBD21F9E2A14B8860046EE3C /* ClusteringProtocol.swift */,
+				DBD21F9F2A14B8860046EE3C /* Cluster.swift */,
+			);
+			path = Clustering;
+			sourceTree = "<group>";
+		};
+		DBD21FA02A14B8860046EE3C /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21FA12A14B8860046EE3C /* Models */,
+				DBD21FA52A14B8860046EE3C /* CoreDataLayer.swift */,
+				DBD21FA62A14B8860046EE3C /* CoreDataContainer.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		DBD21FA12A14B8860046EE3C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21FA22A14B8860046EE3C /* POI.swift */,
+				DBD21FA32A14B8860046EE3C /* ManagedPOI+CoreDataClass.swift */,
+				DBD21FA42A14B8860046EE3C /* ManagedPOI+CoreDataProperties.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DBD21FA72A14B8860046EE3C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21FA82A14B8860046EE3C /* NMFMarker+.swift */,
+				DBD21FA92A14B8860046EE3C /* String+Localize.swift */,
+				DBD21FAA2A14B8860046EE3C /* CGPoint+Distance.swift */,
+				DBD21FAB2A14B8860046EE3C /* NMFMarker+Animation.swift */,
+				DBD21FAC2A14B8860046EE3C /* NMFCameraUpdate+.swift */,
+				DBD21FAD2A14B8860046EE3C /* CGPoint+isValid.swift */,
+				DBD21FAE2A14B8860046EE3C /* UIColor+.swift */,
+				DBD21FAF2A14B8860046EE3C /* String+Bundle.swift */,
+				DBD21FB02A14B8860046EE3C /* NMFPolygonOverlay+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		DBD21FB12A14B8860046EE3C /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21FB22A14B8860046EE3C /* CSVParser.swift */,
+				DBD21FB32A14B8860046EE3C /* DataParser.swift */,
+				DBD21FB42A14B8860046EE3C /* ImageDownloader.swift */,
+				DBD21FB52A14B8860046EE3C /* PropertyWrapper */,
+				DBD21FB82A14B8860046EE3C /* AddressAPI.swift */,
+				DBD21FB92A14B8860046EE3C /* JsonParser.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		DBD21FB52A14B8860046EE3C /* PropertyWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21FB62A14B8860046EE3C /* IsCheck.swift */,
+				DBD21FB72A14B8860046EE3C /* Value.swift */,
+			);
+			path = PropertyWrapper;
+			sourceTree = "<group>";
+		};
+		DBD21FBA2A14B8860046EE3C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21FBB2A14B8860046EE3C /* DrawerModels */,
+				DBD21FBF2A14B8860046EE3C /* Geocoding.swift */,
+				DBD21FC02A14B8860046EE3C /* LatLng.swift */,
+				DBD21FC12A14B8860046EE3C /* POIModel.swift */,
+				DBD21FC22A14B8860046EE3C /* LinkedList.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DBD21FBB2A14B8860046EE3C /* DrawerModels */ = {
+			isa = PBXGroup;
+			children = (
+				DBD21FBC2A14B8860046EE3C /* MapSettings.swift */,
+				DBD21FBD2A14B8860046EE3C /* MapTypes.swift */,
+				DBD21FBE2A14B8860046EE3C /* LayerGroup.swift */,
+			);
+			path = DrawerModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -496,9 +825,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB0168E7299C9B0100E07875 /* splash.json in Resources */,
+				DBD21FC52A14B8860046EE3C /* poi.csv in Resources */,
 				DB830FE02989EECB00D76B2B /* LaunchScreen.storyboard in Resources */,
+				DBD21FFB2A14BC260046EE3C /* Detail.storyboard in Resources */,
+				DBD21FFA2A14BC260046EE3C /* Loading.storyboard in Resources */,
 				DB687AE5298A2BB3006A5E69 /* Localizable.strings in Resources */,
 				DB830FDD2989EECB00D76B2B /* Assets.xcassets in Resources */,
+				DBD21FC62A14B8860046EE3C /* BMEuljiro10yearslaterOTF.otf in Resources */,
+				DBD21FC72A14B8860046EE3C /* NanumSquareRoundOTFR.otf in Resources */,
+				DBD21FC42A14B8860046EE3C /* gangnam_8000.json in Resources */,
+				DBD21FC32A14B8860046EE3C /* restaurant.json in Resources */,
+				DBD21FC82A14B8860046EE3C /* NanumSquareRoundOTFEB.otf in Resources */,
 				DB3E32E7299B1DF400EAD0B6 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -553,59 +890,102 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB3E32BF2995E65600EAD0B6 /* ProfileTabFlow.swift in Sources */,
+				DBD21FD12A14B8860046EE3C /* MainAnimationController.swift in Sources */,
 				DB3E32D5299614E200EAD0B6 /* TestFlow.swift in Sources */,
+				DBD21FC92A14B8860046EE3C /* LoadViewController.swift in Sources */,
+				DBD21FDE2A14B8860046EE3C /* ManagedPOI+CoreDataProperties.swift in Sources */,
 				DB687AD8298A1E43006A5E69 /* LoginFlow.swift in Sources */,
 				DB0168FA29B0550E00E07875 /* ProfileSettingSection.swift in Sources */,
 				DB3E32D12995FC3800EAD0B6 /* FeedTabViewController.swift in Sources */,
+				DBD21FF22A14B8860046EE3C /* MapTypes.swift in Sources */,
 				DB3E32CB2995FC0900EAD0B6 /* HomeTabViewController.swift in Sources */,
 				DB3E32C52995FBD400EAD0B6 /* MapTabViewReactor.swift in Sources */,
+				DBD21FEA2A14B8860046EE3C /* CSVParser.swift in Sources */,
 				DB3E32DB2999BE2B00EAD0B6 /* SplashViewController.swift in Sources */,
+				DBD21FF02A14B8860046EE3C /* JsonParser.swift in Sources */,
 				DB3E32CD2995FC1A00EAD0B6 /* SearchTabViewController.swift in Sources */,
 				DB687AEB298A4545006A5E69 /* LoginButton.swift in Sources */,
 				DB3E32D7299614ED00EAD0B6 /* TestViewReactor.swift in Sources */,
 				DB687AF3298C99EB006A5E69 /* AppKeys.swift in Sources */,
 				DB01690329D3F9C300E07875 /* TabDashBoardViewController.swift in Sources */,
 				DB0168F029A306C000E07875 /* ProfileSettingViewReactor.swift in Sources */,
+				DBD21FE82A14B8860046EE3C /* String+Bundle.swift in Sources */,
 				DB3E32D32995FC5100EAD0B6 /* ProfileTabViewController.swift in Sources */,
+				DBD21FD82A14B8860046EE3C /* KMeans.swift in Sources */,
 				DB3E32CF2995FC2900EAD0B6 /* MapTabViewController.swift in Sources */,
 				DB830FD42989EECB00D76B2B /* AppDelegate.swift in Sources */,
+				DBD21FCC2A14B8860046EE3C /* DrawerController.swift in Sources */,
 				DB687AD6298A1DB5006A5E69 /* AppStep.swift in Sources */,
+				DBD21FE72A14B8860046EE3C /* UIColor+.swift in Sources */,
 				DB20A41E298CC1D400AD31F7 /* KakaoUseCase.swift in Sources */,
 				DB3E32E32999D19E00EAD0B6 /* LocalRepository.swift in Sources */,
 				DB0168DF299B457A00E07875 /* FirebaseRepository.swift in Sources */,
 				DB0168EE29A306A800E07875 /* ProfileSettingFlow.swift in Sources */,
 				DB3E32BD2995E64400EAD0B6 /* FeedTabFlow.swift in Sources */,
+				DBD21FD92A14B8860046EE3C /* Clustering.swift in Sources */,
 				DB20A422298CC5AD00AD31F7 /* KakaoRepository.swift in Sources */,
+				DBD21FF42A14B8860046EE3C /* Geocoding.swift in Sources */,
 				DB0168FF29B05E9000E07875 /* ProfileSettingMenuCell.swift in Sources */,
 				DB3E32B3299482F800EAD0B6 /* UserData.swift in Sources */,
 				DB0168FC29B05A8700E07875 /* ProfileSettingMenuData.swift in Sources */,
+				DBD21FE32A14B8860046EE3C /* CGPoint+Distance.swift in Sources */,
 				DB0168F229A306CF00E07875 /* ProfileSettingViewController.swift in Sources */,
+				DBD21FF52A14B8860046EE3C /* LatLng.swift in Sources */,
 				DB687AD4298A1C79006A5E69 /* AppFlow.swift in Sources */,
+				DBD21FDD2A14B8860046EE3C /* ManagedPOI+CoreDataClass.swift in Sources */,
+				DBD21FDB2A14B8860046EE3C /* Cluster.swift in Sources */,
+				DBD21FE62A14B8860046EE3C /* CGPoint+isValid.swift in Sources */,
+				DBD21FED2A14B8860046EE3C /* IsCheck.swift in Sources */,
 				DB3E32D9299614FB00EAD0B6 /* TestViewController.swift in Sources */,
+				DBD21FE22A14B8860046EE3C /* String+Localize.swift in Sources */,
+				DBD21FEB2A14B8860046EE3C /* DataParser.swift in Sources */,
+				DBD21FD72A14B8860046EE3C /* ConvexHull.swift in Sources */,
+				DBD21FE52A14B8860046EE3C /* NMFCameraUpdate+.swift in Sources */,
+				DBD21FCB2A14B8860046EE3C /* DetailCollectionViewCell.swift in Sources */,
 				DB20A4262991EF0F00AD31F7 /* NaverRepository.swift in Sources */,
 				DB01690829D55BF200E07875 /* OSLogExtension.swift in Sources */,
+				DBD21FCF2A14B8860046EE3C /* MainPresenter.swift in Sources */,
 				DB3E32BB2995E60800EAD0B6 /* MapTabFlow.swift in Sources */,
+				DBD21FCE2A14B8860046EE3C /* MainInteractor.swift in Sources */,
+				DBD21FF62A14B8860046EE3C /* POIModel.swift in Sources */,
 				DB3E32C92995FBF800EAD0B6 /* ProfileTabViewReactor.swift in Sources */,
 				DB3E32C72995FBE800EAD0B6 /* FeedTabViewReactor.swift in Sources */,
 				DB01690129D3F9AD00E07875 /* TabDashBoardViewReactor.swift in Sources */,
+				DBD21FD02A14B8860046EE3C /* AlertType.swift in Sources */,
+				DBD21FE12A14B8860046EE3C /* NMFMarker+.swift in Sources */,
+				DBD21FCD2A14B8860046EE3C /* MainViewController.swift in Sources */,
 				DB3E32E52999D5B800EAD0B6 /* UserDefaultKeys.swift in Sources */,
 				DB3E32C12995FBAE00EAD0B6 /* HomeTabViewReactor.swift in Sources */,
+				DBD21FF12A14B8860046EE3C /* MapSettings.swift in Sources */,
+				DBD21FDF2A14B8860046EE3C /* CoreDataLayer.swift in Sources */,
 				DB3E32B92995E5FD00EAD0B6 /* SearchTabFlow.swift in Sources */,
 				DB20A42A29936D1A00AD31F7 /* KakaoData.swift in Sources */,
 				DB3E32B72995E5E300EAD0B6 /* HomeTabFlow.swift in Sources */,
 				DB687AED298A4AE6006A5E69 /* Extension.swift in Sources */,
+				DBD21FE42A14B8860046EE3C /* NMFMarker+Animation.swift in Sources */,
 				DB0168EA299CAF3100E07875 /* TestCell.swift in Sources */,
+				DBD21FDA2A14B8860046EE3C /* ClusteringProtocol.swift in Sources */,
 				DB3E32DF2999BE4E00EAD0B6 /* SplashFlow.swift in Sources */,
 				DB687ADE298A1FC5006A5E69 /* LoginViewController.swift in Sources */,
 				DB3E32DD2999BE4000EAD0B6 /* SplashViewReactor.swift in Sources */,
 				DB3E32C32995FBC700EAD0B6 /* SearchTabViewReactor.swift in Sources */,
+				DBD21FCA2A14B8860046EE3C /* DetailViewController.swift in Sources */,
 				DB20A428299327A100AD31F7 /* NaverData.swift in Sources */,
+				DBD21FE92A14B8860046EE3C /* NMFPolygonOverlay+.swift in Sources */,
+				DBD21FDC2A14B8860046EE3C /* POI.swift in Sources */,
 				DB830FD62989EECB00D76B2B /* SceneDelegate.swift in Sources */,
 				DB0168F829ADB66F00E07875 /* UserUseCase.swift in Sources */,
+				DBD21FE02A14B8860046EE3C /* CoreDataContainer.swift in Sources */,
 				DB3E32B52995DEE100EAD0B6 /* TabDashBoardFlow.swift in Sources */,
 				DB687ADA298A1EF8006A5E69 /* AppStepper.swift in Sources */,
+				DBD21FEF2A14B8860046EE3C /* AddressAPI.swift in Sources */,
+				DBD21FF72A14B8860046EE3C /* LinkedList.swift in Sources */,
+				DBD21FEC2A14B8860046EE3C /* ImageDownloader.swift in Sources */,
 				DB687ADC298A1FA5006A5E69 /* LoginViewReactor.swift in Sources */,
+				DBD21FD32A14B8860046EE3C /* MarkerLayerFactory.swift in Sources */,
 				DB20A4242991EE8800AD31F7 /* NaverUseCase.swift in Sources */,
+				DBD21FF32A14B8860046EE3C /* LayerGroup.swift in Sources */,
+				DBD21FEE2A14B8860046EE3C /* Value.swift in Sources */,
 				DB0168EC299CC70600E07875 /* Const.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
