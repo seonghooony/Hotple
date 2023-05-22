@@ -766,15 +766,9 @@ PODS:
   - KakaoSDKCommon/Network (2.15.0):
     - Alamofire (~> 5.1)
     - KakaoSDKCommon/Common (= 2.15.0)
-  - KakaoSDKFriend (2.15.0):
-    - KakaoSDKUser (= 2.15.0)
-  - KakaoSDKNavi (2.15.0):
-    - KakaoSDKCommon/Common (= 2.15.0)
   - KakaoSDKShare (2.15.0):
     - KakaoSDKCommon (= 2.15.0)
     - KakaoSDKTemplate (= 2.15.0)
-  - KakaoSDKStory (2.15.0):
-    - KakaoSDKUser (= 2.15.0)
   - KakaoSDKTalk (2.15.0):
     - KakaoSDKTemplate (= 2.15.0)
     - KakaoSDKUser (= 2.15.0)
@@ -822,16 +816,6 @@ PODS:
   - RxGesture (4.0.4):
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
-  - RxKakaoSDK (2.15.0):
-    - KakaoSDKNavi (= 2.15.0)
-    - KakaoSDKTemplate (= 2.15.0)
-    - RxKakaoSDKAuth (= 2.15.0)
-    - RxKakaoSDKCommon (= 2.15.0)
-    - RxKakaoSDKFriend (= 2.15.0)
-    - RxKakaoSDKShare (= 2.15.0)
-    - RxKakaoSDKStory (= 2.15.0)
-    - RxKakaoSDKTalk (= 2.15.0)
-    - RxKakaoSDKUser (= 2.15.0)
   - RxKakaoSDKAuth (2.15.0):
     - KakaoSDKAuth (= 2.15.0)
     - RxKakaoSDKCommon (= 2.15.0)
@@ -846,15 +830,9 @@ PODS:
     - KakaoSDKCommon/Network (= 2.15.0)
     - RxAlamofire (~> 6.0)
     - RxKakaoSDKCommon/Common (= 2.15.0)
-  - RxKakaoSDKFriend (2.15.0):
-    - KakaoSDKFriend (= 2.15.0)
-    - RxKakaoSDKUser (= 2.15.0)
   - RxKakaoSDKShare (2.15.0):
     - KakaoSDKShare (= 2.15.0)
     - RxKakaoSDKCommon (= 2.15.0)
-  - RxKakaoSDKStory (2.15.0):
-    - KakaoSDKStory (= 2.15.0)
-    - RxKakaoSDKUser (= 2.15.0)
   - RxKakaoSDKTalk (2.15.0):
     - KakaoSDKTalk (= 2.15.0)
     - KakaoSDKTemplate (= 2.15.0)
@@ -894,7 +872,11 @@ DEPENDENCIES:
   - RxDataSources
   - RxFlow
   - RxGesture
-  - RxKakaoSDK
+  - RxKakaoSDKAuth
+  - RxKakaoSDKCommon
+  - RxKakaoSDKShare
+  - RxKakaoSDKTalk
+  - RxKakaoSDKUser
   - RxKingfisher
   - RxSwift
   - RxViewController
@@ -926,10 +908,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - KakaoSDKAuth
     - KakaoSDKCommon
-    - KakaoSDKFriend
-    - KakaoSDKNavi
     - KakaoSDKShare
-    - KakaoSDKStory
     - KakaoSDKTalk
     - KakaoSDKTemplate
     - KakaoSDKUser
@@ -947,12 +926,9 @@ SPEC REPOS:
     - RxDataSources
     - RxFlow
     - RxGesture
-    - RxKakaoSDK
     - RxKakaoSDKAuth
     - RxKakaoSDKCommon
-    - RxKakaoSDKFriend
     - RxKakaoSDKShare
-    - RxKakaoSDKStory
     - RxKakaoSDKTalk
     - RxKakaoSDKUser
     - RxKingfisher
@@ -987,10 +963,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
   KakaoSDKAuth: 0fe5cf1756e8a9f66f8fc77826061aafa93034f3
   KakaoSDKCommon: 89d863b7f34398e6fb93a0acb28a204908551a39
-  KakaoSDKFriend: 09a67aa6e2e47301558cc4b74e71633bbfce399e
-  KakaoSDKNavi: b47131f0fa64857bc69d3fe7d2cad5fa70137900
   KakaoSDKShare: f9a7dc7baa8ad9eb7b6b6a3b99802407ab3c81a2
-  KakaoSDKStory: d7c0c186bf869a6b107c5d416ad7f2a88fa524a9
   KakaoSDKTalk: 846856743650b0eea4040a38368a7c1e8dcb0072
   KakaoSDKTemplate: c9cbc64b0248c7a33c211a56dada7e38c1210751
   KakaoSDKUser: a997ca5c4c18ece2ab30646ff74841bc29d4399d
@@ -1008,12 +981,9 @@ SPEC CHECKSUMS:
   RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
   RxFlow: 52f6f6379918392c1ea8cb62d8dcf2df9a5463dd
   RxGesture: f3efb47ed2d26a8082f7b660d4a59970e275a7f8
-  RxKakaoSDK: fb966a9b15127300a5737b790a13ad45490f9a62
   RxKakaoSDKAuth: e7d0ac86282b29538a30d63b83793539344d2271
   RxKakaoSDKCommon: 31411d8a4945bb347067fe80159210e9d175d7e6
-  RxKakaoSDKFriend: 080f3f592eb4ba5fa362aa8c29e9c30bc8a75ad2
   RxKakaoSDKShare: c7457537a7e6df32607aaa6300a387effede80b4
-  RxKakaoSDKStory: 70b5ba4f9b93afb09bf2e134f95d9545092b646c
   RxKakaoSDKTalk: 5a85b696f5ecfc09267696bf548d3b2265c2e354
   RxKakaoSDKUser: 08a495ae92224487a6c19f3b7495ccfcdb1b183e
   RxKingfisher: a602fbf8751d756a7cc6190ddfedc2ce0d301377
@@ -1025,6 +995,6 @@ SPEC CHECKSUMS:
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: fa0b4f10dc9a1381a5d9a236e602f8167fb3bad2
+PODFILE CHECKSUM: 33513eb39a0397ad235512264c2fb7720fa92c14
 
 COCOAPODS: 1.11.3

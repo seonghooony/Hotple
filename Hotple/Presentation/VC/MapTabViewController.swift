@@ -10,6 +10,7 @@ import SnapKit
 import RxFlow
 import RxCocoa
 import ReactorKit
+import Foundation
 
 import NMapsMap
 import CoreLocation
@@ -26,47 +27,17 @@ class MapTabViewController: UIViewController, View {
     
     private var naverMapView = NMFNaverMapView()
     
-    private lazy var animationController: MainAnimationController = {
-        let controller = MainAnimationController(frame: view.frame, mapView: mapView)
-        guard let animationView = controller.view else { return controller }
-        mapView.addSubview(animationView)
-        if let mapController = mapView.subviews.first(where: { $0 is UIImageView }) {
-            mapView.bringSubviewToFront(mapController)
-        }
-        return controller
-    }()
-    
-    private var boundsLatLng: (southWest: LatLng, northEast: LatLng) {
-//        let boundsLatLngs = mapView.coveringBounds.boundsLatLngs
-//        let point = CGPoint(x: 0, y: view.bounds.height)
-        
-        let southWest = LatLng(mapView.projection.latlngBounds(fromViewBounds: self.view.frame).southWest)
-        let northEast = LatLng(mapView.projection.latlngBounds(fromViewBounds: self.view.frame).northEast)
-        
-        return (southWest: southWest, northEast: northEast)
-    }
-    
-    var interactor: MainBusinessLogic?
-    private var displayedData: ViewModel = .init(markers: [], polygons: [], bounds: [], count: 0)
-    private var mapView: NMFMapView { naverMapView.mapView }
-    private var projection: NMFProjection { naverMapView.mapView.projection }
-
-    private var highlightMarker: NMFMarker? {
-        didSet {
-            guard highlightMarker != oldValue else { return }
-            highlightMarker?.iconImage = NMF_MARKER_IMAGE_RED
-            if let position = highlightMarker?.position {
-                highlightMarker?.captionText = "\(position.lat),\n \(position.lng)"
-            }
-            oldValue?.iconImage = NMF_MARKER_IMAGE_GREEN
-            oldValue?.captionText = ""
-        }
-    }
-
-    
     /** Zoom Level **/
     let MIN_ZOOM_LEVEL = 5.5    // zoom level 최소값
     let MAX_ZOOM_LEVEL = 19.5   // zoom level 최대값
+    
+    private var clusterManager: PGClusteringManager!
+    
+
+    
+    var markers = [NMFMarker]()
+    
+    var currmarkers = [NMFMarker]()
     
     override func loadView() {
         
@@ -77,10 +48,17 @@ class MapTabViewController: UIViewController, View {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.clusterManager = PGClusteringManager(mapView: naverMapView.mapView, frame: self.view.frame)
+        clusterManager.delegate = self
+        
+        // 현위치로 초기 위치 세팅 (없을 시 잠실역)
+        naverMapView.mapView.latitude = 37.514634749
+        naverMapView.mapView.longitude = 127.104260695
+        
+        
         initNotificationCenter()
         initConstraint()
-        
-        configureVIP()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -156,9 +134,14 @@ class MapTabViewController: UIViewController, View {
         naverMapView.mapView.maxZoomLevel = MAX_ZOOM_LEVEL  // 카메라의 최대 줌 레벨
         naverMapView.mapView.touchDelegate = self   // 지도 안 탭 할 경우 터치 이벤트 설정delegate (심벌 터치 포함) NMFMapViewTouchDelegate
         naverMapView.mapView.addCameraDelegate(delegate: self)  // 카메라 변경 이벤트 대기 이벤트 NMFMapViewCameraDelegate
+        
+        // 현위치로 초기 위치 세팅 (없을 시 잠실역)
         view.addSubview(naverMapView)
         
-
+        
+        generateRandomMarker(size: 1000)
+        
+        
         
         checkLocationPermission()
         
@@ -220,10 +203,6 @@ class MapTabViewController: UIViewController, View {
         locationManager.stopUpdatingLocation()
         
     }
-        
-    private func randomScale() -> Double {
-        return Double(arc4random()) / Double(UINT32_MAX) * 2.0 - 1.0
-    }
     
     @objc func didEnterBackgroundObserver() {
         Log.debug("didEnterBackground")
@@ -247,7 +226,7 @@ class MapTabViewController: UIViewController, View {
 //            .bind(to: reactor.action)
 //            .disposed(by: disposeBag)
         
-        
+
 
         
     }
@@ -301,7 +280,7 @@ extension MapTabViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        Log.debug("[didUpdateLocations]")
+//        Log.debug("[didUpdateLocations]")
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -364,13 +343,14 @@ extension MapTabViewController: NMFMapViewCameraDelegate {
     
     //카메라 변화 모든 제스처 시마다 호출 (드래그, 틸트, 줌 시)
     func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
-        Log.debug("1. cameraDidChangeByReason, reason : \(reason)")
+//        Log.debug("1. cameraDidChangeByReason, reason : \(reason)")
 
     }
     
     //카메라 변화 제스처 후 자동 밀릴 때 호출 (빠른 이동 제스처 후 끝자락에서 부드럽게 움직이게 동작할 때 호출)
     func mapView(_ mapView: NMFMapView, cameraIsChangingByReason reason: Int) {
-        Log.debug("2. cameraIsChangingByReason, reason : \(reason)")
+//        Log.debug("2. cameraIsChangingByReason, reason : \(reason)")
+        
         
     }
     
@@ -379,7 +359,12 @@ extension MapTabViewController: NMFMapViewCameraDelegate {
         Log.debug("mapViewCameraIdle")
         let zoomLevel = mapView.zoomLevel
             
-        interactor?.fetchPOI(southWest: boundsLatLng.southWest, northEast: boundsLatLng.northEast, zoomLevel: zoomLevel)
+        
+        clusterManager.resetQuadTreeBoundingBox(mapView: mapView, frame: self.view.frame)
+        clusterManager.addMarkers(markers: markers)
+        clusterManager.clusterAnnotationWithinMapRectangle(mapView: mapView, frame: self.view.frame, zoomScale: zoomLevel)
+        
+        
         
 //        log("북서 꼭지점 위치: \(mapView.projection.latlngBounds(fromViewBounds: self.view.frame).southWest)")
 //        log("남동 꼭지점 위치: \(mapView.projection.latlngBounds(fromViewBounds: self.view.frame).northEast)")
@@ -394,7 +379,7 @@ extension MapTabViewController: NMFMapViewCameraDelegate {
 
     //줌 레벨 설정
     private func cameraChangeAction(_ mapView: NMFMapView, cameraIsChangingByReason reason: Int) {
-        Log.debug("cameraIsChangingByReason, reason : \(reason)")
+//        Log.debug("cameraIsChangingByReason, reason : \(reason)")
 
             
         
@@ -403,117 +388,55 @@ extension MapTabViewController: NMFMapViewCameraDelegate {
 
 
 extension MapTabViewController {
+    func generateRandomMarker(size: Int) {
     
-    private func configureVIP() {
-        let interactor = MainInteractor()
-        let presenter = MainPresenter()
-        self.interactor = interactor
-        interactor.presenter = presenter
-        interactor.clustering?.tool = self
-        interactor.clustering?.data = presenter
-        presenter.viewController = self
-    }
-    
-    private func setMarkersTouchHandler(markers: [NMFMarker], bounds: [NMGLatLngBounds]) {
-            zip(markers, bounds).forEach { [weak self] marker, bound in
-                guard let self = self,
-                      let pointCount = marker.userInfo["pointCount"] as? Int
-                else { return }
+        
+        DispatchQueue.global(qos: .default).async {
+            for i in 1...size {
+                let marker = NMFMarker()
+                marker.position = NMGLatLng(lat: 37.514634749 + Double.random(in: 0.01...0.1), lng: 127.104260695 + Double.random(in: 0.01...0.1))
+                marker.width = 12
+                marker.height = 10
+                //            marker.iconImage = NMFOverlayImage(name: "img_poi_apart_info2") //y_company_poi_01  img_poi_apart_info
+                marker.userInfo = [
+                    "test" : i
+                ]
                 
-                guard pointCount == 1 else {
-                    marker.touchHandler = { [weak self] _ in
-                        self?.touchedClusterMarker(bounds: bound, insets: 10)
-                        return true
-                    }
-                    return
-                }
-                
-                marker.touchHandler = { [weak self] _ in
-                    guard marker == self?.highlightMarker else {
-                        self?.highlightMarker = marker
-                        return true
-                    }
-                    self?.touchedLeafMarker(marker: marker)
-                    return true
-                }
+                self.markers.append(marker)
             }
-        }
-    
-    private func touchedClusterMarker(bounds: NMGLatLngBounds, insets: CGFloat) {
             
-            let edgeInsets = UIEdgeInsets(top: insets, left: insets, bottom: insets , right: insets)
-            let cameraUpdate = NMFCameraUpdate(fit: bounds,
-                                               paddingInsets: edgeInsets,
-                                               cameraAnimation: .easeIn,
-                                               duration: 0.8)
-            mapView.moveCamera(cameraUpdate)
-        }
-        
-        private func touchedLeafMarker(marker: NMFMarker) {
             
         }
+
+    }
     
-    func configureFirstMarkers(newMarkers: [NMFMarker], bounds: [NMGLatLngBounds]) {
-            self.setOverlaysMapView(overlays: newMarkers, mapView: mapView)
-            self.setMarkersTouchHandler(markers: newMarkers, bounds: bounds)
-        }
-        
-        func setOverlaysMapView(overlays: [NMFOverlay], mapView: NMFMapView?) {
-            return overlays.forEach { $0.mapView = mapView }
-        }
-        
-        func markerChangeAnimation(oldMarkers: [NMFMarker],
-                                   newMarkers: [NMFMarker],
-                                   bounds: [NMGLatLngBounds],
-                                   completion: (() -> Void)?) {
-            self.setOverlaysMapView(overlays: oldMarkers, mapView: nil)
+    func removeCurrMarker() {
 
-            self.animationController.clusteringAnimation(
-                old: oldMarkers.map {
-                    (latLng: $0.position, size: $0.iconImage.image)
-                },
-                new: newMarkers.map {
-                    (latLng: $0.position, size: $0.iconImage.image)
-                },
-                isMerge: oldMarkers.count > newMarkers.count,
-                completion: {
-                    self.setOverlaysMapView(overlays: newMarkers, mapView: self.mapView)
-                    self.setMarkersTouchHandler(markers: newMarkers, bounds: bounds)
-                    completion?()
-                })
-        }
-}
-
-extension MapTabViewController: ClusteringTool {
-    func convertLatLngToPoint(latLng: LatLng) -> CGPoint {
-        return projection.point(from: NMGLatLng(lat: latLng.lat, lng: latLng.lng))
+        
+            
+        
     }
 }
 
-extension MapTabViewController: MainDisplayLogic {
-    func displayFetch(viewModel: ViewModel) {
-        displayedData.markers.forEach({
-            $0.touchHandler = nil
-        })
-        let oldViewModel = displayedData
-        displayedData = viewModel
-        redrawMap(oldViewModel: oldViewModel, newViewModel: viewModel)
-    }
-    
-    private func redrawMap(oldViewModel: ViewModel?, newViewModel: ViewModel) {
-        guard let oldViewModel = oldViewModel else {
-            self.configureFirstMarkers(newMarkers: newViewModel.markers, bounds: newViewModel.bounds)
-            return
+extension MapTabViewController: PGClusteringManagerDelegate {
+
+    func displayMarkers(markers: [NMFMarker]) {
+        Log.debug("display")
+        Log.debug("클러스터링 개수 : \(markers.count)")
+        Log.debug("현재 스레드가 메인스레드? : \(OperationQueue.current == OperationQueue.main)")
+
+        for marker in self.currmarkers {
+            marker.mapView = nil
+        }
+        
+        self.currmarkers = markers
+        
+        for marker in currmarkers {
+            marker.mapView = self.naverMapView.mapView
         }
 
-        self.setOverlaysMapView(overlays: oldViewModel.polygons, mapView: nil)
         
-        self.markerChangeAnimation(
-            oldMarkers: oldViewModel.markers,
-            newMarkers: newViewModel.markers,
-            bounds: newViewModel.bounds,
-            completion: {
-                self.setOverlaysMapView(overlays: newViewModel.polygons, mapView: self.mapView)
-            })
+        
+        
     }
 }
