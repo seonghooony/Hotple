@@ -40,7 +40,8 @@ class PGQuadTree {
         southEast = nil
     }
     
-    public func resetMarkers() {
+    // 쿼드 트리 알고리즘을 적용 시킬 변수 초기화
+    public func resetQuadTree() {
         self.markers.removeAll()
         isDivided = false
 

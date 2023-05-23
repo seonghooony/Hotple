@@ -33,17 +33,17 @@ class MapTabViewController: UIViewController, View {
     
     private var clusterManager: PGClusteringManager!
     
-
+    
     
     var markers = [NMFMarker]()
     
-    var currmarkers = [NMFMarker]()
+    var currmarkersTuple = [(NMFMarker, NMFInfoWindow?)]()
     
     override func loadView() {
         
         initView()
         initNaverMapView()
-       
+        
     }
     
     override func viewDidLoad() {
@@ -58,7 +58,7 @@ class MapTabViewController: UIViewController, View {
         
         initNotificationCenter()
         initConstraint()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,7 +86,7 @@ class MapTabViewController: UIViewController, View {
     }
     
     /*
-        상단 네비게이션 바 초기화
+     상단 네비게이션 바 초기화
      */
     private func initNavigationBar() {
         
@@ -100,7 +100,7 @@ class MapTabViewController: UIViewController, View {
                 viewcontroller.navigationItem.leftBarButtonItems = [tempBtn2]
             }
         })
-
+        
     }
     
     private func initView() {
@@ -158,19 +158,19 @@ class MapTabViewController: UIViewController, View {
     }
     
     /*
-        사용자의 위치 정보를 확인할 수 있도록 위치 권한을 확인한다.
+     사용자의 위치 정보를 확인할 수 있도록 위치 권한을 확인한다.
      */
     func checkLocationPermission() {
         
         switch locationManager.authorizationStatus {
-        // 위치 사용 권한이 허용되어 있음
+            // 위치 사용 권한이 허용되어 있음
         case .authorizedAlways, .authorizedWhenInUse:
             Log.debug(".authorizedAlways, .authorizedWhenInUse")
             locationManager.delegate = self
             trackingCurrLocation()
             break
             
-        // 위치 사용 권한 허용 여부 미결정 상태. 권한을 허용할 것인지 여부를 묻는 팝업이 나타난다.
+            // 위치 사용 권한 허용 여부 미결정 상태. 권한을 허용할 것인지 여부를 묻는 팝업이 나타난다.
         case .notDetermined:
             Log.debug(".notDetermined")
             
@@ -179,24 +179,24 @@ class MapTabViewController: UIViewController, View {
             stopTrackingCurrLocation()
             break
             
-        // 위치 사용 권한이 허용되지 않은 상태.
+            // 위치 사용 권한이 허용되지 않은 상태.
         case .restricted, .denied:
             Log.debug(".restricted, .denied")
             stopTrackingCurrLocation()
-           break
+            break
             
-        // [개인정보보호] -> [위치 서비스] 활성화 X
+            // [개인정보보호] -> [위치 서비스] 활성화 X
         @unknown default:
             Log.debug("default")
             
             break
-
+            
         }
     }
     
     func trackingCurrLocation() {
         locationManager.startUpdatingLocation()
-
+        
     }
     
     func stopTrackingCurrLocation() {
@@ -219,15 +219,15 @@ class MapTabViewController: UIViewController, View {
     
     func bindAction(_ reactor: MapTabViewReactor) {
         //action
-//        kakaoBtn.rx.tap
-//            .map { _ in
-//                return Reactor.Action.clickToKakao
-//            }
-//            .bind(to: reactor.action)
-//            .disposed(by: disposeBag)
+        //        kakaoBtn.rx.tap
+        //            .map { _ in
+        //                return Reactor.Action.clickToKakao
+        //            }
+        //            .bind(to: reactor.action)
+        //            .disposed(by: disposeBag)
         
-
-
+        
+        
         
     }
     
@@ -235,15 +235,15 @@ class MapTabViewController: UIViewController, View {
     func bindState(_ reactor: MapTabViewReactor) {
         //state
         
-//        reactor.state
-//            .map { state in
-//                print("reactor")
-//                print(state.userData)
-//                return String(state.userData.id)
-//            }
-//            .distinctUntilChanged()
-//            .bind(to: testLbl.rx.text)
-//            .disposed(by: disposeBag)
+        //        reactor.state
+        //            .map { state in
+        //                print("reactor")
+        //                print(state.userData)
+        //                return String(state.userData.id)
+        //            }
+        //            .distinctUntilChanged()
+        //            .bind(to: testLbl.rx.text)
+        //            .disposed(by: disposeBag)
         
     }
     
@@ -256,31 +256,31 @@ extension MapTabViewController: CLLocationManagerDelegate {
         
         
         switch manager.authorizationStatus {
-        // 사용자가 위치 권한 사용을 허용함
+            // 사용자가 위치 권한 사용을 허용함
         case .authorizedAlways, .authorizedWhenInUse:
             Log.debug("CLLocationManagerDelegate - 사용자가 위치 권한 사용을 허용한 상태임")
             trackingCurrLocation()
             
-        // 위치 사용 권한 허용 여부 미결정 상태. 권한을 허용할 것인지 여부를 묻는 팝업이 나타난다.
+            // 위치 사용 권한 허용 여부 미결정 상태. 권한을 허용할 것인지 여부를 묻는 팝업이 나타난다.
         case .notDetermined:
             Log.debug("CLLocationManagerDelegate - 사용자가 위치 권한 사용에 대한 허용 미결정 상태임")
             stopTrackingCurrLocation()
             break
             
-        // 위치 사용 권한이 허용되지 않은 상태.
+            // 위치 사용 권한이 허용되지 않은 상태.
         case .denied, .restricted:
             Log.debug("CLLocationManagerDelegate - 사용자가 위치 권한 사용을 허용하지 않은 상태임")
             stopTrackingCurrLocation()
-        // 그 외.
+            // 그 외.
         @unknown default:
             Log.debug("CLLocationManagerDelegate - 사용자가 위치 권한 사용을 허용하지 않은 상태임 (DEFAULT)")
             stopTrackingCurrLocation()
         }
-
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        Log.debug("[didUpdateLocations]")
+        //        Log.debug("[didUpdateLocations]")
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -294,30 +294,30 @@ extension MapTabViewController: CLLocationManagerDelegate {
 /* extension for NMFAuthManagerDelegate */
 extension MapTabViewController: NMFAuthManagerDelegate {
     func authorized(_ state: NMFAuthState, error: Error?) {
-            switch state {
-            case .authorized:   // 인증 완료
-                Log.network("naver map is authorized.")
-            case .authorizing:  // 인증 진행중
-                break
-            case .pending:  // 인증 대기중
-                break
-            case .unauthorized: // 인증되지 않음
-                Log.network("naver map is unauthorized.")
-                
-                if let error = error as NSError? {
-                    let code = error.code
-                }
-                break
-            default:
-                break
+        switch state {
+        case .authorized:   // 인증 완료
+            Log.network("naver map is authorized.")
+        case .authorizing:  // 인증 진행중
+            break
+        case .pending:  // 인증 대기중
+            break
+        case .unauthorized: // 인증되지 않음
+            Log.network("naver map is unauthorized.")
+            
+            if let error = error as NSError? {
+                let code = error.code
             }
+            break
+        default:
+            break
         }
+    }
 }
 
 /* extension for NMFMapViewTouchDelegate */
 extension MapTabViewController: NMFMapViewTouchDelegate {
     /*
-        지도를 탭했을때 호출된다.
+     지도를 탭했을때 호출된다.
      */
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
         Log.action("지도 탭")
@@ -325,9 +325,9 @@ extension MapTabViewController: NMFMapViewTouchDelegate {
     }
     
     /*
-        지도 위의 심벌을 탭했을 때 호출된다.
-        반환값이 true : 심벌 탭 이벤트에서 이벤트를 소비한 것으로 처리되어 지도 탭 이벤트 호출되지 않음.
-        반환값이 false : 이벤트를 소비하지 않는 것으로 처리되어 지도 탭 이벤트로 이벤트 전파됨.
+     지도 위의 심벌을 탭했을 때 호출된다.
+     반환값이 true : 심벌 탭 이벤트에서 이벤트를 소비한 것으로 처리되어 지도 탭 이벤트 호출되지 않음.
+     반환값이 false : 이벤트를 소비하지 않는 것으로 처리되어 지도 탭 이벤트로 이벤트 전파됨.
      */
     func mapView(_ mapView: NMFMapView, didTap symbol: NMFSymbol) -> Bool {
         return false
@@ -343,13 +343,13 @@ extension MapTabViewController: NMFMapViewCameraDelegate {
     
     //카메라 변화 모든 제스처 시마다 호출 (드래그, 틸트, 줌 시)
     func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
-//        Log.debug("1. cameraDidChangeByReason, reason : \(reason)")
-
+        //        Log.debug("1. cameraDidChangeByReason, reason : \(reason)")
+        
     }
     
     //카메라 변화 제스처 후 자동 밀릴 때 호출 (빠른 이동 제스처 후 끝자락에서 부드럽게 움직이게 동작할 때 호출)
     func mapView(_ mapView: NMFMapView, cameraIsChangingByReason reason: Int) {
-//        Log.debug("2. cameraIsChangingByReason, reason : \(reason)")
+        //        Log.debug("2. cameraIsChangingByReason, reason : \(reason)")
         
         
     }
@@ -358,30 +358,30 @@ extension MapTabViewController: NMFMapViewCameraDelegate {
     func mapViewCameraIdle(_ mapView: NMFMapView) {
         Log.debug("mapViewCameraIdle")
         let zoomLevel = mapView.zoomLevel
-            
         
-        clusterManager.resetQuadTreeBoundingBox(mapView: mapView, frame: self.view.frame)
+        
+        clusterManager.resetQuadTreeSetting(mapView: mapView, frame: self.view.frame)
         clusterManager.addMarkers(markers: markers)
-        clusterManager.clusterAnnotationWithinMapRectangle(mapView: mapView, frame: self.view.frame, zoomScale: zoomLevel)
+        clusterManager.runClustering(mapView: mapView, frame: self.view.frame, zoomScale: zoomLevel)
         
         
         
-//        log("북서 꼭지점 위치: \(mapView.projection.latlngBounds(fromViewBounds: self.view.frame).southWest)")
-//        log("남동 꼭지점 위치: \(mapView.projection.latlngBounds(fromViewBounds: self.view.frame).northEast)")
-//        log("가운데 꼭지점 위치: \(mapView.projection.latlngBounds(fromViewBounds: self.view.frame).center)")
-//        let centerAimPoint = mapView.projection.latlngBounds(fromViewBounds: self.view.frame).center
-//        let southWestAimPoint = mapView.projection.latlngBounds(fromViewBounds: self.view.frame).southWest
-//        let northEastAimPoint = mapView.projection.latlngBounds(fromViewBounds: self.view.frame).northEast
-
-
+        //        log("북서 꼭지점 위치: \(mapView.projection.latlngBounds(fromViewBounds: self.view.frame).southWest)")
+        //        log("남동 꼭지점 위치: \(mapView.projection.latlngBounds(fromViewBounds: self.view.frame).northEast)")
+        //        log("가운데 꼭지점 위치: \(mapView.projection.latlngBounds(fromViewBounds: self.view.frame).center)")
+        //        let centerAimPoint = mapView.projection.latlngBounds(fromViewBounds: self.view.frame).center
+        //        let southWestAimPoint = mapView.projection.latlngBounds(fromViewBounds: self.view.frame).southWest
+        //        let northEastAimPoint = mapView.projection.latlngBounds(fromViewBounds: self.view.frame).northEast
+        
+        
     }
-
-
+    
+    
     //줌 레벨 설정
     private func cameraChangeAction(_ mapView: NMFMapView, cameraIsChangingByReason reason: Int) {
-//        Log.debug("cameraIsChangingByReason, reason : \(reason)")
-
-            
+        //        Log.debug("cameraIsChangingByReason, reason : \(reason)")
+        
+        
         
     }
 }
@@ -389,17 +389,24 @@ extension MapTabViewController: NMFMapViewCameraDelegate {
 
 extension MapTabViewController {
     func generateRandomMarker(size: Int) {
-    
-        
         DispatchQueue.global(qos: .default).async {
             for i in 1...size {
                 let marker = NMFMarker()
-                marker.position = NMGLatLng(lat: 37.514634749 + Double.random(in: 0.01...0.1), lng: 127.104260695 + Double.random(in: 0.01...0.1))
+                let lat = 37.514634749 + Double.random(in: 0.01...0.1)
+                let lng = 127.104260695 + Double.random(in: 0.01...0.1)
+                marker.position = NMGLatLng(lat: lat, lng: lng)
                 marker.width = 12
                 marker.height = 10
                 //            marker.iconImage = NMFOverlayImage(name: "img_poi_apart_info2") //y_company_poi_01  img_poi_apart_info
+                
+                var mapMarkerData = MapMarkerData()
+                mapMarkerData.latitude = lat
+                mapMarkerData.longitude = lng
+                mapMarkerData.title = "id : \(i)"
+                mapMarkerData.type = MapType.Leaf
+                
                 marker.userInfo = [
-                    "test" : i
+                    "data" : mapMarkerData
                 ]
                 
                 self.markers.append(marker)
@@ -407,34 +414,35 @@ extension MapTabViewController {
             
             
         }
-
+        
     }
     
-    func removeCurrMarker() {
-
-        
-            
-        
-    }
 }
 
 extension MapTabViewController: PGClusteringManagerDelegate {
-
-    func displayMarkers(markers: [NMFMarker]) {
+    
+    func displayMarkers(markersTuple: [(NMFMarker, NMFInfoWindow?)]) {
         Log.debug("display")
-        Log.debug("클러스터링 개수 : \(markers.count)")
-        Log.debug("현재 스레드가 메인스레드? : \(OperationQueue.current == OperationQueue.main)")
+        Log.debug("클러스터링 개수 : \(markersTuple.count)")
 
-        for marker in self.currmarkers {
-            marker.mapView = nil
+        
+        for marker in self.currmarkersTuple {
+            if marker.1 != nil {
+                marker.1!.close()
+            }
+            marker.0.mapView = nil
         }
         
-        self.currmarkers = markers
+        self.currmarkersTuple = markersTuple
         
-        for marker in currmarkers {
-            marker.mapView = self.naverMapView.mapView
+        for marker in self.currmarkersTuple {
+            marker.0.mapView = self.naverMapView.mapView
+            if marker.1 != nil {
+                
+                marker.1!.open(with: marker.0, alignType: .topLeft)
+            }
         }
-
+        
         
         
         
