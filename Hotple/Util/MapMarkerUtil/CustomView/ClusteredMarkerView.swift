@@ -7,7 +7,8 @@
 
 import Foundation
 import UIKit
-//import SnapKit
+import NMapsMap
+import SnapKit
 
 class ClusteredMarkerView: UIView {
     
@@ -19,9 +20,10 @@ class ClusteredMarkerView: UIView {
     // 지역 클러스터링 개수
     var count: String?
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, count: String) {
         super.init(frame: frame)
         Log.debug("ClusteredMarkerView init")
+        self.count = count
         viewConfigure()
         constraintConfigure()
     }
@@ -33,58 +35,57 @@ class ClusteredMarkerView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         Log.debug("ClusteredMarkerView layoutSubviews")
-        constraintConfigure()
+//        constraintConfigure()
     }
     
     private func viewConfigure() {
         
         // 컨테이너 뷰
         containerView.layer.borderWidth = 1
-        containerView.layer.borderColor = UIColor.green.cgColor
-        containerView.layer.cornerRadius = bounds.size.height / 2
-        containerView.backgroundColor = .black
+//        containerView.layer.borderColor = UIColor.green.cgColor
+//        containerView.layer.cornerRadius = bounds.size.height / 2
+        containerView.backgroundColor = .white
         self.addSubview(containerView)
         
-        containerView.translatesAutoresizingMaskIntoConstraints = false
+        
         
         // 지역 지점 버튼
+        self.countLbl.text = self.count
         countLbl.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        countLbl.textColor = .white
+        countLbl.textColor = .black
         containerView.addSubview(countLbl)
         
-        countLbl.translatesAutoresizingMaskIntoConstraints = false
+        
         
     }
     
     func constraintConfigure() {
+
         
-        containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        containerView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        
-        countLbl.centerXAnchor.constraint(equalTo: self.containerView.centerXAnchor).isActive = true
-        countLbl.centerYAnchor.constraint(equalTo: self.containerView.centerYAnchor).isActive = true
-        countLbl.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        countLbl.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        
-//        containerView.snp.makeConstraints { make in
-//            make.edges.equalToSuperview()
-//        }
-//
-//        // 지역 지점 버튼
-//        countLbl.snp.makeConstraints { make in
-//            make.width.height.equalTo(100)
-//            make.edges.equalToSuperview()
-//        }
+        containerView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        // 지역 지점 버튼
+        countLbl.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
     
-    func setCount(count: String) {
-        DispatchQueue.main.async {
-            // 지역명 설정
-            self.countLbl.text = count
-        }
+    func animate() {
+
+        let animation = AnimationController.transformScale(option: .increase)
         
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(1.5)
+        CATransaction.setDisableActions(true)
+        CATransaction.setCompletionBlock { [weak self] in
+            Log.debug("애니메이션종료")
+            
+        }
+        self.layer.add(animation, forKey: "markerAnimation")
+        CATransaction.commit()
+
     }
     
 }

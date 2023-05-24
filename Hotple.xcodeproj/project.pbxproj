@@ -55,13 +55,14 @@
 		DB3E32E32999D19E00EAD0B6 /* LocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E32E22999D19E00EAD0B6 /* LocalRepository.swift */; };
 		DB3E32E52999D5B800EAD0B6 /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E32E42999D5B800EAD0B6 /* UserDefaultKeys.swift */; };
 		DB3E32E7299B1DF400EAD0B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB3E32E6299B1DF400EAD0B6 /* GoogleService-Info.plist */; };
-		DB5F4B562A1B1C9100296B74 /* PGBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B522A1B1C9100296B74 /* PGBoundingBox.swift */; };
-		DB5F4B572A1B1C9100296B74 /* PGClusteringManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B532A1B1C9100296B74 /* PGClusteringManager.swift */; };
-		DB5F4B592A1B1C9100296B74 /* PGQuadTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B552A1B1C9100296B74 /* PGQuadTree.swift */; };
+		DB5F4B562A1B1C9100296B74 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B522A1B1C9100296B74 /* BoundingBox.swift */; };
+		DB5F4B572A1B1C9100296B74 /* ClusteringManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B532A1B1C9100296B74 /* ClusteringManager.swift */; };
+		DB5F4B592A1B1C9100296B74 /* QuadTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B552A1B1C9100296B74 /* QuadTree.swift */; };
 		DB5F4B6B2A1B2D2B00296B74 /* CustomInfoWindowDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B6A2A1B2D2B00296B74 /* CustomInfoWindowDataSource.swift */; };
 		DB5F4B6E2A1B2FD100296B74 /* MapMarkerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B6D2A1B2FD100296B74 /* MapMarkerData.swift */; };
 		DB5F4B702A1B315B00296B74 /* MapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B6F2A1B315B00296B74 /* MapType.swift */; };
 		DB5F4B732A1B35E000296B74 /* ClusteredMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B722A1B35E000296B74 /* ClusteredMarkerView.swift */; };
+		DB5F4B8A2A1DA2D100296B74 /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B892A1DA2D100296B74 /* AnimationController.swift */; };
 		DB687AD4298A1C79006A5E69 /* AppFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB687AD3298A1C79006A5E69 /* AppFlow.swift */; };
 		DB687AD6298A1DB5006A5E69 /* AppStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB687AD5298A1DB5006A5E69 /* AppStep.swift */; };
 		DB687AD8298A1E43006A5E69 /* LoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB687AD7298A1E43006A5E69 /* LoginFlow.swift */; };
@@ -128,13 +129,14 @@
 		DB3E32E22999D19E00EAD0B6 /* LocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRepository.swift; sourceTree = "<group>"; };
 		DB3E32E42999D5B800EAD0B6 /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
 		DB3E32E6299B1DF400EAD0B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		DB5F4B522A1B1C9100296B74 /* PGBoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PGBoundingBox.swift; sourceTree = "<group>"; };
-		DB5F4B532A1B1C9100296B74 /* PGClusteringManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PGClusteringManager.swift; sourceTree = "<group>"; };
-		DB5F4B552A1B1C9100296B74 /* PGQuadTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PGQuadTree.swift; sourceTree = "<group>"; };
+		DB5F4B522A1B1C9100296B74 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
+		DB5F4B532A1B1C9100296B74 /* ClusteringManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClusteringManager.swift; sourceTree = "<group>"; };
+		DB5F4B552A1B1C9100296B74 /* QuadTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuadTree.swift; sourceTree = "<group>"; };
 		DB5F4B6A2A1B2D2B00296B74 /* CustomInfoWindowDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInfoWindowDataSource.swift; sourceTree = "<group>"; };
 		DB5F4B6D2A1B2FD100296B74 /* MapMarkerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerData.swift; sourceTree = "<group>"; };
 		DB5F4B6F2A1B315B00296B74 /* MapType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapType.swift; sourceTree = "<group>"; };
 		DB5F4B722A1B35E000296B74 /* ClusteredMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusteredMarkerView.swift; sourceTree = "<group>"; };
+		DB5F4B892A1DA2D100296B74 /* AnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
 		DB687AD3298A1C79006A5E69 /* AppFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlow.swift; sourceTree = "<group>"; };
 		DB687AD5298A1DB5006A5E69 /* AppStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStep.swift; sourceTree = "<group>"; };
 		DB687AD7298A1E43006A5E69 /* LoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlow.swift; sourceTree = "<group>"; };
@@ -321,9 +323,9 @@
 		DB5F4B512A1B1C5200296B74 /* MapClusterUtil */ = {
 			isa = PBXGroup;
 			children = (
-				DB5F4B522A1B1C9100296B74 /* PGBoundingBox.swift */,
-				DB5F4B532A1B1C9100296B74 /* PGClusteringManager.swift */,
-				DB5F4B552A1B1C9100296B74 /* PGQuadTree.swift */,
+				DB5F4B522A1B1C9100296B74 /* BoundingBox.swift */,
+				DB5F4B532A1B1C9100296B74 /* ClusteringManager.swift */,
+				DB5F4B552A1B1C9100296B74 /* QuadTree.swift */,
 			);
 			path = MapClusterUtil;
 			sourceTree = "<group>";
@@ -340,6 +342,7 @@
 		DB5F4B652A1B27FF00296B74 /* MapMarkerUtil */ = {
 			isa = PBXGroup;
 			children = (
+				DB5F4B892A1DA2D100296B74 /* AnimationController.swift */,
 				DB5F4B712A1B35CA00296B74 /* CustomView */,
 				DB5F4B6A2A1B2D2B00296B74 /* CustomInfoWindowDataSource.swift */,
 			);
@@ -634,7 +637,7 @@
 				DB687AD6298A1DB5006A5E69 /* AppStep.swift in Sources */,
 				DB20A41E298CC1D400AD31F7 /* KakaoUseCase.swift in Sources */,
 				DB3E32E32999D19E00EAD0B6 /* LocalRepository.swift in Sources */,
-				DB5F4B562A1B1C9100296B74 /* PGBoundingBox.swift in Sources */,
+				DB5F4B562A1B1C9100296B74 /* BoundingBox.swift in Sources */,
 				DB0168DF299B457A00E07875 /* FirebaseRepository.swift in Sources */,
 				DB0168EE29A306A800E07875 /* ProfileSettingFlow.swift in Sources */,
 				DB3E32BD2995E64400EAD0B6 /* FeedTabFlow.swift in Sources */,
@@ -645,14 +648,14 @@
 				DB5F4B6E2A1B2FD100296B74 /* MapMarkerData.swift in Sources */,
 				DB0168F229A306CF00E07875 /* ProfileSettingViewController.swift in Sources */,
 				DB687AD4298A1C79006A5E69 /* AppFlow.swift in Sources */,
-				DB5F4B592A1B1C9100296B74 /* PGQuadTree.swift in Sources */,
+				DB5F4B592A1B1C9100296B74 /* QuadTree.swift in Sources */,
 				DB3E32D9299614FB00EAD0B6 /* TestViewController.swift in Sources */,
 				DB20A4262991EF0F00AD31F7 /* NaverRepository.swift in Sources */,
 				DB01690829D55BF200E07875 /* OSLogExtension.swift in Sources */,
 				DB3E32BB2995E60800EAD0B6 /* MapTabFlow.swift in Sources */,
 				DB3E32C92995FBF800EAD0B6 /* ProfileTabViewReactor.swift in Sources */,
 				DB3E32C72995FBE800EAD0B6 /* FeedTabViewReactor.swift in Sources */,
-				DB5F4B572A1B1C9100296B74 /* PGClusteringManager.swift in Sources */,
+				DB5F4B572A1B1C9100296B74 /* ClusteringManager.swift in Sources */,
 				DB01690129D3F9AD00E07875 /* TabDashBoardViewReactor.swift in Sources */,
 				DB3E32E52999D5B800EAD0B6 /* UserDefaultKeys.swift in Sources */,
 				DB3E32C12995FBAE00EAD0B6 /* HomeTabViewReactor.swift in Sources */,
@@ -673,6 +676,7 @@
 				DB3E32B52995DEE100EAD0B6 /* TabDashBoardFlow.swift in Sources */,
 				DB687ADA298A1EF8006A5E69 /* AppStepper.swift in Sources */,
 				DB687ADC298A1FA5006A5E69 /* LoginViewReactor.swift in Sources */,
+				DB5F4B8A2A1DA2D100296B74 /* AnimationController.swift in Sources */,
 				DB20A4242991EE8800AD31F7 /* NaverUseCase.swift in Sources */,
 				DB0168EC299CC70600E07875 /* Const.swift in Sources */,
 			);

@@ -11,7 +11,7 @@ import SnapKit
 
 class CustomInfoWindowDataSource : NSObject {
     // 커스텀 마커 UI
-    private var clusteredMarkerView: ClusteredMarkerView!
+//    private var clusteredMarkerView: ClusteredMarkerView!
 //    private var regionSpotPOIView: RegionSpotPOIView!   // 지역 지점
 //    private var apartInfoPOIView: ApartInfoPOIView! // 아파트평형 정보
 //    private var apartTradeInfoPOIView: ApartTradeInfoPOIView!   // 아파트 실거래 정보
@@ -42,14 +42,18 @@ extension CustomInfoWindowDataSource : NMFOverlayImageDataSource {
             switch mapType {
             case .Cluster:
                 Log.debug("cluster 뷰 만들기 시작")
-                if clusteredMarkerView == nil {
-                    clusteredMarkerView = ClusteredMarkerView()
-                }
+//                if clusteredMarkerView == nil {
+//                    clusteredMarkerView = ClusteredMarkerView(frame: CGRect(x: 0, y: 0, width: 50, height: 50), count: mapMarkerData?.title ?? "x")
+//                }
                 
-                clusteredMarkerView.setCount(count: mapMarkerData?.title ?? "title없음")
-                
+                let clusteredMarkerView = ClusteredMarkerView(frame: CGRect(x: 0, y: 0, width: 50, height: 50), count: mapMarkerData?.title ?? "x")
+
                 clusteredMarkerView.layoutIfNeeded()
-                clusteredMarkerView.constraintConfigure()
+//                DispatchQueue.main.async {
+//                    clusteredMarkerView.animate()
+//                }
+                
+
                 
                 return clusteredMarkerView
                 

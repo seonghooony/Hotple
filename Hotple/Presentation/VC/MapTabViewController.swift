@@ -31,7 +31,7 @@ class MapTabViewController: UIViewController, View {
     let MIN_ZOOM_LEVEL = 5.5    // zoom level 최소값
     let MAX_ZOOM_LEVEL = 19.5   // zoom level 최대값
     
-    private var clusterManager: PGClusteringManager!
+    private var clusterManager: ClusteringManager!
     
     
     
@@ -48,7 +48,7 @@ class MapTabViewController: UIViewController, View {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.clusterManager = PGClusteringManager(mapView: naverMapView.mapView, frame: self.view.frame)
+        self.clusterManager = ClusteringManager(mapView: naverMapView.mapView, frame: self.view.frame)
         clusterManager.delegate = self
         
         // 현위치로 초기 위치 세팅 (없을 시 잠실역)
@@ -419,7 +419,7 @@ extension MapTabViewController {
     
 }
 
-extension MapTabViewController: PGClusteringManagerDelegate {
+extension MapTabViewController: ClusteringManagerDelegate {
     
     func displayMarkers(markersTuple: [(NMFMarker, NMFInfoWindow?)]) {
         Log.debug("display")
@@ -439,7 +439,7 @@ extension MapTabViewController: PGClusteringManagerDelegate {
             marker.0.mapView = self.naverMapView.mapView
             if marker.1 != nil {
                 
-                marker.1!.open(with: marker.0, alignType: .topLeft)
+                marker.1!.open(with: marker.0, alignType: .bottom)
             }
         }
         

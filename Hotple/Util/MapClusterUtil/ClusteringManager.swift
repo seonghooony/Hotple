@@ -10,30 +10,30 @@ import UIKit
 import MapKit
 import NMapsMap
 
-protocol PGClusteringManagerDelegate: AnyObject {
+protocol ClusteringManagerDelegate: AnyObject {
     
     func displayMarkers(markersTuple: [(NMFMarker, NMFInfoWindow?)])
 }
 
-class PGClusteringManager {
+class ClusteringManager {
     
     private let infoWindowDataSource = CustomInfoWindowDataSource()
     
-    weak var delegate: PGClusteringManagerDelegate?
+    weak var delegate: ClusteringManagerDelegate?
     
-    private let quadTree: PGQuadTree!
+    private let quadTree: QuadTree!
     
     init(mapView: NMFMapView, frame: CGRect) {
         
         
-        self.quadTree = PGQuadTree(boundingBox: PGBoundingBox.mapRectToBoundingBox(mapRect: mapView.projection.latlngBounds(fromViewBounds: frame)))
+        self.quadTree = QuadTree(boundingBox: BoundingBox.mapRectToBoundingBox(mapRect: mapView.projection.latlngBounds(fromViewBounds: frame)))
         
     }
     
     public func resetQuadTreeSetting(mapView: NMFMapView, frame: CGRect) {
         
         quadTree.resetQuadTree()
-        quadTree.boundingBox = PGBoundingBox.mapRectToBoundingBox(mapRect: mapView.projection.latlngBounds(fromViewBounds: frame))
+        quadTree.boundingBox = BoundingBox.mapRectToBoundingBox(mapRect: mapView.projection.latlngBounds(fromViewBounds: frame))
         
     }
     
@@ -59,7 +59,7 @@ class PGClusteringManager {
         let maxY = mapView.projection.latlngBounds(fromViewBounds: frame).northEast.lat
         
         
-        let cellSizePoints = Double(maxX - minX) / Double(PGClusteringManager.cellSizeForZoomScale(zoomScale: zoomScale))
+        let cellSizePoints = Double(maxX - minX) / Double(ClusteringManager.cellSizeForZoomScale(zoomScale: zoomScale))
         
         var currentnum = 1
         var yCoordinate = minY
@@ -73,7 +73,7 @@ class PGClusteringManager {
                 let ne = NMGLatLng(lat: yCoordinate + cellSizePoints, lng: xCoordinate + cellSizePoints)
                 
                 
-                let area = PGBoundingBox.mapRectToBoundingBox(mapRect: NMGLatLngBounds(southWest: sw, northEast: ne))
+                let area = BoundingBox.mapRectToBoundingBox(mapRect: NMGLatLngBounds(southWest: sw, northEast: ne))
                 
                 
                 self.quadTree.queryRegion(searchInBoundingBox: area) { (markers) in
@@ -178,7 +178,7 @@ class PGClusteringManager {
     
 }
 
-extension PGClusteringManager {
+extension ClusteringManager {
     
     class func zoomScaleToZoomLevel(scale: MKZoomScale) -> Int {
         

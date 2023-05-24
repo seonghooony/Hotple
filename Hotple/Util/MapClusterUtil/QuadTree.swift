@@ -12,20 +12,20 @@ import CoreGraphics
 import MapKit
 import NMapsMap
 
-class PGQuadTree {
+class QuadTree {
 
     static let capacity = 4
 
     var markers = [NMFMarker]()
-    var boundingBox: PGBoundingBox
+    var boundingBox: BoundingBox
     var isDivided = false
 
-    private var northWest: PGQuadTree?
-    private var northEast: PGQuadTree?
-    private var southWest: PGQuadTree?
-    private var southEast: PGQuadTree?
+    private var northWest: QuadTree?
+    private var northEast: QuadTree?
+    private var southWest: QuadTree?
+    private var southEast: QuadTree?
 
-    init(boundingBox: PGBoundingBox) {
+    init(boundingBox: BoundingBox) {
         self.boundingBox = boundingBox
 
     }
@@ -58,7 +58,7 @@ class PGQuadTree {
 
             return
         }
-        if markers.count < PGQuadTree.capacity {
+        if markers.count < QuadTree.capacity {
             
             markers.append(newMarker)
         } else {
@@ -73,7 +73,7 @@ class PGQuadTree {
         }
     }
 
-    func queryRegion(searchInBoundingBox: PGBoundingBox, completion: ([NMFMarker]) -> Void) {
+    func queryRegion(searchInBoundingBox: BoundingBox, completion: ([NMFMarker]) -> Void) {
         
         guard searchInBoundingBox.intersectsWithBoundingBox(boundingBox: self.boundingBox) else {
             
@@ -106,7 +106,7 @@ class PGQuadTree {
         completion(totalMarkers)
     }
 
-    func getSubQuadTrees() -> [PGQuadTree] {
+    func getSubQuadTrees() -> [QuadTree] {
         if isDivided {
             return [northWest!, northEast!, southWest!, southEast!]
         } else {
@@ -115,7 +115,7 @@ class PGQuadTree {
     }
 }
 
-extension PGQuadTree {
+extension QuadTree {
 
     private func subdivideNode() {
         self.isDivided = true
@@ -123,10 +123,10 @@ extension PGQuadTree {
         let xMiddle = (boundingBox.xNorthEast+boundingBox.xSouthWest)/2.0
         let yMiddle = (boundingBox.yNorthEast+boundingBox.ySouthWest)/2.0
 
-        self.northWest = PGQuadTree(boundingBox: PGBoundingBox(xSouthWest: boundingBox.xSouthWest, ySouthWest: yMiddle, xNorthEast: xMiddle, yNorthEast: boundingBox.yNorthEast))
-        self.northEast = PGQuadTree(boundingBox: PGBoundingBox(xSouthWest: xMiddle, ySouthWest: yMiddle, xNorthEast: boundingBox.xNorthEast, yNorthEast: boundingBox.yNorthEast))
-        self.southWest = PGQuadTree(boundingBox: PGBoundingBox(xSouthWest: boundingBox.xSouthWest, ySouthWest: boundingBox.ySouthWest, xNorthEast: xMiddle, yNorthEast: yMiddle))
-        self.southEast = PGQuadTree(boundingBox: PGBoundingBox(xSouthWest: xMiddle, ySouthWest: boundingBox.ySouthWest, xNorthEast: boundingBox.xNorthEast, yNorthEast: yMiddle))
+        self.northWest = QuadTree(boundingBox: BoundingBox(xSouthWest: boundingBox.xSouthWest, ySouthWest: yMiddle, xNorthEast: xMiddle, yNorthEast: boundingBox.yNorthEast))
+        self.northEast = QuadTree(boundingBox: BoundingBox(xSouthWest: xMiddle, ySouthWest: yMiddle, xNorthEast: boundingBox.xNorthEast, yNorthEast: boundingBox.yNorthEast))
+        self.southWest = QuadTree(boundingBox: BoundingBox(xSouthWest: boundingBox.xSouthWest, ySouthWest: boundingBox.ySouthWest, xNorthEast: xMiddle, yNorthEast: yMiddle))
+        self.southEast = QuadTree(boundingBox: BoundingBox(xSouthWest: xMiddle, ySouthWest: boundingBox.ySouthWest, xNorthEast: boundingBox.xNorthEast, yNorthEast: yMiddle))
 
     }
 

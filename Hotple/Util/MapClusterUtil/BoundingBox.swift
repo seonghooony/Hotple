@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import NMapsMap
 
-struct PGBoundingBox {
+struct BoundingBox {
     
     let xSouthWest: CGFloat
     let ySouthWest: CGFloat
@@ -19,7 +19,7 @@ struct PGBoundingBox {
     
     
     // 클러스터 될 영역의 박스를 설정한다.
-    static func mapRectToBoundingBox(mapRect: NMGLatLngBounds) -> PGBoundingBox {
+    static func mapRectToBoundingBox(mapRect: NMGLatLngBounds) -> BoundingBox {
 
         let minLat = mapRect.southWest.lat //botRight.latitude
         let maxLat = mapRect.northEast.lat
@@ -27,7 +27,7 @@ struct PGBoundingBox {
         let minLon = mapRect.southWest.lng
         let maxLon = mapRect.northEast.lng
         
-        return PGBoundingBox(xSouthWest: CGFloat(minLon),
+        return BoundingBox(xSouthWest: CGFloat(minLon),
                              ySouthWest: CGFloat(minLat),
                              xNorthEast: CGFloat(maxLon),
                              yNorthEast: CGFloat(maxLat))
@@ -43,7 +43,7 @@ struct PGBoundingBox {
     }
     
     // 셀이 박스 영역 안에 포함되는지 확인한다.
-    func intersectsWithBoundingBox(boundingBox: PGBoundingBox) -> Bool {
+    func intersectsWithBoundingBox(boundingBox: BoundingBox) -> Bool {
         
         return (xSouthWest <= boundingBox.xNorthEast && xNorthEast >= boundingBox.xSouthWest &&
                 ySouthWest <= boundingBox.yNorthEast && yNorthEast >= boundingBox.ySouthWest)
