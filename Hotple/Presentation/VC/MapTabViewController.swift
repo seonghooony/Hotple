@@ -396,6 +396,11 @@ extension MapTabViewController {
                 let lng = 127.104260695 + Double.random(in: 0.01...0.1)
                 marker.position = NMGLatLng(lat: lat, lng: lng)
                 marker.iconImage = NMF_MARKER_IMAGE_BLACK
+                marker.captionText = "\(i)번째 POI"
+                marker.captionColor = UIColor.red
+                marker.captionHaloColor = UIColor.gray
+                
+                
 //                marker.iconTintColor = UIColor.clear
 //                marker.iconImage = NMFOverlayImage(image: UIImage())
 //                marker.width = 1

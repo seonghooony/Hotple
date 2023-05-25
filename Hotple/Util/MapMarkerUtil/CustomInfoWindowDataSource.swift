@@ -43,7 +43,7 @@ extension CustomInfoWindowDataSource : NMFOverlayImageDataSource {
             
             switch mapType {
             case .Cluster:
-                Log.debug("cluster 뷰 만들기 시작")
+//                Log.debug("cluster 뷰 만들기 시작")
                 
                 guard let mapCount = mapMarkerData?.count else {
                     Log.error("마커 생성 불가 : MapCount가 명확하지 않음")
