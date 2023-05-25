@@ -80,13 +80,13 @@ class ClusteringManager {
                     
                     if markers.count > 1 {
                         
-                        let centerMarker = makeClusteredMarker(markers: markers)
+                        let centerMarker = makeClusteredMarker(markers: markers, mapView: mapView)
                         
                         clusterMarkers.append(centerMarker)
                         
                     } else if markers.count == 1 {
                         
-                        let leafMarker = makeLeafMarker(marker: markers.first!)
+                        let leafMarker = makeLeafMarker(marker: markers.first!, mapView: mapView)
                         
                         
                         clusterMarkers.append(leafMarker)
@@ -107,7 +107,7 @@ class ClusteringManager {
     }
     
     // 클러스터링 된 마커의 Marker와 InfoWindow 튜플 배출
-    private func makeClusteredMarker(markers: [NMFMarker]) -> (NMFMarker, NMFInfoWindow?) {
+    private func makeClusteredMarker(markers: [NMFMarker], mapView: NMFMapView) -> (NMFMarker, NMFInfoWindow?) {
         var totalX = 0.0
         var totalY = 0.0
         
@@ -122,30 +122,34 @@ class ClusteringManager {
         mapMarkerData.longitude = totalY
         mapMarkerData.title = "\(markers.count) 개"
         mapMarkerData.type = MapType.Cluster
-        
+        mapMarkerData.count = markers.count
         
         let centerMarker = NMFMarker()
+//        centerMarker.iconImage = NMFOverlayImage(image: UIImage())
         centerMarker.position = NMGLatLng(lat: totalX/Double(totalMarkers), lng: totalY/Double(totalMarkers))
         centerMarker.userInfo = [
             "data" : mapMarkerData
         ]
         
         
-        
-        centerMarker.touchHandler = { [weak self] (overlay:NMFOverlay) -> Bool in
-//                        self?.overlayTouched(overlay: overlay)
-            return true
-        }
+//        centerMarker.touchHandler = { [weak self] (overlay:NMFOverlay) -> Bool in
+//
+//            return true
+//        }
         
         let infoWindow = NMFInfoWindow()
+        infoWindow.position = NMGLatLng(lat: totalX/Double(totalMarkers), lng: totalY/Double(totalMarkers))
+        infoWindow.userInfo = [
+            "data" : mapMarkerData
+        ]
         infoWindow.dataSource = infoWindowDataSource
-//        let dataSource = NMFInfoWindowDefaultTextSource.data()
-//        dataSource.title = "좀 되라"
-//        infoWindow.dataSource = dataSource
+        
         
         infoWindow.touchHandler = { [weak self] (overlay:NMFOverlay) -> Bool in
-            
-//            self?.overlayTouched(overlay: overlay)
+            guard let self = self else { return true }
+            let cameraUpdate = NMFCameraUpdate(scrollTo: centerMarker.position, zoomTo: mapView.zoomLevel + 1)
+            cameraUpdate.animation = .linear
+            mapView.moveCamera(cameraUpdate)
             
             return true
         }
@@ -155,24 +159,24 @@ class ClusteringManager {
     }
     
     // 끝단 실제 마커의 Marker와 InfoWindow 튜플 배출
-    private func makeLeafMarker(marker: NMFMarker) -> (NMFMarker, NMFInfoWindow?) {
-       
+    private func makeLeafMarker(marker: NMFMarker, mapView: NMFMapView) -> (NMFMarker, NMFInfoWindow?) {
 
+//        let infoWindow = NMFInfoWindow()
+//        infoWindow.position = marker.position
+//        infoWindow.userInfo = marker.userInfo
+//        infoWindow.dataSource = infoWindowDataSource
+//
+//        infoWindow.touchHandler = { [weak self] (overlay:NMFOverlay) -> Bool in
+//            guard let self = self else { return true }
+//            let cameraUpdate = NMFCameraUpdate(scrollTo: marker.position, zoomTo: mapView.zoomLevel + 0.3)
+//            cameraUpdate.animation = .linear
+//            mapView.moveCamera(cameraUpdate)
+//
+//            return true
+//        }
         
-
-        
-        let infoWindow = NMFInfoWindow()
-        infoWindow.dataSource = infoWindowDataSource
-        
-        infoWindow.touchHandler = { [weak self] (overlay:NMFOverlay) -> Bool in
-            
-//            self?.overlayTouched(overlay: overlay)
-            
-            return true
-        }
-        
-        
-        return (marker, infoWindow)
+        return (marker, nil)
+//        return (marker, infoWindow)
         
     }
     

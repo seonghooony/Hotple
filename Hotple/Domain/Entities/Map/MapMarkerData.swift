@@ -18,6 +18,8 @@ struct MapMarkerData {
     var title: String?
     var subTitle: String?
     
+    var count: Int?
+    
     var type: MapType?
     
 }

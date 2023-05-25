@@ -395,9 +395,11 @@ extension MapTabViewController {
                 let lat = 37.514634749 + Double.random(in: 0.01...0.1)
                 let lng = 127.104260695 + Double.random(in: 0.01...0.1)
                 marker.position = NMGLatLng(lat: lat, lng: lng)
-                marker.width = 12
-                marker.height = 10
-                //            marker.iconImage = NMFOverlayImage(name: "img_poi_apart_info2") //y_company_poi_01  img_poi_apart_info
+                marker.iconImage = NMF_MARKER_IMAGE_BLACK
+//                marker.iconTintColor = UIColor.clear
+//                marker.iconImage = NMFOverlayImage(image: UIImage())
+//                marker.width = 1
+//                marker.height = 1
                 
                 var mapMarkerData = MapMarkerData()
                 mapMarkerData.latitude = lat
@@ -408,6 +410,15 @@ extension MapTabViewController {
                 marker.userInfo = [
                     "data" : mapMarkerData
                 ]
+                
+                marker.touchHandler = { [weak self] (overlay:NMFOverlay) -> Bool in
+                    guard let self = self else { return true }
+                    let cameraUpdate = NMFCameraUpdate(scrollTo: marker.position, zoomTo: self.naverMapView.mapView.zoomLevel + 0.3)
+                    cameraUpdate.animation = .linear
+                    self.naverMapView.mapView.moveCamera(cameraUpdate)
+        
+                    return true
+                }
                 
                 self.markers.append(marker)
             }
@@ -436,10 +447,13 @@ extension MapTabViewController: ClusteringManagerDelegate {
         self.currmarkersTuple = markersTuple
         
         for marker in self.currmarkersTuple {
-            marker.0.mapView = self.naverMapView.mapView
+            
+            
             if marker.1 != nil {
-                
-                marker.1!.open(with: marker.0, alignType: .bottom)
+//                marker.1!.open(with: marker.0, alignType: .bottom)
+                marker.1!.open(with: self.naverMapView.mapView)
+            } else {
+                marker.0.mapView = self.naverMapView.mapView
             }
         }
         

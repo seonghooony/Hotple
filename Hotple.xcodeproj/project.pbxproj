@@ -63,6 +63,7 @@
 		DB5F4B702A1B315B00296B74 /* MapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B6F2A1B315B00296B74 /* MapType.swift */; };
 		DB5F4B732A1B35E000296B74 /* ClusteredMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B722A1B35E000296B74 /* ClusteredMarkerView.swift */; };
 		DB5F4B8A2A1DA2D100296B74 /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B892A1DA2D100296B74 /* AnimationController.swift */; };
+		DB5F4B8C2A1EF53900296B74 /* LeafMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B8B2A1EF53900296B74 /* LeafMarkerView.swift */; };
 		DB687AD4298A1C79006A5E69 /* AppFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB687AD3298A1C79006A5E69 /* AppFlow.swift */; };
 		DB687AD6298A1DB5006A5E69 /* AppStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB687AD5298A1DB5006A5E69 /* AppStep.swift */; };
 		DB687AD8298A1E43006A5E69 /* LoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB687AD7298A1E43006A5E69 /* LoginFlow.swift */; };
@@ -137,6 +138,7 @@
 		DB5F4B6F2A1B315B00296B74 /* MapType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapType.swift; sourceTree = "<group>"; };
 		DB5F4B722A1B35E000296B74 /* ClusteredMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusteredMarkerView.swift; sourceTree = "<group>"; };
 		DB5F4B892A1DA2D100296B74 /* AnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
+		DB5F4B8B2A1EF53900296B74 /* LeafMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeafMarkerView.swift; sourceTree = "<group>"; };
 		DB687AD3298A1C79006A5E69 /* AppFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlow.swift; sourceTree = "<group>"; };
 		DB687AD5298A1DB5006A5E69 /* AppStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStep.swift; sourceTree = "<group>"; };
 		DB687AD7298A1E43006A5E69 /* LoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlow.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				DB5F4B722A1B35E000296B74 /* ClusteredMarkerView.swift */,
+				DB5F4B8B2A1EF53900296B74 /* LeafMarkerView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				DB3E32D9299614FB00EAD0B6 /* TestViewController.swift in Sources */,
 				DB20A4262991EF0F00AD31F7 /* NaverRepository.swift in Sources */,
 				DB01690829D55BF200E07875 /* OSLogExtension.swift in Sources */,
+				DB5F4B8C2A1EF53900296B74 /* LeafMarkerView.swift in Sources */,
 				DB3E32BB2995E60800EAD0B6 /* MapTabFlow.swift in Sources */,
 				DB3E32C92995FBF800EAD0B6 /* ProfileTabViewReactor.swift in Sources */,
 				DB3E32C72995FBE800EAD0B6 /* FeedTabViewReactor.swift in Sources */,
