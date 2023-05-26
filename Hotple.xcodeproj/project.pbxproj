@@ -78,6 +78,7 @@
 		DB830FD62989EECB00D76B2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB830FD52989EECB00D76B2B /* SceneDelegate.swift */; };
 		DB830FDD2989EECB00D76B2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB830FDC2989EECB00D76B2B /* Assets.xcassets */; };
 		DB830FE02989EECB00D76B2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB830FDE2989EECB00D76B2B /* LaunchScreen.storyboard */; };
+		DBCE8D8D2A204B0300D7A5D3 /* MapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCE8D8C2A204B0300D7A5D3 /* MapUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -156,6 +157,7 @@
 		DB830FDC2989EECB00D76B2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB830FDF2989EECB00D76B2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB830FE12989EECB00D76B2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBCE8D8C2A204B0300D7A5D3 /* MapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUseCase.swift; sourceTree = "<group>"; };
 		E0A947FA276A7FD213BEA009 /* Pods-Hotple.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hotple.debug.xcconfig"; path = "Target Support Files/Pods-Hotple/Pods-Hotple.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -300,6 +302,7 @@
 				DB0168F729ADB66F00E07875 /* UserUseCase.swift */,
 				DB20A41D298CC1D400AD31F7 /* KakaoUseCase.swift */,
 				DB20A4232991EE8800AD31F7 /* NaverUseCase.swift */,
+				DBCE8D8C2A204B0300D7A5D3 /* MapUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				DB3E32C32995FBC700EAD0B6 /* SearchTabViewReactor.swift in Sources */,
 				DB5F4B6B2A1B2D2B00296B74 /* CustomInfoWindowDataSource.swift in Sources */,
 				DB20A428299327A100AD31F7 /* NaverData.swift in Sources */,
+				DBCE8D8D2A204B0300D7A5D3 /* MapUseCase.swift in Sources */,
 				DB830FD62989EECB00D76B2B /* SceneDelegate.swift in Sources */,
 				DB0168F829ADB66F00E07875 /* UserUseCase.swift in Sources */,
 				DB3E32B52995DEE100EAD0B6 /* TabDashBoardFlow.swift in Sources */,

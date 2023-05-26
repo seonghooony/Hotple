@@ -31,13 +31,14 @@ class MapTabViewController: UIViewController, View {
     let MIN_ZOOM_LEVEL = 5.5    // zoom level 최소값
     let MAX_ZOOM_LEVEL = 19.5   // zoom level 최대값
     
-    private var clusterManager: ClusteringManager!
+    private var clusterManager: ClusteringManager?
     
+//    var markers = [NMFMarker]()
     
+    var currMarkersTuple = [(NMFMarker, NMFInfoWindow?)]()
     
-    var markers = [NMFMarker]()
-    
-    var currmarkersTuple = [(NMFMarker, NMFInfoWindow?)]()
+    private let viewloadedSubject = PublishSubject<Bool>()
+    private let scrolledMapSubject = PublishSubject<Bool>()
     
     override func loadView() {
         
@@ -49,7 +50,8 @@ class MapTabViewController: UIViewController, View {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.clusterManager = ClusteringManager(mapView: naverMapView.mapView, frame: self.view.frame)
-        clusterManager.delegate = self
+        clusterManager!.delegate = self
+        viewloadedSubject.onNext(true)
         
         // 현위치로 초기 위치 세팅 (없을 시 잠실역)
         naverMapView.mapView.latitude = 37.514634749
@@ -58,6 +60,7 @@ class MapTabViewController: UIViewController, View {
         
         initNotificationCenter()
         initConstraint()
+        
         
     }
     
@@ -119,7 +122,9 @@ class MapTabViewController: UIViewController, View {
         naverMapView.mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 0)
         naverMapView.showScaleBar = true   // 축척(기준 거리)바 비활성화
         naverMapView.showLocationButton = true  // 현위치 버튼 활성화
-        naverMapView.showCompass = true // 나침반 활성화
+        naverMapView.showCompass = false // 나침반 활성화
+        naverMapView.mapView.isRotateGestureEnabled = false // 회전 제스처 비활성
+        naverMapView.mapView.isTiltGestureEnabled = false // 기울기 제스처 비활성
         naverMapView.showZoomControls = false    // 줌 버튼 활성화
         naverMapView.showIndoorLevelPicker = true   // 실내지도 층 피커
         naverMapView.mapView.mapType = .basic   // 일반 지도. 하천, 녹지, 도로, 심벌 등 다양한 정보
@@ -127,8 +132,8 @@ class MapTabViewController: UIViewController, View {
         naverMapView.mapView.isTiltGestureEnabled = false   // 두손가락으로 위아래 드래그 시 기울기 비활성화
         naverMapView.mapView.isStopGestureEnabled = false   // ?
         naverMapView.mapView.isIndoorMapEnabled = true  //  실내지도를 활성화
-        naverMapView.mapView.logoAlign = .rightTop  // 네이버 로고
-        naverMapView.mapView.logoMargin = UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 10)
+        naverMapView.mapView.logoAlign = .leftBottom  // 네이버 로고
+        naverMapView.mapView.logoMargin = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         naverMapView.mapView.extent = NMGLatLngBounds(southWest: NMGLatLng(lat: 31.43, lng: 122.37), northEast: NMGLatLng(lat: 44.35, lng: 132))    // 카메라의 대상 지점을 한반도 인근으로 제한
         naverMapView.mapView.minZoomLevel = MIN_ZOOM_LEVEL  // 카메라의 최소 줌 레벨
         naverMapView.mapView.maxZoomLevel = MAX_ZOOM_LEVEL  // 카메라의 최대 줌 레벨
@@ -137,11 +142,7 @@ class MapTabViewController: UIViewController, View {
         
         // 현위치로 초기 위치 세팅 (없을 시 잠실역)
         view.addSubview(naverMapView)
-        
-        
-        generateRandomMarker(size: 1000)
-        
-        
+
         
         checkLocationPermission()
         
@@ -204,11 +205,23 @@ class MapTabViewController: UIViewController, View {
         
     }
     
+    func runClustering(markers: [NMFMarker]) {
+        Log.debug("MapTabViewController runClustering func Excuting")
+        
+        self.clusterManager?.resetQuadTreeSetting(mapView: self.naverMapView.mapView, frame: self.view.frame)
+        self.clusterManager?.addMarkers(markers: markers)
+        self.clusterManager?.runClustering(mapView: self.naverMapView.mapView, frame: self.view.frame, zoomScale: self.naverMapView.mapView.zoomLevel)
+    }
+    
     @objc func didEnterBackgroundObserver() {
         Log.debug("didEnterBackground")
         
         checkLocationPermission()
     }
+    
+    
+    
+    
     
     func bind(reactor: MapTabViewReactor) {
         bindAction(reactor)
@@ -219,13 +232,21 @@ class MapTabViewController: UIViewController, View {
     
     func bindAction(_ reactor: MapTabViewReactor) {
         //action
-        //        kakaoBtn.rx.tap
-        //            .map { _ in
-        //                return Reactor.Action.clickToKakao
-        //            }
-        //            .bind(to: reactor.action)
-        //            .disposed(by: disposeBag)
+        // 뷰가 그려진 후 동작
+        viewloadedSubject.asObserver()
+            .map { _ in
+                return Reactor.Action.loadView
+            }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
         
+        // 지도 스크롤 후 동작
+        scrolledMapSubject.asObserver()
+            .map { _ in
+                return Reactor.Action.scrollMap
+            }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
         
         
         
@@ -234,16 +255,19 @@ class MapTabViewController: UIViewController, View {
     
     func bindState(_ reactor: MapTabViewReactor) {
         //state
+        // 마커리스트가 리셋 된 후 다시 클러스터링 진행
+        reactor.state
+            .map { state in
+                return state.allMarkers
+            }
+            .bind(onNext: { [weak self] markers in
+                guard let self = self else { return }
+                self.runClustering(markers: markers)
+            })
+            .disposed(by: disposeBag)
         
-        //        reactor.state
-        //            .map { state in
-        //                print("reactor")
-        //                print(state.userData)
-        //                return String(state.userData.id)
-        //            }
-        //            .distinctUntilChanged()
-        //            .bind(to: testLbl.rx.text)
-        //            .disposed(by: disposeBag)
+      
+            
         
     }
     
@@ -356,22 +380,9 @@ extension MapTabViewController: NMFMapViewCameraDelegate {
     
     //카메라 이동이 멈춘 후 대기 중일 때 한번 호출
     func mapViewCameraIdle(_ mapView: NMFMapView) {
-        Log.debug("mapViewCameraIdle")
-        let zoomLevel = mapView.zoomLevel
-        
-        
-        clusterManager.resetQuadTreeSetting(mapView: mapView, frame: self.view.frame)
-        clusterManager.addMarkers(markers: markers)
-        clusterManager.runClustering(mapView: mapView, frame: self.view.frame, zoomScale: zoomLevel)
-        
-        
-        
-        //        log("북서 꼭지점 위치: \(mapView.projection.latlngBounds(fromViewBounds: self.view.frame).southWest)")
-        //        log("남동 꼭지점 위치: \(mapView.projection.latlngBounds(fromViewBounds: self.view.frame).northEast)")
-        //        log("가운데 꼭지점 위치: \(mapView.projection.latlngBounds(fromViewBounds: self.view.frame).center)")
-        //        let centerAimPoint = mapView.projection.latlngBounds(fromViewBounds: self.view.frame).center
-        //        let southWestAimPoint = mapView.projection.latlngBounds(fromViewBounds: self.view.frame).southWest
-        //        let northEastAimPoint = mapView.projection.latlngBounds(fromViewBounds: self.view.frame).northEast
+        Log.info("MapTabViewController NMFMapViewCameraDelegate mapViewCameraIdle")
+
+        scrolledMapSubject.onNext(true)
         
         
     }
@@ -387,71 +398,23 @@ extension MapTabViewController: NMFMapViewCameraDelegate {
 }
 
 
-extension MapTabViewController {
-    func generateRandomMarker(size: Int) {
-        DispatchQueue.global(qos: .default).async {
-            for i in 1...size {
-                let marker = NMFMarker()
-                let lat = 37.514634749 + Double.random(in: 0.01...0.1)
-                let lng = 127.104260695 + Double.random(in: 0.01...0.1)
-                marker.position = NMGLatLng(lat: lat, lng: lng)
-                marker.iconImage = NMF_MARKER_IMAGE_BLACK
-                marker.captionText = "\(i)번째 POI"
-                marker.captionColor = UIColor.red
-                marker.captionHaloColor = UIColor.gray
-                
-                
-//                marker.iconTintColor = UIColor.clear
-//                marker.iconImage = NMFOverlayImage(image: UIImage())
-//                marker.width = 1
-//                marker.height = 1
-                
-                var mapMarkerData = MapMarkerData()
-                mapMarkerData.latitude = lat
-                mapMarkerData.longitude = lng
-                mapMarkerData.title = "id : \(i)"
-                mapMarkerData.type = MapType.Leaf
-                
-                marker.userInfo = [
-                    "data" : mapMarkerData
-                ]
-                
-                marker.touchHandler = { [weak self] (overlay:NMFOverlay) -> Bool in
-                    guard let self = self else { return true }
-                    let cameraUpdate = NMFCameraUpdate(scrollTo: marker.position, zoomTo: self.naverMapView.mapView.zoomLevel + 0.3)
-                    cameraUpdate.animation = .linear
-                    self.naverMapView.mapView.moveCamera(cameraUpdate)
-        
-                    return true
-                }
-                
-                self.markers.append(marker)
-            }
-            
-            
-        }
-        
-    }
-    
-}
-
 extension MapTabViewController: ClusteringManagerDelegate {
     
     func displayMarkers(markersTuple: [(NMFMarker, NMFInfoWindow?)]) {
-        Log.debug("display")
+        Log.info("MapTabViewController displayMarkers")
         Log.debug("클러스터링 개수 : \(markersTuple.count)")
 
         
-        for marker in self.currmarkersTuple {
+        for marker in self.currMarkersTuple {
             if marker.1 != nil {
                 marker.1!.close()
             }
             marker.0.mapView = nil
         }
         
-        self.currmarkersTuple = markersTuple
+        self.currMarkersTuple = markersTuple
         
-        for marker in self.currmarkersTuple {
+        for marker in self.currMarkersTuple {
             
             
             if marker.1 != nil {

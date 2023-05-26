@@ -18,11 +18,16 @@ class MapTabFlow: Flow {
     
     private weak var windowNavigationController: UINavigationController?
     
+    let mapUseCase: MapUseCase
 
     init(windowNavigationController: UINavigationController) {
         Log.debug("MapTabFlow init")
         
         self.windowNavigationController = windowNavigationController
+        
+        let localRepository = LocalRepository()
+        let firebaseRepository = FirebaseRepository()
+        self.mapUseCase = MapUseCase(localRepository: localRepository, firebaseRepository: firebaseRepository)
         
     }
     
@@ -53,7 +58,7 @@ class MapTabFlow: Flow {
         
         Log.flow("MapTabFlow navigateToMapTab")
         
-        let mapTabViewReactor = MapTabViewReactor()
+        let mapTabViewReactor = MapTabViewReactor(mapUseCase: mapUseCase)
         let mapTabViewController = MapTabViewController(reactor: mapTabViewReactor)
         mapTabViewController.windowNavigationController = windowNavigationController
         self.rootViewController.navigationBar.isHidden = true

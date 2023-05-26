@@ -136,8 +136,8 @@ class ClusteringManager {
             yCoordinate+=cellSizePoints
             
         }
-        Log.debug("clustering 끝")
-        Log.info("클러스터링 완료 후 마커 수 : \(clusterMarkers.count)")
+//        Log.debug("clustering 끝")
+//        Log.info("클러스터링 완료 후 마커 수 : \(clusterMarkers.count)")
         DispatchQueue.main.async {
             self.delegate?.displayMarkers(markersTuple: clusterMarkers)
         }
@@ -196,6 +196,17 @@ class ClusteringManager {
     // 끝단 실제 마커의 Marker와 InfoWindow 튜플 배출
     private func makeLeafMarker(marker: NMFMarker, mapView: NMFMapView) -> (NMFMarker, NMFInfoWindow?) {
 
+        let leafMarker = marker
+
+        leafMarker.touchHandler = { [weak self] (overlay:NMFOverlay) -> Bool in
+            guard let self = self else { return true }
+            let cameraUpdate = NMFCameraUpdate(scrollTo: marker.position, zoomTo: mapView.zoomLevel)
+            cameraUpdate.animation = .linear
+            mapView.moveCamera(cameraUpdate)
+            
+            return true
+        }
+        
 //        let infoWindow = NMFInfoWindow()
 //        infoWindow.position = marker.position
 //        infoWindow.userInfo = marker.userInfo
@@ -210,7 +221,7 @@ class ClusteringManager {
 //            return true
 //        }
         
-        return (marker, nil)
+        return (leafMarker, nil)
 //        return (marker, infoWindow)
         
     }
@@ -222,7 +233,7 @@ extension ClusteringManager {
     class func cellDivCountForZoomScale(zoomScale: Double) -> Int {
         
         let zoomLevel = Int(zoomScale)
-        Log.debug("#zoomLevel: \(zoomLevel)")
+//        Log.debug("#zoomLevel: \(zoomLevel)")
         
         // 네이버 지도에 맞게 대강 맞춘 값
         switch zoomLevel {
