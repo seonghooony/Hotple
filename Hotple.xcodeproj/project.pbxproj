@@ -22,7 +22,7 @@
 		DB01690129D3F9AD00E07875 /* TabDashBoardViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB01690029D3F9AD00E07875 /* TabDashBoardViewReactor.swift */; };
 		DB01690329D3F9C300E07875 /* TabDashBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB01690229D3F9C300E07875 /* TabDashBoardViewController.swift */; };
 		DB01690629D55B9300E07875 /* OSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB01690429D55B7700E07875 /* OSLog.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		DB01690829D55BF200E07875 /* OSLogExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB01690729D55BF200E07875 /* OSLogExtension.swift */; };
+		DB01690829D55BF200E07875 /* OSLog+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB01690729D55BF200E07875 /* OSLog+Extension.swift */; };
 		DB20A41E298CC1D400AD31F7 /* KakaoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB20A41D298CC1D400AD31F7 /* KakaoUseCase.swift */; };
 		DB20A422298CC5AD00AD31F7 /* KakaoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB20A421298CC5AD00AD31F7 /* KakaoRepository.swift */; };
 		DB20A4242991EE8800AD31F7 /* NaverUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB20A4232991EE8800AD31F7 /* NaverUseCase.swift */; };
@@ -62,7 +62,7 @@
 		DB5F4B6E2A1B2FD100296B74 /* MapMarkerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B6D2A1B2FD100296B74 /* MapMarkerData.swift */; };
 		DB5F4B702A1B315B00296B74 /* MapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B6F2A1B315B00296B74 /* MapType.swift */; };
 		DB5F4B732A1B35E000296B74 /* ClusteredMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B722A1B35E000296B74 /* ClusteredMarkerView.swift */; };
-		DB5F4B8A2A1DA2D100296B74 /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B892A1DA2D100296B74 /* AnimationController.swift */; };
+		DB5F4B8A2A1DA2D100296B74 /* AnimationLayerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B892A1DA2D100296B74 /* AnimationLayerUtil.swift */; };
 		DB5F4B8C2A1EF53900296B74 /* LeafMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5F4B8B2A1EF53900296B74 /* LeafMarkerView.swift */; };
 		DB687AD4298A1C79006A5E69 /* AppFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB687AD3298A1C79006A5E69 /* AppFlow.swift */; };
 		DB687AD6298A1DB5006A5E69 /* AppStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB687AD5298A1DB5006A5E69 /* AppStep.swift */; };
@@ -72,13 +72,14 @@
 		DB687ADE298A1FC5006A5E69 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB687ADD298A1FC5006A5E69 /* LoginViewController.swift */; };
 		DB687AE5298A2BB3006A5E69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB687AE7298A2BB3006A5E69 /* Localizable.strings */; };
 		DB687AEB298A4545006A5E69 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB687AEA298A4545006A5E69 /* LoginButton.swift */; };
-		DB687AED298A4AE6006A5E69 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB687AEC298A4AE6006A5E69 /* Extension.swift */; };
 		DB687AF3298C99EB006A5E69 /* AppKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB687AF2298C99EB006A5E69 /* AppKeys.swift */; };
 		DB830FD42989EECB00D76B2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB830FD32989EECB00D76B2B /* AppDelegate.swift */; };
 		DB830FD62989EECB00D76B2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB830FD52989EECB00D76B2B /* SceneDelegate.swift */; };
 		DB830FDD2989EECB00D76B2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB830FDC2989EECB00D76B2B /* Assets.xcassets */; };
 		DB830FE02989EECB00D76B2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB830FDE2989EECB00D76B2B /* LaunchScreen.storyboard */; };
 		DBCE8D8D2A204B0300D7A5D3 /* MapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCE8D8C2A204B0300D7A5D3 /* MapUseCase.swift */; };
+		DBCE8D932A209C2F00D7A5D3 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCE8D922A209C2F00D7A5D3 /* UIImage+Extension.swift */; };
+		DBCE8D952A209C6700D7A5D3 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCE8D942A209C6700D7A5D3 /* Array+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,7 +99,7 @@
 		DB01690029D3F9AD00E07875 /* TabDashBoardViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabDashBoardViewReactor.swift; sourceTree = "<group>"; };
 		DB01690229D3F9C300E07875 /* TabDashBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabDashBoardViewController.swift; sourceTree = "<group>"; };
 		DB01690429D55B7700E07875 /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
-		DB01690729D55BF200E07875 /* OSLogExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLogExtension.swift; sourceTree = "<group>"; };
+		DB01690729D55BF200E07875 /* OSLog+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extension.swift"; sourceTree = "<group>"; };
 		DB20A41D298CC1D400AD31F7 /* KakaoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoUseCase.swift; sourceTree = "<group>"; };
 		DB20A421298CC5AD00AD31F7 /* KakaoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoRepository.swift; sourceTree = "<group>"; };
 		DB20A4232991EE8800AD31F7 /* NaverUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverUseCase.swift; sourceTree = "<group>"; };
@@ -138,7 +139,7 @@
 		DB5F4B6D2A1B2FD100296B74 /* MapMarkerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerData.swift; sourceTree = "<group>"; };
 		DB5F4B6F2A1B315B00296B74 /* MapType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapType.swift; sourceTree = "<group>"; };
 		DB5F4B722A1B35E000296B74 /* ClusteredMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusteredMarkerView.swift; sourceTree = "<group>"; };
-		DB5F4B892A1DA2D100296B74 /* AnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
+		DB5F4B892A1DA2D100296B74 /* AnimationLayerUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationLayerUtil.swift; sourceTree = "<group>"; };
 		DB5F4B8B2A1EF53900296B74 /* LeafMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeafMarkerView.swift; sourceTree = "<group>"; };
 		DB687AD3298A1C79006A5E69 /* AppFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlow.swift; sourceTree = "<group>"; };
 		DB687AD5298A1DB5006A5E69 /* AppStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStep.swift; sourceTree = "<group>"; };
@@ -149,7 +150,6 @@
 		DB687AE6298A2BB3006A5E69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DB687AE8298A2BF3006A5E69 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DB687AEA298A4545006A5E69 /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
-		DB687AEC298A4AE6006A5E69 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		DB687AF2298C99EB006A5E69 /* AppKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeys.swift; sourceTree = "<group>"; };
 		DB830FD02989EECB00D76B2B /* Hotple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hotple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB830FD32989EECB00D76B2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +158,8 @@
 		DB830FDF2989EECB00D76B2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB830FE12989EECB00D76B2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBCE8D8C2A204B0300D7A5D3 /* MapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUseCase.swift; sourceTree = "<group>"; };
+		DBCE8D922A209C2F00D7A5D3 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		DBCE8D942A209C6700D7A5D3 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		E0A947FA276A7FD213BEA009 /* Pods-Hotple.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hotple.debug.xcconfig"; path = "Target Support Files/Pods-Hotple/Pods-Hotple.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -264,12 +266,12 @@
 		DB20A415298CACCB00AD31F7 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				DB687AE9298A4520006A5E69 /* Custom */,
 				DB687AD0298A1B99006A5E69 /* Stepper */,
 				DB687ACF298A1B5A006A5E69 /* Step */,
 				DB687ACE298A1B16006A5E69 /* Flow */,
 				DB687AD2298A1BC0006A5E69 /* Reactor */,
 				DB687AD1298A1BB9006A5E69 /* VC */,
+				DBCE8D902A2092DF00D7A5D3 /* View */,
 				DB0168E8299CAF1400E07875 /* Cell */,
 			);
 			path = Presentation;
@@ -338,8 +340,8 @@
 		DB5F4B5A2A1B263F00296B74 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				DB5F4B652A1B27FF00296B74 /* MapMarkerUtil */,
-				DB5F4B512A1B1C5200296B74 /* MapClusterUtil */,
+				DB5F4B892A1DA2D100296B74 /* AnimationLayerUtil.swift */,
+				DBCE8D8F2A20920A00D7A5D3 /* Map */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -347,8 +349,6 @@
 		DB5F4B652A1B27FF00296B74 /* MapMarkerUtil */ = {
 			isa = PBXGroup;
 			children = (
-				DB5F4B892A1DA2D100296B74 /* AnimationController.swift */,
-				DB5F4B712A1B35CA00296B74 /* CustomView */,
 				DB5F4B6A2A1B2D2B00296B74 /* CustomInfoWindowDataSource.swift */,
 			);
 			path = MapMarkerUtil;
@@ -361,15 +361,6 @@
 				DB5F4B6F2A1B315B00296B74 /* MapType.swift */,
 			);
 			path = Map;
-			sourceTree = "<group>";
-		};
-		DB5F4B712A1B35CA00296B74 /* CustomView */ = {
-			isa = PBXGroup;
-			children = (
-				DB5F4B722A1B35E000296B74 /* ClusteredMarkerView.swift */,
-				DB5F4B8B2A1EF53900296B74 /* LeafMarkerView.swift */,
-			);
-			path = CustomView;
 			sourceTree = "<group>";
 		};
 		DB687ACE298A1B16006A5E69 /* Flow */ = {
@@ -459,14 +450,14 @@
 			path = Strings;
 			sourceTree = "<group>";
 		};
-		DB687AE9298A4520006A5E69 /* Custom */ = {
+		DB687AE9298A4520006A5E69 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				DB687AEC298A4AE6006A5E69 /* Extension.swift */,
-				DB687AEA298A4545006A5E69 /* LoginButton.swift */,
-				DB01690729D55BF200E07875 /* OSLogExtension.swift */,
+				DB01690729D55BF200E07875 /* OSLog+Extension.swift */,
+				DBCE8D922A209C2F00D7A5D3 /* UIImage+Extension.swift */,
+				DBCE8D942A209C6700D7A5D3 /* Array+Extension.swift */,
 			);
-			path = Custom;
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		DB830FC72989EECA00D76B2B = {
@@ -490,7 +481,7 @@
 		DB830FD22989EECB00D76B2B /* Hotple */ = {
 			isa = PBXGroup;
 			children = (
-				DB5F4B5A2A1B263F00296B74 /* Util */,
+				DBCE8D8E2A2091E200D7A5D3 /* Common */,
 				DB20A413298CABCE00AD31F7 /* Application */,
 				DB20A415298CACCB00AD31F7 /* Presentation */,
 				DB20A414298CACB700AD31F7 /* Domain */,
@@ -502,6 +493,34 @@
 				DB830FDE2989EECB00D76B2B /* LaunchScreen.storyboard */,
 			);
 			path = Hotple;
+			sourceTree = "<group>";
+		};
+		DBCE8D8E2A2091E200D7A5D3 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				DB687AE9298A4520006A5E69 /* Extension */,
+				DB5F4B5A2A1B263F00296B74 /* Util */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		DBCE8D8F2A20920A00D7A5D3 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				DB5F4B652A1B27FF00296B74 /* MapMarkerUtil */,
+				DB5F4B512A1B1C5200296B74 /* MapClusterUtil */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		DBCE8D902A2092DF00D7A5D3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DB5F4B722A1B35E000296B74 /* ClusteredMarkerView.swift */,
+				DB5F4B8B2A1EF53900296B74 /* LeafMarkerView.swift */,
+				DB687AEA298A4545006A5E69 /* LoginButton.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -657,19 +676,20 @@
 				DB5F4B592A1B1C9100296B74 /* QuadTree.swift in Sources */,
 				DB3E32D9299614FB00EAD0B6 /* TestViewController.swift in Sources */,
 				DB20A4262991EF0F00AD31F7 /* NaverRepository.swift in Sources */,
-				DB01690829D55BF200E07875 /* OSLogExtension.swift in Sources */,
+				DB01690829D55BF200E07875 /* OSLog+Extension.swift in Sources */,
 				DB5F4B8C2A1EF53900296B74 /* LeafMarkerView.swift in Sources */,
 				DB3E32BB2995E60800EAD0B6 /* MapTabFlow.swift in Sources */,
 				DB3E32C92995FBF800EAD0B6 /* ProfileTabViewReactor.swift in Sources */,
 				DB3E32C72995FBE800EAD0B6 /* FeedTabViewReactor.swift in Sources */,
 				DB5F4B572A1B1C9100296B74 /* ClusteringManager.swift in Sources */,
+				DBCE8D932A209C2F00D7A5D3 /* UIImage+Extension.swift in Sources */,
 				DB01690129D3F9AD00E07875 /* TabDashBoardViewReactor.swift in Sources */,
 				DB3E32E52999D5B800EAD0B6 /* UserDefaultKeys.swift in Sources */,
 				DB3E32C12995FBAE00EAD0B6 /* HomeTabViewReactor.swift in Sources */,
 				DB3E32B92995E5FD00EAD0B6 /* SearchTabFlow.swift in Sources */,
 				DB20A42A29936D1A00AD31F7 /* KakaoData.swift in Sources */,
+				DBCE8D952A209C6700D7A5D3 /* Array+Extension.swift in Sources */,
 				DB3E32B72995E5E300EAD0B6 /* HomeTabFlow.swift in Sources */,
-				DB687AED298A4AE6006A5E69 /* Extension.swift in Sources */,
 				DB0168EA299CAF3100E07875 /* TestCell.swift in Sources */,
 				DB5F4B702A1B315B00296B74 /* MapType.swift in Sources */,
 				DB3E32DF2999BE4E00EAD0B6 /* SplashFlow.swift in Sources */,
@@ -684,7 +704,7 @@
 				DB3E32B52995DEE100EAD0B6 /* TabDashBoardFlow.swift in Sources */,
 				DB687ADA298A1EF8006A5E69 /* AppStepper.swift in Sources */,
 				DB687ADC298A1FA5006A5E69 /* LoginViewReactor.swift in Sources */,
-				DB5F4B8A2A1DA2D100296B74 /* AnimationController.swift in Sources */,
+				DB5F4B8A2A1DA2D100296B74 /* AnimationLayerUtil.swift in Sources */,
 				DB20A4242991EE8800AD31F7 /* NaverUseCase.swift in Sources */,
 				DB0168EC299CC70600E07875 /* Const.swift in Sources */,
 			);

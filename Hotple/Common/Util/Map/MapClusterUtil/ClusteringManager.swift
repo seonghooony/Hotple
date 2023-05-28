@@ -165,7 +165,8 @@ class ClusteringManager {
         let centerMarker = NMFMarker()
         centerMarker.position = NMGLatLng(lat: totalX/Double(totalMarkers), lng: totalY/Double(totalMarkers))
         centerMarker.userInfo = [
-            "data" : mapMarkerData
+            "data" : mapMarkerData,
+            "markers" : markers
         ]
 //        centerMarker.touchHandler = { [weak self] (overlay:NMFOverlay) -> Bool in
 //
@@ -233,18 +234,20 @@ extension ClusteringManager {
     class func cellDivCountForZoomScale(zoomScale: Double) -> Int {
         
         let zoomLevel = Int(zoomScale)
-//        Log.debug("#zoomLevel: \(zoomLevel)")
+        Log.debug("#zoomLevel: \(zoomLevel)")
         
         // 네이버 지도에 맞게 대강 맞춘 값
         switch zoomLevel {
-        case 0...4:
-            return 16//32
-        case 5...8:
-            return 8//16
-        case 9...16:
-            return 4//8
+        case 0...8:
+            return 2//32
+        case 9...11:
+            return 4//16
+        case 12...14:
+            return 5//8
+        case 15...16:
+            return 6
         case 17...20:
-            return 2//4
+            return 8//4
         default:
             return 10
         }
