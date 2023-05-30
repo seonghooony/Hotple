@@ -42,7 +42,7 @@ final class KakaoRepository: KakaoRepositoryProtocol {
     }
     
     func setLoginWithKakaoTalk() -> Observable<Bool> {
-        Log.info("KakaoRepository setLoginWithKakaoTalk")
+        Log.network("KakaoRepository setLoginWithKakaoTalk")
         
         if (UserApi.isKakaoTalkLoginAvailable()) {
             return UserApi.shared.rx.loginWithKakaoTalk()
@@ -75,7 +75,7 @@ final class KakaoRepository: KakaoRepositoryProtocol {
     
     // 로그아웃
     func setLogout() -> Observable<Bool> {
-        Log.info("KakaoRepository setLogout")
+        Log.network("KakaoRepository setLogout")
         
         return Observable.create { [weak self] observer in
             
@@ -116,7 +116,7 @@ final class KakaoRepository: KakaoRepositoryProtocol {
             
             UserApi.shared.rx.me()
                 .subscribe(onSuccess:{ ( user ) in
-                    print("me() success.")
+                    Log.network("UserApi me() success.")
 //                    print(user)
 
                     var kakaoUserData = KakaoUserData(id: user.id ?? 1)
@@ -138,8 +138,8 @@ final class KakaoRepository: KakaoRepositoryProtocol {
                     observer.onCompleted()
 
                 }, onFailure: {error in
-                    print("me() error.")
-                    print(error)
+                    Log.network("UserApi me() error.")
+                    Log.network(error)
                     observer.onError(error)
 
                 })
@@ -181,13 +181,13 @@ final class KakaoRepository: KakaoRepositoryProtocol {
         // 사용자 액세스 토큰 정보 조회
         UserApi.shared.rx.accessTokenInfo()
             .subscribe(onSuccess:{ (accessTokenInfo) in
-                print("accessTokenInfo() success.")
+                Log.network("UserApi accessTokenInfo() success.")
 
                 //do something
                 _ = accessTokenInfo
                 
             }, onFailure: {error in
-                print(error)
+                Log.network("UserApi accessTokenInfo(): \(error)")
             })
             .disposed(by: disposeBag)
     }
@@ -199,10 +199,10 @@ final class KakaoRepository: KakaoRepositoryProtocol {
     func setUnlink() {
         UserApi.shared.rx.unlink()
             .subscribe(onCompleted:{
-                print("unlink() success.")
+                Log.network("unlink() success.")
             }, onError: {error in
-                print("unlink() error.")
-                print(error)
+                Log.network("unlink() error.")
+                Log.network(error)
             })
             .disposed(by: disposeBag)
     }

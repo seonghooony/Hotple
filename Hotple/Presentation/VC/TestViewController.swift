@@ -93,7 +93,7 @@ class TestViewController: UIViewController, View {
     }
     
     deinit {
-        print("ProfileTabViewController deinit")
+        Log.info("ProfileTabViewController deinit")
     }
     
     func initConstraint() {
@@ -208,7 +208,7 @@ extension TestViewController: UIScrollViewDelegate {
         var headerConstant = scrollView.contentOffset.y
         var tableConstant = CGFloat()
         
-        print(headerConstant)
+//        print(headerConstant)
         
         headerConstant = headerConstant < 0 ? 0 : headerConstant
         headerConstant = headerConstant > Const.canMoveHeight ? Const.canMoveHeight : headerConstant

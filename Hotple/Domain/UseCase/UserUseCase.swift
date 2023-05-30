@@ -24,14 +24,14 @@ final class UserUseCase: UserUseCaseProtocol {
 
     
     init(localRepository: LocalRepository, firebaseRepository: FirebaseRepository) {
-        print("UserUseCase init")
+        Log.debug("UserUseCase init")
         self.localRepository = localRepository
         self.firebaseRepository = firebaseRepository
     }
     
     deinit {
         disposeBag = DisposeBag()
-        print("UserUseCase deinit")
+        Log.debug("UserUseCase deinit")
     }
     
     func getUserInfo() -> Observable<UserData?> {

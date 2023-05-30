@@ -35,7 +35,7 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
 
     
     init(localRepository: LocalRepository, firebaseRepository: FirebaseRepository, kakaoRepository: KakaoRepository) {
-        print("KakaoUseCase init")
+        Log.debug("KakaoUseCase init")
         
         self.localRepository = localRepository
         self.firebaseRepository = firebaseRepository
@@ -44,7 +44,7 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
     
     deinit {
         disposeBag = DisposeBag()
-        print("KakaoUseCase deinit")
+        Log.debug("KakaoUseCase deinit")
     }
     
     // 회원가입 + 로그인 (카카오)
@@ -67,27 +67,27 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
             .subscribe { userData in
                 // firebase 내 유저데이터가 있을 경우
                 if let userData = userData {
-                    print("유저 데이터 존재함")
+                    Log.network("KakaoUseCase Login : 유저 데이터 존재함")
                     localLoginSubject.onNext(userData)
                     localLoginSubject.onCompleted()
                     
                 // firebase 내 유저데이터가 없을 경우
                 } else {
                     if let kakaoAccountUserData = kakaoAccountUserData {
-                        print("유저 데이터 존재하지 않음, 푸쉬 진행")
+                        Log.network("KakaoUseCase Login : 유저 데이터 존재하지 않음, 푸쉬 진행")
                         pushUserSubject.onNext(kakaoAccountUserData)
                         pushUserSubject.onCompleted()
                     } else {
-                        print("카카오 데이트 존재 하지 않음, 푸쉬 불가능")
+                        Log.network("KakaoUseCase Login : 카카오 데이트 존재 하지 않음, 푸쉬 불가능")
                         pushUserSubject.onCompleted()
                     }
                 }
             } onError: { error in
-                print(error.localizedDescription)
+                Log.network(error.localizedDescription)
             } onCompleted: {
-                print("")
+                Log.network("KakaoUseCase Login : checkUserSubject onCompleted")
             } onDisposed: {
-                print("")
+                Log.network("KakaoUseCase Login : checkUserSubject onDisposed")
             }
             .disposed(by: self.disposeBag)
         
@@ -99,16 +99,16 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
                 return self.localRepository.createUser(userData)
             }
             .subscribe { isCompleted in
-                print("완료 여부 : \(isCompleted)")
-                print("로컬 로그인 성공, 완료 이벤트 방출")
+                Log.network("KakaoUseCase Login : 완료 여부 : \(isCompleted)")
+                Log.network("KakaoUseCase Login : 로컬 로그인 성공, 완료 이벤트 방출")
                 completedLoginSubject.onNext(isCompleted)
                 completedLoginSubject.onCompleted()
             } onError: { error in
-                print(error.localizedDescription)
+                Log.network(error.localizedDescription)
             } onCompleted: {
-                print("")
+                Log.network("KakaoUseCase Login : localLoginSubject onCompleted")
             } onDisposed: {
-                print("")
+                Log.network("KakaoUseCase Login : localLoginSubject onDisposed")
             }
             .disposed(by: self.disposeBag)
 
@@ -122,18 +122,18 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
             .subscribe { isCompleted in
                 if isCompleted {
                     if let kakaoAccountUserData = kakaoAccountUserData {
-                        print("유저 데이터 푸쉬 진행 성공")
+                        Log.network("KakaoUseCase Login : 유저 데이터 푸쉬 진행 성공")
                         localLoginSubject.onNext(kakaoAccountUserData)
                         localLoginSubject.onCompleted()
                     }
                     
                 }
             } onError: { error in
-                print(error.localizedDescription)
+                Log.network(error.localizedDescription)
             } onCompleted: {
-                print("")
+                Log.network("KakaoUseCase Login : pushUserSubject onCompleted")
             } onDisposed: {
-                print("")
+                Log.network("KakaoUseCase Login : pushUserSubject onDisposed")
             }
             .disposed(by: self.disposeBag)
 
@@ -141,7 +141,7 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
         // 카카오톡 앱과 연동 가능 여부 -> 카카오 로그인 진행 후 id 얻기
         if (UserApi.isKakaoTalkLoginAvailable()) {
 
-            kakaoRepository.setLoginWithKakaoAccount()
+            kakaoRepository.setLoginWithKakaoTalk()
                 .filter { $0 == true }
                 .flatMapLatest { [weak self] _ -> Observable<UserData> in
                     guard let self = self else { return Observable.never() }
@@ -149,7 +149,7 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
                     return self.getUserInfo()
                 }
                 .subscribe { userData in
-                    print("카카오 서드파티 로그인 성공, 로컬 로그인 진행")
+                    Log.network("KakaoUseCase Login : 카카오 톡 서드파티 로그인 성공, 로컬 로그인 진행")
                     kakaoAccountUserData = userData
                     checkUserSubject.onNext(userData)
                     checkUserSubject.onCompleted()
@@ -166,7 +166,7 @@ final class KakaoUseCase: KakaoUseCaseProtocol {
                     return self.getUserInfo()
                 }
                 .subscribe { userData in
-                    print("카카오 서드파티 로그인 성공, 로컬 로그인 진행")
+                    Log.network("KakaoUseCase Login : 카카오 계정 서드파티 로그인 성공, 로컬 로그인 진행")
                     kakaoAccountUserData = userData
                     checkUserSubject.onNext(userData)
                     checkUserSubject.onCompleted()

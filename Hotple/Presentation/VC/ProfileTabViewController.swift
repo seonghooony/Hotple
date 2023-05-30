@@ -50,8 +50,6 @@ class ProfileTabViewController: UIViewController, View {
     private let viewDidLoadSubject = PublishSubject<Bool>()
     
     override func loadView() {
-        print("loadView")
-        
         initView()
         
     }
@@ -348,7 +346,7 @@ extension ProfileTabViewController: UIScrollViewDelegate {
         headerConstant = headerConstant < 0 ? 0 : headerConstant
         headerConstant = headerConstant > Const.headerMaxHeight ? Const.headerMaxHeight : headerConstant
         
-        print(headerConstant)
+//        print(headerConstant)
         
 //        stickyHeaderView.snp.updateConstraints { make in
 //            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(-headerConstant)

@@ -138,7 +138,7 @@ class ProfileSettingViewReactor: Reactor, Stepper {
     func logout() {
         
         if let loginType = UserDefaults.standard.string(forKey: UserDefaultKeys.LOGIN_TYPE) {
-            Log.info("ProfileSettingViewReactor logout func / loginType : \(loginType)")
+            Log.network("ProfileSettingViewReactor logout func / loginType : \(loginType)")
             
             switch loginType {
             case "naver":

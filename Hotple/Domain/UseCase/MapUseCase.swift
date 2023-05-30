@@ -25,7 +25,7 @@ final class MapUseCase: MapUserUseCaseProtocol {
     var disposeBag = DisposeBag()
     
     init(localRepository: LocalRepository, firebaseRepository: FirebaseRepository) {
-        print("MapUseCase init")
+        Log.debug("MapUseCase init")
 //        self.mapView = mapView
         self.localRepository = localRepository
         self.firebaseRepository = firebaseRepository
@@ -33,7 +33,7 @@ final class MapUseCase: MapUserUseCaseProtocol {
     
     deinit {
         disposeBag = DisposeBag()
-        print("MapUseCase deinit")
+        Log.info("MapUseCase deinit")
     }
     
     func generateRandomMarker(size: Int) -> [NMFMarker] {

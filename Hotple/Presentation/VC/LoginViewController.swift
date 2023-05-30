@@ -18,6 +18,8 @@ class LoginViewController: UIViewController, View {
     
     typealias Reactor = LoginViewReactor
     
+    private let loadingIndicator = UIActivityIndicatorView(style: .large)
+    
     private let loginLbl = UILabel()
     
     private let kakaoBtn = UIButton()
@@ -61,6 +63,8 @@ class LoginViewController: UIViewController, View {
         
         testLbl.textColor = .black
         self.view.addSubview(self.testLbl)
+        
+        self.view.addSubview(loadingIndicator)
     }
     
     override func viewDidLoad() {
@@ -108,6 +112,10 @@ class LoginViewController: UIViewController, View {
         self.testLbl.snp.makeConstraints { make in
             make.trailing.bottom.equalToSuperview()
             
+        }
+        
+        self.loadingIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
 
         
@@ -168,14 +176,19 @@ class LoginViewController: UIViewController, View {
         
         reactor.state
             .map { state in
-                print("reactor")
-                print(state.userData)
                 return String(state.userData.id)
             }
             .distinctUntilChanged()
             .bind(to: testLbl.rx.text)
             .disposed(by: disposeBag)
 
+        reactor.state
+            .map { state in
+                return state.isLoading
+            }
+            .bind(to: loadingIndicator.rx.isAnimating)
+            .disposed(by: disposeBag)
+        
     }
     
 }

@@ -64,7 +64,6 @@ class SplashViewReactor: Reactor, Stepper {
                     if userData != nil {
                         self.steps.accept(AppStep.tabDashBoardIsRequired)
                     } else {
-                        print("loginIsRequired action 실행")
                         self.steps.accept(AppStep.loginIsRequired)
                     }
                     

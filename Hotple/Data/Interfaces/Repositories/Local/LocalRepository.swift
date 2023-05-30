@@ -29,7 +29,7 @@ final class LocalRepository: LocalRepositoryProtocol {
     }
     
     func createUser(_ user: UserData) -> Observable<Bool> {
-        Log.info("LocalRepository createUser")
+        Log.network("LocalRepository createUser")
         
         guard let data = try? JSONEncoder().encode(user) else { return Observable.just(false) }
         UserDefaults.standard.setValue(user.id, forKey: UserDefaultKeys.USER_ID)
@@ -60,7 +60,7 @@ final class LocalRepository: LocalRepositoryProtocol {
     }
     
     func readUser() -> Observable<UserData?> {
-        Log.info("LocalRepository readUser")
+        Log.network("LocalRepository readUser")
         guard let id = UserDefaults.standard.string(forKey: UserDefaultKeys.USER_ID) else { return Observable.just(nil) }
         let query: [CFString: Any] = [
             kSecClass : kSecClassGenericPassword,
@@ -83,7 +83,7 @@ final class LocalRepository: LocalRepositoryProtocol {
     }
     
     func updateUser(_ user: UserData) -> Observable<Bool> {
-        Log.info("LocalRepository updateUser")
+        Log.network("LocalRepository updateUser")
         guard let data = try? JSONEncoder().encode(user) else { return Observable.just(false) }
         guard let userId = UserDefaults.standard.string(forKey: UserDefaultKeys.USER_ID) else { return Observable.just(false) }
         
@@ -105,7 +105,7 @@ final class LocalRepository: LocalRepositoryProtocol {
     }
     
     func deleteUser() -> Observable<Bool> {
-        Log.info("LocalRepository deleteUser")
+        Log.network("LocalRepository deleteUser")
         guard let userId = UserDefaults.standard.string(forKey: UserDefaultKeys.USER_ID) else { return Observable.just(false) }
         
         let query: [CFString: Any] = [

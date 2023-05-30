@@ -26,7 +26,7 @@ final class NaverUseCase: NaverUseCaseProtocol {
 
     
     init(localRepository: LocalRepository, firebaseRepository: FirebaseRepository, naverRepository: NaverRepository) {
-        print("NaverUseCase init")
+        Log.debug("NaverUseCase init")
         self.localRepository = localRepository
         self.firebaseRepository = firebaseRepository
         self.naverRepository = naverRepository
@@ -34,7 +34,7 @@ final class NaverUseCase: NaverUseCaseProtocol {
     
     deinit {
         disposeBag = DisposeBag()
-        print("NaverUseCase deinit")
+        Log.debug("NaverUseCase deinit")
     }
     
     func login() -> Observable<Bool> {
@@ -56,27 +56,27 @@ final class NaverUseCase: NaverUseCaseProtocol {
             .subscribe { userData in
                 // firebase 내 유저데이터가 있을 경우
                 if let userData = userData {
-                    print("유저 데이터 존재함")
+                    Log.network("NaverUseCase Login : 유저 데이터 존재함")
                     localLoginSubject.onNext(userData)
                     localLoginSubject.onCompleted()
                     
                 // firebase 내 유저데이터가 없을 경우
                 } else {
                     if let naverAccountUserData = naverAccountUserData {
-                        print("유저 데이터 존재하지 않음, 푸쉬 진행")
+                        Log.network("NaverUseCase Login : 유저 데이터 존재하지 않음, 푸쉬 진행")
                         pushUserSubject.onNext(naverAccountUserData)
                         pushUserSubject.onCompleted()
                     } else {
-                        print("카카오 데이트 존재 하지 않음, 푸쉬 불가능")
+                        Log.network("NaverUseCase Login : 카카오 데이트 존재 하지 않음, 푸쉬 불가능")
                         pushUserSubject.onCompleted()
                     }
                 }
             } onError: { error in
-                print(error.localizedDescription)
+                Log.network(error.localizedDescription)
             } onCompleted: {
-                print("")
+                Log.network("NaverUseCase Login : checkUserSubject onCompleted")
             } onDisposed: {
-                print("")
+                Log.network("NaverUseCase Login : checkUserSubject onDisposed")
             }
             .disposed(by: self.disposeBag)
         
@@ -88,16 +88,16 @@ final class NaverUseCase: NaverUseCaseProtocol {
                 return self.localRepository.createUser(userData)
             }
             .subscribe { isCompleted in
-                print("완료 여부 : \(isCompleted)")
-                print("로컬 로그인 성공, 완료 이벤트 방출")
+                Log.network("NaverUseCase Login : 완료 여부 : \(isCompleted)")
+                Log.network("NaverUseCase Login : 로컬 로그인 성공, 완료 이벤트 방출")
                 completedLoginSubject.onNext(isCompleted)
                 completedLoginSubject.onCompleted()
             } onError: { error in
-                print(error.localizedDescription)
+                Log.network(error.localizedDescription)
             } onCompleted: {
-                print("")
+                Log.network("NaverUseCase Login : localLoginSubject onCompleted")
             } onDisposed: {
-                print("")
+                Log.network("NaverUseCase Login : localLoginSubject onDisposed")
             }
             .disposed(by: self.disposeBag)
 
@@ -111,18 +111,18 @@ final class NaverUseCase: NaverUseCaseProtocol {
             .subscribe { isCompleted in
                 if isCompleted {
                     if let naverAccountUserData = naverAccountUserData {
-                        print("유저 데이터 푸쉬 진행 성공")
+                        Log.network("NaverUseCase Login : 유저 데이터 푸쉬 진행 성공")
                         localLoginSubject.onNext(naverAccountUserData)
                         localLoginSubject.onCompleted()
                     }
                     
                 }
             } onError: { error in
-                print(error.localizedDescription)
+                Log.network(error.localizedDescription)
             } onCompleted: {
-                print("")
+                Log.network("NaverUseCase Login : pushUserSubject onCompleted")
             } onDisposed: {
-                print("")
+                Log.network("NaverUseCase Login : pushUserSubject onDisposed")
             }
             .disposed(by: self.disposeBag)
         
@@ -182,7 +182,7 @@ final class NaverUseCase: NaverUseCaseProtocol {
                 return self.getUserInfo()
             }
             .subscribe { userData in
-                print("네이버 서드파티 로그인 성공")
+                Log.network("NaverUseCase Login : 네이버 서드파티 로그인 성공")
                 naverAccountUserData = userData
                 checkUserSubject.onNext(userData)
                 checkUserSubject.onCompleted()
@@ -252,7 +252,7 @@ final class NaverUseCase: NaverUseCaseProtocol {
                     //                    print(kakaoUserData.email)
                     
                 case .failure(let error):
-                    debugPrint(error.localizedDescription)
+                    Log.network(error.localizedDescription)
                     return Observable.error(error)
                 }
             }

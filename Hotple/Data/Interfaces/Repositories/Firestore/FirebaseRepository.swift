@@ -52,7 +52,7 @@ final class FirebaseRepository: FirebaseRepositoryProtocol {
     }
     
     func getUserData(userData: UserData) -> Observable<UserData?> {
-        Log.info("FirebaseRepository getUserData")
+        Log.network("FirebaseRepository getUserData")
         
         return Observable.create { observer in
             self.db.collection("Users").document(userData.id).getDocument { document, error in

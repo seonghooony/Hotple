@@ -33,7 +33,6 @@ class SplashViewController: UIViewController, View {
         
         
         animationLogoView.play { isFinished in
-            print(isFinished)
             self.startSubject.onNext(isFinished)
         }
         animationLogoView.contentMode = .scaleToFill

@@ -45,12 +45,15 @@ class LoginViewReactor: Reactor, Stepper {
         case loginNaver(Bool)
         
         case setUserInfo(UserData)
+        
+        case setLoading(Bool)
 //        case setNaver
         
     }
     
     struct State {
         var userData: UserData
+        var isLoading: Bool = false
     }
 
     
@@ -60,21 +63,41 @@ class LoginViewReactor: Reactor, Stepper {
         case .clickToKakao:
             Log.action("LoginViewReactor clickToKakao action excuting")
             
-            return kakaoUseCase.login()
-                .map { isLogin in
-                    return Mutation.loginKakao(isLogin)
-                }
-                .catchAndReturn(Mutation.loginKakao(false))
+            return Observable.concat([
+                Observable.just(Mutation.setLoading(true)),
+                kakaoUseCase.login()
+                    .map { isLogin in
+                        return Mutation.loginKakao(isLogin)
+                    }
+                    .catchAndReturn(Mutation.loginKakao(false)),
+                Observable.just(Mutation.setLoading(false))
+            ])
+            
+//            return kakaoUseCase.login()
+//                .map { isLogin in
+//                    return Mutation.loginKakao(isLogin)
+//                }
+//                .catchAndReturn(Mutation.loginKakao(false))
 
             
         case .clickToNaver:
             Log.action("LoginViewReactor clickToNaver action excuting")
             
-            return naverUseCase.login()
-                .map { isLogin in
-                    return Mutation.loginNaver(isLogin)
-                }
-                .catchAndReturn( Mutation.loginNaver(false))
+            return Observable.concat([
+                Observable.just(Mutation.setLoading(true)),
+                naverUseCase.login()
+                    .map { isLogin in
+                        return Mutation.loginNaver(isLogin)
+                    }
+                    .catchAndReturn( Mutation.loginNaver(false)),
+                Observable.just(Mutation.setLoading(false))
+            ])
+            
+//            return naverUseCase.login()
+//                .map { isLogin in
+//                    return Mutation.loginNaver(isLogin)
+//                }
+//                .catchAndReturn( Mutation.loginNaver(false))
 
             
         case .clickToSkip:
@@ -165,6 +188,8 @@ class LoginViewReactor: Reactor, Stepper {
         case .setUserInfo(let userData):
             newState.userData = userData
 
+        case .setLoading(let isLoading):
+            newState.isLoading = isLoading
         }
         
         return newState

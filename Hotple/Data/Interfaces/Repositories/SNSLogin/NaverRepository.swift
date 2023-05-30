@@ -44,7 +44,7 @@ final class NaverRepository: NSObject, NaverThirdPartyLoginConnectionDelegate, N
     
     // 서드파티 로그인 및 회원가입 진행
     func setLogin() -> Observable<Bool> {
-        Log.info("NaverRepository setLogin")
+        Log.network("NaverRepository setLogin")
         
         loginInstance?.delegate = self
         loginInstance?.requestThirdPartyLogin()
@@ -54,7 +54,7 @@ final class NaverRepository: NSObject, NaverThirdPartyLoginConnectionDelegate, N
     
     // 로그아웃
     func setLogout() -> Observable<Bool> {
-        Log.info("NaverRepository setLogout")
+        Log.network("NaverRepository setLogout")
         
         loginInstance?.resetToken()
         
@@ -68,7 +68,7 @@ final class NaverRepository: NSObject, NaverThirdPartyLoginConnectionDelegate, N
     
     // 유저 정보 요청
     func getUserInfo() -> Observable<Result<NaverUserData, Error>> {
-        Log.info("NaverRepository getUserInfo")
+        Log.network("NaverRepository getUserInfo")
         
         guard let isValidAccessToken = loginInstance?.isValidAccessTokenExpireTimeNow() else { return .never() }
         
