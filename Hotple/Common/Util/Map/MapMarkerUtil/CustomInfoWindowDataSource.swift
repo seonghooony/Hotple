@@ -10,14 +10,8 @@ import NMapsMap
 import SnapKit
 
 class CustomInfoWindowDataSource : NSObject {
-    // 커스텀 마커 UI
-//    private var clusteredMarkerView: ClusteredMarkerView!
-//    private var regionSpotPOIView: RegionSpotPOIView!   // 지역 지점
-//    private var apartInfoPOIView: ApartInfoPOIView! // 아파트평형 정보
-//    private var apartTradeInfoPOIView: ApartTradeInfoPOIView!   // 아파트 실거래 정보
-//    private var antennaShopPOIView: AntennaShopPOIView!   // 안테나 샵
-//    private var normalExpertPOIView: NormalExpertPOIView!   // 일반 전문업체
-//    private var portfolioPOIView: PortfolioPOIView!   // 포트폴리오
+
+
 }
 
 extension CustomInfoWindowDataSource : NMFOverlayImageDataSource {
