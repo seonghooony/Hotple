@@ -33,7 +33,7 @@ final class MapUseCase: MapUserUseCaseProtocol {
     
     deinit {
         disposeBag = DisposeBag()
-        Log.info("MapUseCase deinit")
+        Log.debug("MapUseCase deinit")
     }
     
     func generateRandomMarker(size: Int) -> [NMFMarker] {

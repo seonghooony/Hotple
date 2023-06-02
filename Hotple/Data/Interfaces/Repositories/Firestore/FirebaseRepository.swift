@@ -15,7 +15,8 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 protocol FirebaseRepositoryProtocol {
-    
+    func setUserData(userData: UserData) -> Observable<Bool>
+    func getUserData(userData: UserData) -> Observable<UserData?>
 }
 
 final class FirebaseRepository: FirebaseRepositoryProtocol {

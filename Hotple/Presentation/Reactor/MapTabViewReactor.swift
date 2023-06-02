@@ -51,12 +51,12 @@ class MapTabViewReactor: Reactor, Stepper {
         switch action {
         case .loadView:
             Log.action("MapTabViewReactor loadView action excuting")
-            let markers = mapUseCase.generateRandomMarker(size: 1000)
+            let markers = mapUseCase.generateRandomMarker(size: 10000)
             return Observable.just(Mutation.resetMarkers(markers))
             
         case .scrollMap:
             Log.action("MapTabViewReactor scrollMap action excuting")
-            let markers = mapUseCase.generateRandomMarker(size: 1000)
+            let markers = mapUseCase.generateRandomMarker(size: 10000)
             return Observable.just(Mutation.resetMarkers(markers))
             
         }
