@@ -52,6 +52,8 @@ class QuadTree {
         
     }
     
+    // 해당 바운드박스(노드) 내 마커들이 임계치보다 갯수가 많으면 4개의 사분면으로 분할하여 서브 바운드박스(노드)에 담아 넣음.
+    // 이 과정을 재귀로 반복하여 임계치보다 작아질 때 까지 반복함.
     public func insertMarker(newMarker: NMFMarker) {
 
         guard self.boundingBox.containsCoordinate(coordinate: newMarker.position) else {
@@ -73,6 +75,8 @@ class QuadTree {
         }
     }
 
+    // 각 바운드박스(노드) 별로 해당되는 마커들의 리스트를 얻어온다.
+    // 분할이 필요하다면 재귀형태로 파고들어 마커들의 리스트를 얻어온다.
     func queryRegion(searchInBoundingBox: BoundingBox, completion: ([NMFMarker]) -> Void) {
         
         guard searchInBoundingBox.intersectsWithBoundingBox(boundingBox: self.boundingBox) else {
