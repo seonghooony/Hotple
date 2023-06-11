@@ -11,7 +11,7 @@ RxSwift, Rxflow, ReactorKit, Clean Architecture, Map Clustering, MVVM 등 새로
 
 <br>
 
-![슬라이드1](https://github.com/seonghooony/Hotple/assets/91402556/7751f8e0-6b0d-4045-a915-c8c3b6a8a8c9)
+![Slide1](https://github.com/seonghooony/Hotple/assets/91402556/e8de8e62-e821-4330-9e3c-b1e96665c293)
 ![슬라이드2](https://github.com/seonghooony/Hotple/assets/91402556/485897ae-c0cb-472a-872f-7aa1627d737b)
 ![슬라이드3](https://github.com/seonghooony/Hotple/assets/91402556/a1a25e4d-36a1-429f-8f3b-a643ed186d52)
 ![슬라이드4](https://github.com/seonghooony/Hotple/assets/91402556/48e77dee-4100-47c7-a916-0e81db83b58e)
