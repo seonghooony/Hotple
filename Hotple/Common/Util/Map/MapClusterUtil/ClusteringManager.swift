@@ -181,14 +181,14 @@ class ClusteringManager {
         infoWindow.dataSource = infoWindowDataSource
         
         
-        infoWindow.touchHandler = { [weak self] (overlay:NMFOverlay) -> Bool in
-            guard let self = self else { return true }
-            let cameraUpdate = NMFCameraUpdate(scrollTo: centerMarker.position, zoomTo: mapView.zoomLevel + 1)
-            cameraUpdate.animation = .linear
-            mapView.moveCamera(cameraUpdate)
-            
-            return true
-        }
+//        infoWindow.touchHandler = { [weak self] (overlay:NMFOverlay) -> Bool in
+//            guard let self = self else { return true }
+//            let cameraUpdate = NMFCameraUpdate(scrollTo: centerMarker.position, zoomTo: mapView.zoomLevel + 1)
+//            cameraUpdate.animation = .linear
+//            mapView.moveCamera(cameraUpdate)
+//
+//            return true
+//        }
         
         
         return (centerMarker, infoWindow)
@@ -199,14 +199,14 @@ class ClusteringManager {
 
         let leafMarker = marker
 
-        leafMarker.touchHandler = { [weak self] (overlay:NMFOverlay) -> Bool in
-            guard let self = self else { return true }
-            let cameraUpdate = NMFCameraUpdate(scrollTo: marker.position, zoomTo: mapView.zoomLevel)
-            cameraUpdate.animation = .linear
-            mapView.moveCamera(cameraUpdate)
-            
-            return true
-        }
+//        leafMarker.touchHandler = { [weak self] (overlay:NMFOverlay) -> Bool in
+//            guard let self = self else { return true }
+//            let cameraUpdate = NMFCameraUpdate(scrollTo: marker.position, zoomTo: mapView.zoomLevel)
+//            cameraUpdate.animation = .linear
+//            mapView.moveCamera(cameraUpdate)
+//            
+//            return true
+//        }
         
 //        let infoWindow = NMFInfoWindow()
 //        infoWindow.position = marker.position
